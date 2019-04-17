@@ -1,0 +1,47 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    font: normal 'Arial','PingFangSC','Sans-serif','Microsoft Yahei';
+    color: #222;
+    outline: none !important;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+}
+html , body{
+	position: relative;
+	padding: 0;
+	margin: 0;
+	color: #222;
+	background: #f3f3f3;
+}
+a{
+	text-decoration: none;
+}
+li{
+	list-style: none;
+}
+table {
+    table-layout: fixed;
+}
+h1,h2,h3,h4,h5,p{
+	padding: 0;
+	margin: 0;
+}
+ul{
+	padding: 0;
+	margin:0;
+}
+button{
+	outline: none;
+}
+img{
+    padding:0px;
+    margin:0px;
+    border:0;
+    font-size: 0;
+    display: block;
+}

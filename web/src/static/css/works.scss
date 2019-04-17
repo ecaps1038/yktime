@@ -1,0 +1,11 @@
+@import "../static/css/common.scss";
+.aaa{
+	@include w-h(120px,60px,#00aaee);
+	@include fonts(24px,#fff,60px,center);
+	@include bord-st(1px,6px,#00bbcc,);
+	cursor: pointer;
+}
+.router-link-active{
+	font-size:16px;
+	color:#00aaee;
+}

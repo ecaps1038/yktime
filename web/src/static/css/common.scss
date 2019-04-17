@@ -1,0 +1,48 @@
+@mixin w-h($width,$height,$bgc: #fff,$dis: inline-block){
+	width:$width;
+	height:$height;
+	background-color: $bgc;
+	display: $dis;
+}
+@mixin w-h-n($width,$height){
+	width: $width;
+	height: $height;
+}
+@mixin fonts($size,$color,$lih,$aling: left,$weight: normal){
+	font-size: $size;
+	color: $color;
+	text-align: $aling;
+	line-height: $lih;
+	font-weight: $weight;
+}
+@mixin bord-st($width,$radu,$color){
+	border:{
+		color:$color;
+		width: $width;
+		style: solid;
+		radius: $radu;
+	}
+}
+@mixin positions($mod,$top,$left,$right: auto,$bottom: auto){
+	position: $mod;
+	top: $top;
+	left: $left;
+	right: $right;
+	bottom: $bottom;
+}
+
+$h1: 80px;
+$mh: 600px;
+
+
+
+//常规设置
+*{
+	color: #333;
+	font-size: 14px;
+	font-family: sans-serif;
+}
+ul,li{
+	list-style: none;
+	float: left;
+}

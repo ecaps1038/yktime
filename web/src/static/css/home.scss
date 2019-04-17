@@ -1,0 +1,73 @@
+@import "../static/css/common.scss";
+.banner{
+	//margin-top: $h1;
+	@include w-h(100%,700px,#222);
+	.bn-iner{
+		width: 1080px;
+		height: 700px;
+		padding-top: 192px;
+		margin: 0 auto;
+		.title{
+			@include w-h-n(320px,160px);
+		}
+		.some{
+			margin-top: -20px;
+			@include fonts(14px,#fff,28px);
+		}
+	}
+}
+.content{
+	width: 1080px;
+	margin: 0 auto;
+	padding-bottom: 40px;
+	ul li{
+		@include w-h(100%,360px,#fff);
+		margin-top: 30px;
+		.cont-inf{
+			float: left;
+			width: 450px;
+			position: relative;
+			.icon{
+				@include w-h(42px,42px,#ff7f26);
+				padding: 11px;
+				float: left;
+				img{
+					width: 20px;
+				}
+			}
+			.date{
+				float: right;
+				padding-right: 30px;
+				padding-top: 22px;
+				@include fonts(18px,#bbb,22px,left,bold);
+			}
+			.introduce-div{
+				clear:both;
+				padding: 60px 40px 0 40px;
+				.title{
+					@include fonts(26px,#222,52px);
+					&:hover{
+						color: #ff7f26;
+					}
+					cursor: pointer;
+				}
+				.introduce{
+					@include fonts(16px,#666,30px);
+				}
+			}
+		}
+		.photo-div{
+			float: right;
+			width: 630px;
+			padding: 24px 24px 24px 0;
+			.photo-img-div{
+				overflow: hidden;
+				height: 312px;
+				cursor: pointer;
+				img{
+					width: 606px;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,58 @@
+@import "../common.scss";
+.files{
+    background: #fff;
+    padding: 30px;
+}
+.files-nav{
+	width: 196px;
+	float: left;
+	text-align: center;
+	li{
+		padding: 10px;
+	}
+	a{
+		@include w-h(120px,32px,#fff);
+		@include bord-st(1px,16px,#fff);
+		@include fonts(14px,#999,30px,center);
+		cursor: pointer;
+		&:hover{
+			@include bord-st(1px,16px,#ff7f26);
+			color: #ff7f26;
+		}
+	}
+	.selectcss{
+		@include bord-st(1px,16px,#ff7f26);
+		color: #ff7f26;
+	}
+}
+.file-main{
+	height: 200px;
+	padding-left: 222px;
+	.title{
+		@include w-h(100%,42px,#f3f3f3);
+	}
+	.up{
+		float: right;
+		@include w-h(142px,42px,#fff);
+	}
+	.title .file-input{
+		width: 100px;
+		height: 42px;
+		overflow: hidden;
+		padding-top: 12px;
+		float: left;
+		#file{
+			font-size: 12px;
+			margin-left: -62px;
+		}
+		border: 0px;
+	}
+	#upload{
+		border: 0px;
+		border-radius: 50%;
+		//background: #e8e8e8;
+		@include w-h(42px,42px,#fff2e9);
+		color: #ff7f26;
+		cursor: pointer;
+	}
+}

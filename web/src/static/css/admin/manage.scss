@@ -1,0 +1,120 @@
+
+@import "../common.scss";
+.aside{
+	@include w-h(200px,100%,#1c1c21,block);
+	@include positions(fixed,0px,0px);
+	padding-top: 40px;
+	z-index: 1001;
+	.news{
+		@include w-h(10px,10px,#ff504b,block);
+		border-radius: 50%;
+		@include positions(absolute,108px,130px);
+
+	}
+	.user{
+		@include w-h-n(200px,178px);
+		text-align: center;
+		border-bottom: 1px solid #232329;
+		.user-img{
+			@include w-h(80px,80px,#232329);
+			border-radius: 50%;
+			overflow: hidden;
+			img{
+				width: 80px;
+			}		
+		}
+		.name{
+			@include fonts(18px,rgba(255,255,255,1),32px,center);
+		}
+		.slogan{
+			@include fonts(14px,rgba(255,255,255,0.5),16px,center);
+		}
+	}
+	.nav{
+		a{
+			display: inline-block;
+			position: relative;
+			padding-left: 20px;
+			width: 200px;
+			@include fonts(14px,rgba(255,255,255,0.3),52px,left);
+			.icon {
+				width: 16px;
+				height: 16px;
+				margin-right: 16px;
+				vertical-align: -0.2em;
+				fill: rgba(255,255,255,0.3);
+				overflow: hidden;
+			}
+			&:hover{
+				color: #fff;
+				background: #232329;
+			}
+			&:hover .icon{
+				fill: #ff7f26;
+			}
+		}
+		.router-link-active{
+			color: #fff;
+			background: #232329;
+			.icon{
+				fill:#ff7f26;
+			}
+		}
+	}
+	.logo{
+		@include w-h-n(100px,48px);
+		position: absolute;
+		bottom: 24px;
+		left: 50px;
+		cursor: pointer;
+		a{
+			@include w-h(100px,45px,rgba(0,0,0,0),block);
+			opacity: 0.1;
+		}
+	}
+}
+.manage-right{
+	padding-left: 200px;	
+	.to-bar{
+		@include positions(fixed,0px,0px);
+		z-index: 1000;
+		@include w-h(100%,64px,#fff);
+		padding-left: 200px;
+		box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+		.left{
+			float: left;
+			padding: 20px 24px;
+			.title-icon{
+				width: 24px;
+				height: 24px;
+				fill: #ff7f26;
+			}
+			span{
+				@include fonts(20px,#333,24px,left);
+				vertical-align: top;
+				padding-left: 6px;
+			}
+		}
+		.right{
+			float: right;
+			padding: 20px 24px;
+			cursor: pointer;
+			.add-icon{
+				width: 24px;
+				height: 24px;
+				fill: rgba(255,127,38,0.3);
+				&:hover{
+					fill: rgba(255,127,38,1);
+				}
+			}
+		}
+	}
+	.manage-view{
+		padding: 88px 24px 24px 24px;
+		.manage-main{
+			min-height: $mh;
+		}
+
+	}
+}
+
