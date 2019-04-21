@@ -5,7 +5,9 @@
 }
 .files-nav{
 	width: 196px;
-	float: left;
+	position: fixed;
+	left: 260px;
+	top: 120px;
 	text-align: center;
 	li{
 		padding: 10px;
@@ -26,17 +28,35 @@
 	}
 }
 .file-main{
-	height: 200px;
+	//height: 1200px;
 	padding-left: 222px;
 	.title{
 		@include w-h(100%,42px,#f3f3f3);
 	}
 	.up{
 		float: right;
-		@include w-h(142px,42px,#fff);
+		@include w-h(148px,42px,#fff);
+	}
+	.shanchu{
+		float: right;
+		color: rgba(255,127,38,1);
+		line-height: 42px;
+		padding-right: 20px;
+		cursor: pointer;
+	}
+	.selects{
+		float: left;
+		padding-left: 20px;
+		span{
+			line-height: 42px;
+		}
+		.quxiao{
+			color: #3b74ff;
+			cursor: pointer;
+		}
 	}
 	.title .file-input{
-		width: 100px;
+		width: 106px;
 		height: 42px;
 		overflow: hidden;
 		padding-top: 12px;
@@ -54,5 +74,113 @@
 		@include w-h(42px,42px,#fff2e9);
 		color: #ff7f26;
 		cursor: pointer;
+	}
+}
+.fphotos{
+	width: 100%;
+	clear: both;
+	ul{
+		clear: both;
+		display: inline-block;
+	}
+	li{
+		position: relative;
+		float: left;
+		width: 160px;
+		margin: 12px;
+		text-align: center;
+		p{
+			@include fonts(14px,#333,24px,center);
+			overflow: hidden;
+			text-overflow:ellipsis;
+			white-space: nowrap;
+		}
+		&:hover{
+			.img{
+				background-color: rgba(255,127,38,0.1);
+			}
+			.select{
+				border: 1px solid #fff;
+				background-color: rgba(0,0,0,0.1);
+			}
+			.delete{
+				background-size: 100% 100%;
+			}
+		}
+	}
+	.img{
+		position: relative;
+		width: 160px;
+		height: 160px;
+		img{
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+			max-width: 160px;
+			max-height: 160px;
+		}
+	}
+	.delete{
+		cursor: pointer;
+		position: absolute;
+		right: 12px;
+		top: 12px;
+		width: 20px;
+		height: 20px;
+		background-size: 0%; 
+	}
+	.select{
+		cursor: pointer;
+		position: absolute;
+		left: 12px;
+		top: 12px;
+		width: 20px;
+		height: 20px;
+		border-radius: 2px;
+		background-size: 0%; 
+		background-repeat: no-repeat;
+	}
+	.bg{
+		background-size: 100% 100%;
+		background-color: rgba(255,127,38,0.2);
+	}
+}
+//放大图片
+.displays{
+	display:block !important;
+}
+.detial-photo{
+	@include positions(fixed,0,0);
+	@include w-h-n(100%,100%);
+	z-index: 1001;
+	display: none;
+	.ptbg{
+		@include w-h(100%,100%,rgba(0,0,0,0.9));
+	}
+	img{
+		@include positions(absolute,0,0,0,0);
+		margin: auto;
+		max-width: 96%;
+		max-height: 98%;
+	}
+	i{
+		display: inline-block;
+		z-index: 1;
+		@include w-h-n(40px,40px);
+		background-size: 100%;
+		opacity: .2;
+		cursor: pointer;
+		&:hover{
+			opacity: 0.6;
+		}
+	}
+	.left{
+		@include positions(absolute,46%,80px);
+	}
+	.right{
+		@include positions(absolute,46%,auto,80px,auto);
 	}
 }

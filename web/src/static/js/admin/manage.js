@@ -60,7 +60,7 @@ export default {
 				if(tep == 0){
 					Router.push({path: '/'});
 				}else if(tep == 1){
-					_this.imgurl = 'http://127.0.0.1:8080/vacation-photo/'+data.myimgurl;
+					_this.imgurl = 'http://127.0.0.1:4040/user/user1.png';
 					_this.name = data.myname;
 				}
 			})

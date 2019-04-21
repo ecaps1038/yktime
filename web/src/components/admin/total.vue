@@ -13,14 +13,16 @@
     				<p class="all-data">{{outsum}}</p>
     			</div>
     			<ul>
-    				<li v-for="nav in navs" :key="nav">
+    				<li v-for="nav in navs">
     					<svg class="title-icon" aria-hidden="true">
 							<use :xlink:href="nav.icon"></use>
 						</svg>
 						<p>{{nav.num}}</p>
+                        <router-link :to="nav.path" :style="note">
 						<svg class="add-icon" aria-hidden="true">
 							<use xlink:href="#icon-add"></use>
 						</svg>
+                        </router-link>
     				</li>
     			</ul>
     		</div>
@@ -30,7 +32,7 @@
     				<p class="all-data">{{insum}}</p>
     			</div>
     			<ul>
-    				<li v-for="nav in innavs" :key="nav">
+    				<li v-for="nav in innavs">
 						<p>{{nav.num}}</p>
 						<span>{{nav.name}}</span>
     				</li>

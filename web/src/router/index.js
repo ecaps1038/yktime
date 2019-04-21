@@ -16,6 +16,8 @@ import manage from './../components/admin/manage'
 import total from './../components/admin/total'
 import files from './../components/admin/files'
 import fworks from './../components/admin/fworks'
+import add from './../components/admin/add'
+import upwork from './../components/admin/upwork'
 
 Vue.use(Router)
 
@@ -45,16 +47,23 @@ var router = new Router({
                 },
                 {
                     path: 'files',
-                    component: files,
-                    children:[
-                        // {
-                        //     path: 'works',
-                        //     component: fworks
-                        // },
-                    ]
+                    component: files
                 }
             ]
         },
+        {
+            name: 'add',path:'/add',component: add,
+            children:[
+                {
+                    path:'upwork',
+                    component:upwork
+                },
+                {
+                    path: 'files',
+                    component: files
+                }
+            ]
+        }
     ]
 })
 

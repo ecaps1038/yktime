@@ -39,7 +39,7 @@ export default {
         	_this.$axios.get('http://127.0.0.1:4040/login',{})
         	.then(function (response) {
 				var data = response.data;
-			    _this.user = '<a href="manage"><img src="http://localhost:8080/vacation-photo/'+data.myimgurl+'"></a>';
+			    _this.user = '<a href="manage"><img src="http://127.0.0.1:4040/user/user1.png"></a>';
 			    _this.sub = '退出';
 			})
 			.catch(function (error) {

@@ -30,6 +30,20 @@
 	right: $right;
 	bottom: $bottom;
 }
+@mixin input($w,$h: 42px,$bg: #f8f8f8,$mg: 15px){
+	width: $w;
+	height: $h;
+	background: $bg;
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+	padding-left: 20px;
+	line-height: 42px;
+	margin: $mg 0;
+	&::-webkit-input-placeholder{color:#999;}    /* 使用webkit内核的浏览器 */
+	&:-moz-placeholder{color:#999;}                  /* Firefox版本4-18 */
+	&::-moz-placeholder{color:#999;}                  /* Firefox版本19+ */
+	&:-ms-input-placeholder{color:#999;}
+}
 
 $h1: 80px;
 $mh: 600px;
@@ -44,5 +58,8 @@ $mh: 600px;
 }
 ul,li{
 	list-style: none;
-	float: left;
+}
+.inner{
+	width: 1080px;
+    margin: 0 auto;
 }

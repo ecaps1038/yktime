@@ -19,11 +19,11 @@ exports.logIn = function(data,pwd,req,res){
                 if(pwdMatchFlag){
                     res.cookie('id',ver._id,{signed:true,path:'http://localhost:8080', maxAge: 1000});
                     res.cookie('username',ver.name,{signed:true,path:'http://localhost:8080', maxAge: 1000});
-                    if(ver.imgurl){
-                        res.cookie('imgurl',ver.imgurl,{signed:true,path:'http://localhost:8080', maxAge: 1000}); 
-                   }else{
-                        res.cookie('imgurl','user.jpg',{signed:true,path:'http://localhost:8080', maxAge: 1000});
-                   }
+                //     if(ver.imgurl){
+                //         res.cookie('imgurl',ver.imgurl,{signed:true,path:'http://localhost:8080', maxAge: 1000}); 
+                //    }else{
+                //         res.cookie('imgurl','user.jpg',{signed:true,path:'http://localhost:8080', maxAge: 1000});
+                //    }
                   
                     res.send({success:true,tep:0});
                    //return res.redirect('/yike');

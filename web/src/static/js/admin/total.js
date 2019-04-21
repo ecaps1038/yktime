@@ -7,14 +7,17 @@ export default {
 			navs: [
 				{
 					icon: "#icon-wenzhang",
+					path:'/add/upwork',
 					num: ""
 				},
 				{
 					icon: "#icon-sheying",
+					path:'/add/upwork',
 					num: ""
 				},
 				{
 					icon: "#icon-biji",
+					path:'/',
 					num: ""
 				},
 			],
@@ -65,7 +68,7 @@ export default {
 				if(tep == 0){
 					Router.push({path: '/'});
 				}else if(tep == 1){
-					_this.imgurl = 'http://127.0.0.1:8080/vacation-photo/'+data.myimgurl;
+					_this.imgurl = 'http://127.0.0.1:4040/user/user1.png';
 					_this.name = data.myname;
 				}
 			})
@@ -96,6 +99,6 @@ export default {
 			_this.tep = _this.teps[e];
 		}
 	},
-	mounted:function(){this.outdata();this.indata();this.random()},
+	mounted:function(){this.manage();this.outdata();this.indata();this.random()},
 
 }

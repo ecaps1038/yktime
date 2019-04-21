@@ -1,0 +1,28 @@
+@import "../common.scss";
+.upwork{
+	background: #f3f3f3;
+}
+.inform{
+	@include w-h(100%,auto,#fff);
+	margin-top: 24px;
+	.inf-title{
+		@include fonts(14px,#333,50px);
+		padding-left: 30px;
+		border-bottom:1px solid #eee;
+	}
+}
+.inf-input{
+	padding: 15px 30px;
+	input{
+		@include input(880px)
+	}
+	.num{
+		margin-left: -40px;
+		line-height: 42px;
+		color: #999;
+	}
+	.tx{
+		padding-left: 30px;
+		color: #ff504b;
+	}
+}
