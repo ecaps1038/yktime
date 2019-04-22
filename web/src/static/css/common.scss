@@ -45,6 +45,15 @@
 	&:-ms-input-placeholder{color:#999;}
 }
 
+//必填提醒
+@mixin mast(){
+	display: inline-block;
+	width: 5px;
+	height: 5px;
+	background: #ff504b;
+	border-radius: 50%;
+}
+
 $h1: 80px;
 $mh: 600px;
 

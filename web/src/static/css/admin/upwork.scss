@@ -13,16 +13,26 @@
 }
 .inf-input{
 	padding: 15px 30px;
+	.input{
+		position: relative;
+	}
 	input{
 		@include input(880px)
 	}
 	.num{
-		margin-left: -40px;
+		position: absolute;
+		right: 140px;
+		top: 15px;
 		line-height: 42px;
 		color: #999;
 	}
 	.tx{
-		padding-left: 30px;
+		padding-left: 14px;
 		color: #ff504b;
+	}
+	i{
+		@include mast();
+		margin-right: 8px;
+		margin-bottom: 2px;
 	}
 }
