@@ -7,12 +7,12 @@ export default {
 			navs: [
 				{
 					icon: "#icon-wenzhang",
-					path:'/add/upwork',
+					path:'/add/upwork?n=1',
 					num: ""
 				},
 				{
 					icon: "#icon-sheying",
-					path:'/add/upwork',
+					path:'/add/upwork?n=2',
 					num: ""
 				},
 				{

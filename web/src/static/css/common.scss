@@ -30,7 +30,7 @@
 	right: $right;
 	bottom: $bottom;
 }
-@mixin input($w,$h: 42px,$bg: #f8f8f8,$mg: 15px){
+@mixin input($w,$h: 42px,$bg: #f8f8f8){
 	width: $w;
 	height: $h;
 	background: $bg;
@@ -38,11 +38,13 @@
 	border-radius: 4px;
 	padding-left: 20px;
 	line-height: 42px;
-	margin: $mg 0;
 	&::-webkit-input-placeholder{color:#999;}    /* 使用webkit内核的浏览器 */
 	&:-moz-placeholder{color:#999;}                  /* Firefox版本4-18 */
 	&::-moz-placeholder{color:#999;}                  /* Firefox版本19+ */
 	&:-ms-input-placeholder{color:#999;}
+	&:focus{
+		border-color: #666 !important;
+	}
 }
 
 //必填提醒

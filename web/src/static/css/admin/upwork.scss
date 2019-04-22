@@ -15,9 +15,23 @@
 	padding: 15px 30px;
 	.input{
 		position: relative;
+		padding: 15px 0;	
+		input{
+			@include input(880px)
+		}
 	}
-	input{
-		@include input(880px)
+	.select{
+		position: relative;
+		padding: 15px 0;
+		input{
+			@include input(148px)
+		}
+		.label{
+			width: 320px;
+		}	
+	}
+	.sort{
+		width: 148px;
 	}
 	.num{
 		position: absolute;
@@ -30,7 +44,7 @@
 		padding-left: 14px;
 		color: #ff504b;
 	}
-	i{
+	.tp{
 		@include mast();
 		margin-right: 8px;
 		margin-bottom: 2px;

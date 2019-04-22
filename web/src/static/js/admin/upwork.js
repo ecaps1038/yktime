@@ -3,6 +3,36 @@ import Router from '../../../router/index'
 
 import s from '../myfunc.js'
 
+//文章
+var article=[
+	{
+	 	value: '选项1',
+	    label: '我的故事'
+	}, {
+	    value: '选项2',
+	    label: '观点'
+	}, {
+	    value: '选项3',
+	    label: '非我'
+	}];
+var diary=[
+	{
+	 	value: '选项1',
+	    label: '摄影'
+	}, {
+	    value: '选项2',
+	    label: '插画'
+	}, {
+	    value: '选项3',
+	    label: 'UI'
+	}, {
+	    value: '选项4',
+	    label: '平面'
+	}, {
+	    value: '选项5',
+	    label: '杂'
+}];
+
 
 export default {
 	data () {
@@ -12,6 +42,9 @@ export default {
 			intro: '',
 			num1: 56,
 			num2: 120,
+			just: '',
+			options: [],
+	        value: ''
 		}
 	},
     computed:{
@@ -21,7 +54,7 @@ export default {
 			return _this.num1-num;
 		},
 		titlelen: function(){
-
+			
 		}
 	},
 	methods:{
@@ -44,8 +77,27 @@ export default {
 			    Router.push({path: '/'});
 			});
 		},
+		//判断入口
+		justit: function(){
+			var _this = this;
+			if(_this.$route.query.n==1){
+				_this.options = [];
+				_this.just = '文章';
+				for(var i=0;i<article.length;i++){
+					_this.options.push(article[i]);
+				}
+				
+			}else if(_this.$route.query.n==2){
+				_this.options = [];
+				_this.just = '作品';
+				for(var i=0;i<diary.length;i++){
+					_this.options.push(diary[i]);
+				}
+				
+			}
+		}
 	},
-	mounted:function(){this.manage();},
+	mounted:function(){this.manage();this.justit()},
 	watch: {
         title() {
             if (this.title.length > this.num1) {
