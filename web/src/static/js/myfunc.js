@@ -14,5 +14,8 @@ export default {
 	    }
 	    }
 	    return len;
+	},
+	test(){
+		alert('asdfefsf')
 	}
 }

@@ -17,7 +17,22 @@
 		position: relative;
 		padding: 15px 0;	
 		input{
-			@include input(880px)
+			@include input(880px);
+			padding-right: 40px;
+		}
+		.el-textarea{
+			width: 880px;
+			vertical-align: middle;
+
+		}
+		textarea{
+			@include input(880px);
+			line-height: 20px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			padding-right: 40px;
+			resize:none;
+
 		}
 	}
 	.select{
@@ -49,4 +64,20 @@
 		margin-right: 8px;
 		margin-bottom: 2px;
 	}
+}
+.inf-num,.inf-photo{
+	padding: 22px 38px;
+	.tp{
+		@include mast();
+		float:left;
+		margin-top: 24px;
+		margin-left: -8px;
+	}
+}
+.last-inf{
+	margin-bottom: 24px;
+}
+#fwbFrame{
+	width: 880px;
+	height: 568px;
 }

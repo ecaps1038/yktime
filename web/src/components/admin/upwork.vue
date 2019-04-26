@@ -7,7 +7,7 @@
 					<div class="input">
 						<i class="tp"></i>
 						<input type="text" name="title" :placeholder="just+'标题'" v-model="title">
-						<span class="num">{{numchange}}</span>
+						<span class="num">{{titlechange}}</span>
 						<span class="tx">请填写</span>
 					</div>
 					<div class="select">
@@ -24,15 +24,39 @@
 					</div>
 					<div class="input">
 						<i class="tp"></i>
-						<input type="text" name="title" :placeholder="just+'简介'" v-model="intro">
-						<span class="num">{{num2}}</span>
+						<el-input
+						  type="textarea"
+						  autosize
+						  :placeholder="just+'简介'"
+						  v-model="intro">
+						</el-input>
+						<!-- <input type="text" name="title" :placeholder="just+'简介'" v-model="intro"> -->
+						<span class="num">{{introchange}}</span>
 					</div>
 				</div>
 			</div>
+			<div class="inform">
+				<p class="inf-title">编辑{{just}}</p>
+				<div class="inf-num">
+					<div id="div3"></div>
+					<i class="tp"></i>
+					<iframe name="ifm" id="fwbFrame" frameborder="0" scrolling="no" src="http://127.0.0.1:4040/one"></iframe>
+				</div>
+			</div>
+			<div class="inform last-inf">
+				<p class="inf-title">上传封面</p>
+				<div class="inf-photo">
+					<div id="div3"></div>
+					<i class="tp"></i>
+					<div id="div3"></div>
+				</div>
+			</div>		
 		</div>
     </div>
 </template>
-<script type="text/javascript" src="../../static/js/admin/upwork.js"></script>
+<script type="text/javascript" src="../../static/js/admin/upwork.js">
+</script>
 <style lang="scss">
     @import "../../static/css/admin/upwork.scss";
+    //@import "../../static/css/fwb.scss";
 </style>

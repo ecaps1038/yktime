@@ -2,6 +2,10 @@
 import Router from '../../../router/index'
 
 import s from '../myfunc.js'
+import f from'../filefwb.js'
+import E from 'wangeditor'
+import F from '../lib/wangEditor'
+
 
 //文章
 var article=[
@@ -44,14 +48,20 @@ export default {
 			num2: 120,
 			just: '',
 			options: [],
-	        value: ''
+	        value: '',
+	        editor2: '',
 		}
 	},
     computed:{
-		numchange: function(){
+		titlechange: function(){
 			var _this = this;
 			var num = s.getByteLen(_this.title);
 			return _this.num1-num;
+		},
+		introchange: function(){
+			var _this = this;
+			var num = s.getByteLen(_this.intro);
+			return _this.num2-num;
 		},
 		titlelen: function(){
 			
@@ -95,13 +105,26 @@ export default {
 				}
 				
 			}
-		}
+		},
+		//载入富文本编辑器
+		fwb: function(){
+			var _this = this;
+	        //var E = window.wangEditor;
+			_this.editor2 = new E('#div3');
+			_this.editor2.create();
+		},
+	    
 	},
-	mounted:function(){this.manage();this.justit()},
+	mounted:function(){this.manage();this.justit();this.fwb()},
 	watch: {
         title() {
             if (this.title.length > this.num1) {
                 this.title = String(this.title).slice(0, this.num1);
+            }
+        },
+        intro() {
+            if (this.intro.length > this.num2) {
+                this.intro = String(this.intro).slice(0, this.num2);
             }
         }
     }

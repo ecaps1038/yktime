@@ -5,14 +5,8 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var webpack = require('webpack');
 
-// 引入history模块
-//var history = require('connect-history-api-fallback')
+var ejs = require('ejs');
 
-// 正式环境时，下面两个模块不需要引入
-//import webpackDevMiddleware from 'webpack-dev-middleware'
-//import webpackHotMiddleware from 'webpack-hot-middleware'
-
-//import config from '../../build/webpack.dev.conf'
 //添加凭证文件
 var credentials = require('./config/credentials');
 
@@ -48,19 +42,20 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
-// const compiler = webpack(config)
-// //webpack 中间件
-// app.use(webpackDevMiddleware(compiler, {
-//   publicPath: config.output.publicPath,
-//   stats: { colors: true }
-// }))
+//app.use(express.static(path.join(__dirname, 'views')))
+//加入html试图
+app.set('views', path.join(__dirname, '/views'));
+app.engine('html', require('ejs').__express);  
+app.set('view engine', 'html');
 
-// app.use(webpackHotMiddleware(compiler))
-
-app.use(express.static(path.join(__dirname, 'views')))
-app.get('/', function (req, res) {
-  res.sendFile('./views/index.html');
-})
+app.get('/aaa', function (req, res) {
+  res.type('html');
+  res.render('index');
+});
+app.get('/one', function (req, res) {
+  res.type('html');
+  res.render('one');
+});
 
 //处理附件内容字节数太大
 //var bodyParser = require('body-parser');
