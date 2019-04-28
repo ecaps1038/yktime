@@ -3,10 +3,11 @@
 function fileSelect(){
     var html = '';
     var path = './data/works/';
+    var path1 = '/works/';
    $.ajax({
         url: '/showphoto',
         type: 'POST',
-        data: {path:'./data/works/'},
+        data: {path:path},
         success: function(data){
             if(200 === data.code) {
                 var patt1 = /\.(\w+)/;
@@ -31,7 +32,7 @@ function fileSelect(){
             }
             $('.files ul').html(html);
             reverse('filesul');
-            selectFuc(path);
+            selectFuc(path1);
             postPage();
         },
         error: function(){

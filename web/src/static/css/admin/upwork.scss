@@ -76,6 +76,76 @@
 }
 .last-inf{
 	margin-bottom: 24px;
+	position: relative;
+	.up-cover{
+		@include w-h(280px,210px,#f1f1f1);
+		overflow: hidden;
+		margin: 8px 0 8px 10px;
+		position: relative;
+		text-align: center;
+		.file-input{
+			@include w-h-n(64px,64px);
+			position: absolute;
+			top: 54px;
+			left: 108px;
+			#file{
+				display: inline-block;
+				height: 64px;
+				opacity: 0;
+				cursor: pointer;
+			}
+			p{
+				line-height: 20px;
+				color: #f1f1f1;
+				margin-top: -30px;
+			}
+		}
+		img{
+			width: 280px;
+
+		}
+		#upload{
+			position: absolute;
+			top: 30px;
+			left: 50px;
+		}
+	}
+	.tx{
+		position: absolute;
+		left: 350px;
+		top: 90px;
+		color: #ff504b;
+	}
+}
+.btn-div{
+	height: 92px;
+	button{
+		@include w-h-n(120px,42px);
+		border-radius: 4px;
+		line-height: 42px;
+		border-width: 1px;
+		cursor: pointer;
+	}
+	.publish{
+		background:  rgba(255, 127, 38, 0.9);
+		border-color: rgba(255, 127, 38, 0.9);
+		color: #fff;
+		&:hover{
+			background:  rgba(255, 127, 38, 1);
+			border-color: rgba(255, 127, 38, 1);
+		}
+	}
+	.preview{
+		margin-left: 18px;
+		background:  #f3f3f3;
+		border-color: #bbb;
+		color: #666;
+		&:hover{
+			background:  #f3f3f3;
+			border-color: #aaa;
+			color: #333;
+		}
+	}
 }
 #fwbFrame{
 	width: 880px;

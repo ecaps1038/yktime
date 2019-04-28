@@ -14,6 +14,10 @@ var navss = [
 		path: "/diary/",
         name: "日志图片",
         num: ''
+	}, {
+		path: "/cover/",
+        name: "封面图片",
+        num: ''
 	},
 ];
 var photos = [
@@ -156,6 +160,7 @@ export default {
 			.then(function (response) {
 				if(response.data.code === 200) {
 					_this.pharr.splice(index,1);
+					console.log(_this.pharr)
 				}
 			})
 			.catch(function (error) {
@@ -166,6 +171,7 @@ export default {
 		//删除多个
 		delfiles: function(){
 			var _this = this;
+			_this.path=[];
 			for(var i=0;i<_this.selectFile.length;i++){
 				if(_this.selectFile[i]){
 					var path = _this.nowpath+_this.pharr[i].filename;

@@ -50,6 +50,12 @@ export default {
 			options: [],
 	        value: '',
 	        editor2: '',
+	        src: 'http://127.0.0.1:4040/user/nomare.png',
+	        titlea: '',
+	        selecta: '',
+	        introa: '',
+	        photoa: '',
+	        isok: '',
 		}
 	},
     computed:{
@@ -113,9 +119,100 @@ export default {
 			_this.editor2 = new E('#div3');
 			_this.editor2.create();
 		},
+		//图片显示
+		eimg: function(){
+			var _this = this;
+			var aa = s.getObjectURL(document.getElementById("file").files[0]);
+			_this.src = aa;
+			console.log(_this.src);
+		},
+
+
+		//上传文章上部分
+		uptitle: function(){
+			var _this = this;
+			_this.$axios.post('http://127.0.0.1:4040/uptitle', {
+			    title: _this.title,
+			    label: _this.label,
+			    intro: _this.intro,
+			    value: _this.value,
+			    just: _this.just,
+
+			})
+			.then(function (response) {
+				var tep = response.data.tep;
+			    if(tep == 0){
+			    	//_this.upphoto();
+					//Router.push({path: '/'})
+				}
+			})
+			.catch(function (error) {
+			    console.log(error);
+			    alert(error)
+			});
+		},
+		//封面上传
+		upphoto: function(){
+			var _this = this;
+			var file = document.getElementById("file");
+			//console.log(file.files);
+			if(file.files.length>0){
+	            var formData = new FormData();
+	            formData.append('file',file.files[0])
+	            //console.log(formData);
+	            _this.$axios.post('http://127.0.0.1:4040/uploadcover', 
+					    formData
+					)
+					.then(function (response) {
+						if(response.data.code === 200){
+							alert('上传成功');
+							
+						}				    
+					})
+					.catch(function (error) {
+					    console.log(error);
+					    alert(error)
+					});
+			}
+		},
+		//文章判断
+	    judge: function(){
+			var _this = this;
+			//基本信息上传
+			_this.titlea='';
+	        _this.selecta= '';
+	        _this.introa= '';
+	        _this.photoa='';
+	        _this.isok = 0;
+			if(_this.title==''){
+				_this.titlea = '请填标题';
+				_this.isok = 1;
+			}
+			if(_this.value==''){
+				_this.selecta = "请选择分类";
+				_this.isok = 1;
+			}
+			if(_this.intro==''){
+				_this.introa = "请填简介";
+				_this.isok = 1;
+			}
+			if(_this.src== 'http://127.0.0.1:4040/user/nomare.png'){
+				_this.photoa = "请选择封面";
+				_this.isok = 1;
+			}
+		},
+		//点击发布
+		publish: function(){
+			var _this = this;
+			_this.judge();
+			if(_this.isok == 0){
+				_this.upphoto();
+				_this.uptitle();
+			}
+		}
 	    
 	},
-	mounted:function(){this.manage();this.justit();this.fwb()},
+	mounted:function(){this.manage();this.justit()},
 	watch: {
         title() {
             if (this.title.length > this.num1) {

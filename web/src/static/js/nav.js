@@ -49,7 +49,7 @@ export default {
         },
         quit: function(){
         	var _this = this;
-        	_this.$axios.get('/quit',{})
+        	_this.$axios.get('http://127.0.0.1:4040/quit',{})
         	.then(function (response) {
 				var data = response.data;
 			    _this.user = '';

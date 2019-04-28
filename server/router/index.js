@@ -1,8 +1,10 @@
 var login = require('../model/login');
-var file = require('../model/file')
+var file = require('../model/file');
+var updata = require('../model/upload');
 var multer = require("multer");
 
-var aaa='./data/work/';
+var aaa='./data/cover/';
+var photoname = '';
 var storage = multer.diskStorage({
   	destination: function (req, file, cb) {
 	    cb(null, aaa)
@@ -15,7 +17,6 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 module.exports = function(app){
-	
 	//查询数据库信息
 	app.post('/user',function(req,res){
 		var from = req.body.firstName;
@@ -63,6 +64,7 @@ module.exports = function(app){
 			var myimgurl = req.session.imgurl;
 			var myname = req.session.username;
 			res.send({success:true,tep:1,myname:myname,myimgurl:myimgurl});
+			//aaa = path;
 		}else{
 			res.send({success:true,tep:0});
 		}
@@ -80,6 +82,22 @@ module.exports = function(app){
 		})
 		//res.send({success:true});
 	});
+	//删除图片
+	app.post('/delfile',function(req,res){
+		var path = req.body.path;
+		file.delFiles(res,path);
+	})
+	//后台上传封面图片
+	app.post("/uploadcover",upload.array("file",20),function(req,res,next){
+		//获取文件名
+		photoname = req.files[0].filename;
+		console.log(photoname);
+		res.json({
+			code:200,
+			data:photoname
+		})
+		//res.send({success:true});
+	});
 
 	//获取图片
 	app.post('/showphoto',function(req,res){
@@ -89,8 +107,19 @@ module.exports = function(app){
 		file.showFiles(req,res,path);
 	});
 
-	app.get('/test',function(req,res){
-		console.log('你来了');
+	//文章上传头部
+	app.post('/uptitle',function(req,res){
+		console.log('photoname'+photoname);
+		updata.uptitle(req,res);
 	});
+	//fwb收集
+	app.post('/upfwb',function(req,res){
+		var html = req.body.html;
+		console.log(html);
+		res.json({
+			code:200,
+			data:html
+		})
+	})
 
 }

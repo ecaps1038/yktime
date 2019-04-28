@@ -8,7 +8,7 @@
 						<i class="tp"></i>
 						<input type="text" name="title" :placeholder="just+'标题'" v-model="title">
 						<span class="num">{{titlechange}}</span>
-						<span class="tx">请填写</span>
+						<span class="tx">{{titlea}}</span>
 					</div>
 					<div class="select">
 						<i class="tp"></i>
@@ -21,6 +21,7 @@
 						    </el-option>
 						</el-select>
 						<input type="text" name="title" placeholder="标签以“,”或空格隔开" v-model="label" class="label"> 
+						<span class="tx">{{selecta}}</span>
 					</div>
 					<div class="input">
 						<i class="tp"></i>
@@ -30,8 +31,9 @@
 						  :placeholder="just+'简介'"
 						  v-model="intro">
 						</el-input>
-						<!-- <input type="text" name="title" :placeholder="just+'简介'" v-model="intro"> -->
 						<span class="num">{{introchange}}</span>
+						<span class="tx">{{introa}}</span>
+
 					</div>
 				</div>
 			</div>
@@ -46,11 +48,22 @@
 			<div class="inform last-inf">
 				<p class="inf-title">上传封面</p>
 				<div class="inf-photo">
-					<div id="div3"></div>
 					<i class="tp"></i>
-					<div id="div3"></div>
+					<div class="up-cover">
+						<div  class="file-input">
+	                        <input type="file" name="file" id="file" multiple="multiple" ref="aaa" @change="eimg">
+	                       	<p>修改图片</p>
+	                    </div>
+	                    <img :src="src">
+	                    <!-- <button id="upload" @click="eaimg">上传</button> -->
+					</div>
+					<p class="tx">{{photoa}}</p>
 				</div>
-			</div>		
+			</div>
+			<div class="btn-div">
+				<button class="publish" @click="publish">发布</button>
+				<button class="preview">预览</button>
+			</div>
 		</div>
     </div>
 </template>
