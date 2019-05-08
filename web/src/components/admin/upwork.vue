@@ -40,7 +40,7 @@
 			<div class="inform">
 				<p class="inf-title">编辑{{just}}</p>
 				<div class="inf-num">
-					<div id="div3"></div>
+					<div id="divs"></div>
 					<i class="tp"></i>
 					<iframe name="ifm" id="fwbFrame" frameborder="0" scrolling="no" src="http://127.0.0.1:4040/one"></iframe>
 				</div>
@@ -63,6 +63,7 @@
 			<div class="btn-div">
 				<button class="publish" @click="publish">发布</button>
 				<button class="preview">预览</button>
+				<button @click="huoqu">测试</button>
 			</div>
 		</div>
     </div>

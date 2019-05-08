@@ -109,17 +109,25 @@ module.exports = function(app){
 
 	//文章上传头部
 	app.post('/uptitle',function(req,res){
-		console.log('photoname'+photoname);
+		//console.log('photoname'+photoname);
 		updata.uptitle(req,res);
+		var workid = req.session.workid;
+		console.log(wiokid);
+
 	});
 	//fwb收集
 	app.post('/upfwb',function(req,res){
-		var html = req.body.html;
-		console.log(html);
-		res.json({
-			code:200,
-			data:html
-		})
+		var id = req.body.id;
+		if(id == 0){
+			updata.insertfwb(req,res);
+		}else{
+			console.log('不是第一次提交了')
+			//var workid = req.session.workid;
+		}
+		// res.json({
+		// 	code:200,
+		// 	data:html
+		// })
 	})
 
 }

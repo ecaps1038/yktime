@@ -14,7 +14,7 @@ function fileSelect(){
                 data.data.map(function(ver){
                     var aa = ver.filename.match(patt1)[1];
                     if(aa == 'jpg' || aa == 'png' || aa == 'jpeg'){
-                    html += '<li><div class="img"><img src="/works/'+ver.filename+'"/></div>'+
+                    html += '<li><div class="img"><img src="http://127.0.0.1:4040/works/'+ver.filename+'"/></div>'+
                         '<p>'+ver.filename+'</p>'+
                         '<i class="select"></i></li>';
                     }
@@ -59,7 +59,7 @@ function selectFuc(path){
         $('.files ul li').each(function(){
             var that = $(this);
             if(that.hasClass('selected')){
-                var val = path+that.find('p').text();
+                var val = 'http://127.0.0.1:4040/works/'+that.find('p').text();
                 paths[j] = val;
                 j++;
                 //html+=path+that.find('p').text();
@@ -86,38 +86,44 @@ function reverse(id){
 
 //上传图片
 function uploadFile(){
-            var html = '';
-            var file = document.getElementById("file")
-            var formData = new FormData();
-            for(var i in file.files){//这里如果单张上传就不必遍历直接formData.append('file',file.files[0])
-                    formData.append('file',file.files[i]);
+    var html = '';
+    var file = document.getElementById("file")
+    var formData = new FormData();
+    for(var i in file.files){//这里如果单张上传就不必遍历直接formData.append('file',file.files[0])
+            formData.append('file',file.files[i]);
+    }
+    $.ajax({
+        url: '/upload',
+        type: 'POST',
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data){
+            if(200 === data.code) {
+                $('#result').html("上传成功！");
+                $('#file').val('');
+                fileSelect();
+            } else {
+                $('#result').html("上传失败！");
             }
-            $.ajax({
-                url: '/upload',
-                type: 'POST',
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function(data){
-                    if(200 === data.code) {
-                        $('#result').html("上传成功！");
-                        $('#file').val('');
-                        fileSelect();
-                    } else {
-                        $('#result').html("上传失败！");
-                    }
-                    //console.log('imgUploader upload success');
-                },
-                error: function(){
-                    $("#result").html("与服务器通信发生错误");
-                }
-            });
+            //console.log('imgUploader upload success');
+        },
+        error: function(){
+            $("#result").html("与服务器通信发生错误");
         }
+    });
+}
 
+function postPage1() {
+    var uploada = document.getElementById('upload');
+    uploada.addEventListener("click",function () {
+        uploadFile();
+    },false);
+}
 function postPage() {
-            var uploada = document.getElementById('upload');
-            uploada.addEventListener("click",function () {
-                uploadFile();
-            },false);
-        }
+       var uploada = document.getElementById('upload');
+    window.addEventListener("beforeunload",function () {
+        uploadFile();
+    },false);
+}

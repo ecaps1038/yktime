@@ -1,18 +1,21 @@
-var mongoose = require('../config/db.js'),
+var mongoose = require('mongoose');
+var db = require('../config/yikedb.js'),
     Schema = mongoose.Schema;
     mongoose.Promise = Promise;
 
 //文章/作品 id  属性(1、2)   名称   分类(1/2/3)   标签   摘要   正文   保存时间   是否发布(0/1)   封面图片   查看次数 
 var WorksSchema = new Schema({          
-    name: {type: String},					   					//名称
-    types: {type: Number},					   					//属性
-    classlfy: {type: Number},					   				//分类
-    introduc: {type: String},					   				//摘要
+    userid: {type: String},					   					//用户id
+    types: {type: Number},                                      //属性
+    name: {type: String},                                       //名称
+    classlfy: {type: String},					   				//分类
+    tep: {type: String},                                        //标签
+    introduc: {type: String},					   				//简介
     content: {type: String},					   				//正文内容
-    icon: {type: String, default: 'group.png'},					//封面图片
+    icon: {type: String},					                    //封面图片
     time: {type: Date},  										//保存时间
     release: {type: Number},  									//是否发布
-    times: {type: Number},  									//查看次数
+    times: {type: Number,default: 0},  									//查看次数
 });
 
 // //群成员表
@@ -35,6 +38,6 @@ var WorksSchema = new Schema({
 //     fromname: {type: String},  									//发送者昵称
 // });
 
-module.exports = mongoose.model('Works',WorksSchema);
+module.exports = db.model('Works',WorksSchema);
 // module.exports = mongoose.model('Groupuser',GroupuserSchema);
 // module.exports = mongoose.model('Groupmsg',GroupmsgSchema);

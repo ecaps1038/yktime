@@ -1,4 +1,5 @@
-var mongoose = require('../config/db.js'),
+var mongoose = require('mongoose');
+var db = require('../config/db.js'),
     Schema = mongoose.Schema;
     mongoose.Promise = Promise;
 
@@ -15,4 +16,4 @@ var UserSchema = new Schema({
     grade: {type: Number,default: 0}            //权限等级
 });
 
-module.exports = mongoose.model('User',UserSchema);
+module.exports = db.model('User',UserSchema);

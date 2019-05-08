@@ -2,7 +2,7 @@
 import Router from '../../../router/index'
 
 import s from '../myfunc.js'
-import f from'../filefwb.js'
+import {fileSelect} from'../filefwb.js'
 import E from 'wangeditor'
 import F from '../lib/wangEditor'
 
@@ -55,7 +55,7 @@ export default {
 	        selecta: '',
 	        introa: '',
 	        photoa: '',
-	        isok: '',
+	        isok: '0',
 		}
 	},
     computed:{
@@ -113,11 +113,18 @@ export default {
 			}
 		},
 		//载入富文本编辑器
+		fwb1: function(){
+			var _this = this;
+	        //var E = window.F;
+			_this.editor2 = new F('#divs');
+			_this.editor2.create();
+		},
+		//载入富文本编辑器
 		fwb: function(){
 			var _this = this;
-	        //var E = window.wangEditor;
-			_this.editor2 = new E('#div3');
-			_this.editor2.create();
+	         _this.editor2 = new E('#divs')
+        _this.editor2.create();
+       
 		},
 		//图片显示
 		eimg: function(){
@@ -200,19 +207,34 @@ export default {
 				_this.photoa = "请选择封面";
 				_this.isok = 1;
 			}
+			if(_this.isok == 1){
+				_this.$message('有未填写项');
+			}
+			return _this.isok;
 		},
 		//点击发布
 		publish: function(){
 			var _this = this;
-			_this.judge();
+			//_this.$message(_this.title);
+			//_this.judge();
 			if(_this.isok == 0){
-				_this.upphoto();
+				//_this.upphoto();
 				_this.uptitle();
+				//_this.$router.push({path: '/home'});
 			}
+			for(let i = 0; i<10; i++){
+				console.log(i)
+			}
+		},
+		//测试获取ifrem内容
+		huoqu: function(){
+			var _this = this;
+			var aa = document.getElementById('fwbFrame').contentWindow.document.getElementById('btn1').attr('data-id')
+			alert(aa);
 		}
 	    
 	},
-	mounted:function(){this.manage();this.justit()},
+	mounted:function(){this.manage();this.justit();},
 	watch: {
         title() {
             if (this.title.length > this.num1) {
