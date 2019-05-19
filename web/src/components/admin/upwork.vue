@@ -6,13 +6,13 @@
 				<div class="inf-input">
 					<div class="input">
 						<i class="tp"></i>
-						<input type="text" name="title" :placeholder="just+'标题'" v-model="title">
+						<input type="text" name="title" :placeholder="just+'标题'" v-model="title" @blur="uptitle">
 						<span class="num">{{titlechange}}</span>
 						<span class="tx">{{titlea}}</span>
 					</div>
 					<div class="select">
 						<i class="tp"></i>
-						<el-select v-model="value" :placeholder="just+'分类'">
+						<el-select v-model="value" :placeholder="just+'分类'" @blur="upvalue">
 						    <el-option
 							    v-for="item in options"
 							    :key="item.value"
@@ -20,7 +20,7 @@
 							    :value="item.value">
 						    </el-option>
 						</el-select>
-						<input type="text" name="title" placeholder="标签以“,”或空格隔开" v-model="label" class="label"> 
+						<input type="text" name="title" placeholder="标签以“,”或空格隔开" v-model="label" class="label" @blur="uplabel"> 
 						<span class="tx">{{selecta}}</span>
 					</div>
 					<div class="input">
@@ -29,7 +29,9 @@
 						  type="textarea"
 						  autosize
 						  :placeholder="just+'简介'"
-						  v-model="intro">
+						  v-model="intro"
+						  @blur="upintro" 
+						  >
 						</el-input>
 						<span class="num">{{introchange}}</span>
 						<span class="tx">{{introa}}</span>
@@ -51,7 +53,7 @@
 					<i class="tp"></i>
 					<div class="up-cover">
 						<div  class="file-input">
-	                        <input type="file" name="file" id="file" multiple="multiple" ref="aaa" @change="eimg">
+	                        <input type="file" name="file" id="file" multiple="multiple" ref="aaa" @change="eimg" >
 	                       	<p>修改图片</p>
 	                    </div>
 	                    <img :src="src">
@@ -63,7 +65,7 @@
 			<div class="btn-div">
 				<button class="publish" @click="publish">发布</button>
 				<button class="preview">预览</button>
-				<button @click="huoqu">测试</button>
+				<span class="save"><i :class="icon"></i>{{save}}</span>
 			</div>
 		</div>
     </div>

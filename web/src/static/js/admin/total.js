@@ -1,11 +1,13 @@
 var outs = [23,43,76];
 var ins = [54,73];
+//加入跳转页面的位置
+import Router from '../../../router/index'
 
 export default {
 	data () {
 		return {
 			navs: [
-				{
+				{	
 					icon: "#icon-wenzhang",
 					path:'/add/upwork?n=1',
 					num: ""
@@ -97,6 +99,21 @@ export default {
 			var i = 0; var j = _this.teps.length;
 			var e = Math.floor(Math.random() * (j - i)) + i;
 			_this.tep = _this.teps[e];
+		},
+		//创建数据条
+		createdb: function(index){
+			var _this = this;
+			_this.$axios.post('http://127.0.0.1:4040/creatework', 
+			    {num: index}
+			)
+			.then(function (response) {
+				//var nowid = data.rest;
+				Router.push({path: '/add/upwork?n='+index});
+			})
+			.catch(function (error) {
+			    console.log(error);
+			    alert(error)
+			});
 		}
 	},
 	mounted:function(){this.manage();this.outdata();this.indata();this.random()},

@@ -5,13 +5,19 @@ var multer = require("multer");
 
 var aaa='./data/cover/';
 var photoname = '';
+var wid = '';
 var storage = multer.diskStorage({
   	destination: function (req, file, cb) {
 	    cb(null, aaa)
   	},
   	filename: function (req, file, cb) {
-	  	var str = file.originalname.split('.');
-	    cb(null, Date.now()+'.'+str[1]);
+  		if(wid){
+  			var str = file.originalname.split('.');
+	        cb(null, wid+'.'+str[1]);
+  		}else{
+  			var str = file.originalname.split('.');
+	    	cb(null, Date.now()+'.'+str[1]);
+  		}
   	}
 })
 var upload = multer({ storage: storage });
@@ -86,7 +92,34 @@ module.exports = function(app){
 	app.post('/delfile',function(req,res){
 		var path = req.body.path;
 		file.delFiles(res,path);
-	})
+	});
+
+	//文章操作
+	//初创建文章表
+	app.post('/creatework',function(req,res){
+		var num = req.body.num;
+		//console.log(num);
+		updata.insert(req,res);
+	});
+	//进入upwork前判断
+	app.post('/upwork', function(req,res) {
+		console.log('upwork');
+		if(req.signedCookies.workid && req.session.userId){
+			console.log('b');
+			req.session.workid = req.signedCookies.workid;
+			wid = req.session.workid;
+			res.send({success:true,tep:1,wid:wid});
+			//aaa = path;
+		}else if(req.session.workid){
+			//wid = req.session.workid;
+			updata.getdata(req,res);
+			//res.send({success:true,tep:1,wid:wid});
+		}
+		else{
+			res.send({success:true,tep:0});
+		}
+	});	
+
 	//后台上传封面图片
 	app.post("/uploadcover",upload.array("file",20),function(req,res,next){
 		//获取文件名
@@ -102,32 +135,21 @@ module.exports = function(app){
 	//获取图片
 	app.post('/showphoto',function(req,res){
 		var path = req.body.path;
-		//console.log('哈哈'+path);
 		aaa = path;
 		file.showFiles(req,res,path);
 	});
 
 	//文章上传头部
 	app.post('/uptitle',function(req,res){
-		//console.log('photoname'+photoname);
-		updata.uptitle(req,res);
-		var workid = req.session.workid;
-		console.log(wiokid);
-
+		updata.uptop(req,res);
 	});
 	//fwb收集
 	app.post('/upfwb',function(req,res){
-		var id = req.body.id;
-		if(id == 0){
-			updata.insertfwb(req,res);
-		}else{
-			console.log('不是第一次提交了')
-			//var workid = req.session.workid;
-		}
-		// res.json({
-		// 	code:200,
-		// 	data:html
-		// })
+		updata.uptop(req,res);
+	});
+	//cookie测试
+	app.get('/getcookie',function(req,res){
+		wid = req.signedCookies.workid;
+		res.send({success:true,id:wid});
 	})
-
 }

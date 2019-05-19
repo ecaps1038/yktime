@@ -12,35 +12,63 @@ exports.insertWorks = function(data,ress){
             console.log("works添加失败" + err);
         }
         else {
-        	ress.send({success:true,rest:res._id});
-            //ress.cookie('workid',res._id,{signed:true, path:'http://localhost:8080', maxAge: 1000*60*60*2});
+            ress.cookie('workid',res._id,{signed:true, path:'http://localhost:8080', maxAge: 1000*10});
+        	ress.send({success:true});
             //console.log("群添加成功");
         }
     });
 };
+//更新文本提交内容
+exports.update = function(data,wid,ress){
+    var id = {_id:wid};
+    Works.findOneAndUpdate(id, data, function(err, res){
+        if (err) {
+            console.log("数据修改出错：" + err);
+        }
+        else {
+            ress.send({success:true,tep:0});
+        }
+    });
+}
+//更新富文本内容
+exports.updateWorks = function(data,wid,ress){
+    var id = {_id:wid};
+    Works.findOneAndUpdate(id, data, function(err, res){
+        if (err) {
+            console.log("数据修改出错：" + err);
+        }
+        else {
+            ress.send({success:true,rest:res._id});
+        }
+    });
+}
 
-//查询
-exports.showWorks = function(wherestr,out){
-    //var wherestr = {'username' : '小黄'};
+//根据id查询一条数据
+exports.getoneData = function(id,res){
+    //var id = {'username' : '小黄'};
     //var age = {'userage':{$gte:12,$lte:14}};
-    //var out = {'username':1,'userage':1,'_id':0};
-    User.find(wherestr, out, function(err, ress){
+    var out = {};
+    Works.findById(id, out, function(err, ress){
         if(err){
             console.log('搜索失败');
         }else{
+            // var context = {
+            //     res: res.map(function(vacation){
+            //         return {
+            //             id: vacation._id,
+            //             userid: vacation.userid,
+            //             content: vacation.content,
+            //             // explain: vacation.explain,
+            //             // sex: vacation.sex,
+            //             // imgurl: vacation.imgurl,
+            //             // online: vacation.online,
+            //         }
+            //     })
+            // };
             var context = {
-                res: res.map(function(vacation){
-                    return {
-                        id: vacation._id,
-                        userid: vacation.userid,
-                        content: vacation.content,
-                        // explain: vacation.explain,
-                        // sex: vacation.sex,
-                        // imgurl: vacation.imgurl,
-                        // online: vacation.online,
-                    }
-                })
-            };
+                res:ress,
+                tep:2,
+            }
             res.send({success:true,context});
         }
     });

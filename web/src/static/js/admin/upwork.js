@@ -10,33 +10,32 @@ import F from '../lib/wangEditor'
 //文章
 var article=[
 	{
-	 	value: '选项1',
+	 	value: '1',
 	    label: '我的故事'
 	}, {
-	    value: '选项2',
+	    value: '2',
 	    label: '观点'
 	}, {
-	    value: '选项3',
+	    value: '3',
 	    label: '非我'
 	}];
 var diary=[
 	{
-	 	value: '选项1',
+	 	value: '1',
 	    label: '摄影'
 	}, {
-	    value: '选项2',
+	    value: '2',
 	    label: '插画'
 	}, {
-	    value: '选项3',
+	    value: '3',
 	    label: 'UI'
 	}, {
-	    value: '选项4',
+	    value: '4',
 	    label: '平面'
 	}, {
-	    value: '选项5',
+	    value: '5',
 	    label: '杂'
 }];
-
 
 export default {
 	data () {
@@ -56,6 +55,8 @@ export default {
 	        introa: '',
 	        photoa: '',
 	        isok: '0',
+	        icon: '',
+	        save: '文档自动保存',
 		}
 	},
     computed:{
@@ -74,17 +75,28 @@ export default {
 		}
 	},
 	methods:{
+		//测试
+		out:function(){
+			var _this = this;
+			console.log(_this.inputData);
+		},
         manage: function(){
 			var _this = this;
-			_this.$axios.get('http://127.0.0.1:4040/manage', {
+			_this.$axios.post('http://127.0.0.1:4040/upwork', {
 			})
 			.then(function (response) {
 				var data = response.data;
 				var tep = data.tep;
+				console.log(tep)
+				var wid = data.wid;
 				if(tep == 0){
 					Router.push({path: '/'});
 				}else if(tep == 1){
 					_this.user = '<img src="http://127.0.0.1:4040/user/user1.png">';
+					//alert(wid);
+				}else if(tep == 2){
+					console.log(data.context);
+					_this.title = 'data.tep';
 				}
 			})
 			.catch(function (error) {
@@ -96,14 +108,14 @@ export default {
 		//判断入口
 		justit: function(){
 			var _this = this;
-			if(_this.$route.query.n==1){
+			if(_this.$route.query.n==0){
 				_this.options = [];
 				_this.just = '文章';
 				for(var i=0;i<article.length;i++){
 					_this.options.push(article[i]);
 				}
 				
-			}else if(_this.$route.query.n==2){
+			}else if(_this.$route.query.n==1){
 				_this.options = [];
 				_this.just = '作品';
 				for(var i=0;i<diary.length;i++){
@@ -126,17 +138,65 @@ export default {
         _this.editor2.create();
        
 		},
-		//图片显示
-		eimg: function(){
+		//上传文件
+		upfile: function(data,num){
 			var _this = this;
-			var aa = s.getObjectURL(document.getElementById("file").files[0]);
-			_this.src = aa;
-			console.log(_this.src);
+			_this.icon = 'el-icon-loading';
+				_this.save = '正在保存...';
+				_this.$axios.post('http://127.0.0.1:4040/uptitle', {
+				    data: data,
+				    num: num,
+				})
+				.then(function (response) {
+					var tep = response.data.tep;
+				    if(tep == 0){
+				    	_this.icon = '';
+						_this.save = '已自动保存';
+					}
+				})
+				.catch(function (error) {
+				    console.log(error);
+				    alert(error)
+				});
 		},
 
-
-		//上传文章上部分
+		//inpiut失去焦点自动上传
 		uptitle: function(){
+			var _this = this;
+			_this.titlea = '';
+			if(_this.title==''){
+				_this.titlea = '请填标题';
+			}else{
+				_this.upfile(_this.title,0);
+			}
+		},
+		upvalue: function(){
+			var _this = this;
+			_this.selecta = '';
+			if(_this.value==''){
+				_this.selecta = "请选择分类";
+			}else{
+				_this.upfile(_this.value,1);
+			}
+		},
+		uplabel: function(){
+			var _this = this;
+			if(_this.label==''){
+			}else{
+				_this.upfile(_this.label,2);
+			}
+		},
+		upintro: function(){
+			var _this = this;
+			_this.introa = '';
+			if(_this.intro==''){
+				_this.introa = "请填简介";
+			}else{
+				_this.upfile(_this.value,3);
+			}
+		},
+		//上传文章上部分
+		uptitle1: function(){
 			var _this = this;
 			_this.$axios.post('http://127.0.0.1:4040/uptitle', {
 			    title: _this.title,
@@ -158,6 +218,13 @@ export default {
 			    alert(error)
 			});
 		},
+		//图片显示
+		eimg: function(){
+			var _this = this;
+			var aa = s.getObjectURL(document.getElementById("file").files[0]);
+			_this.src = aa;
+			_this.upphoto();
+		},
 		//封面上传
 		upphoto: function(){
 			var _this = this;
@@ -172,8 +239,7 @@ export default {
 					)
 					.then(function (response) {
 						if(response.data.code === 200){
-							alert('上传成功');
-							
+							_this.upfile(response.data.data,4);							
 						}				    
 					})
 					.catch(function (error) {
@@ -216,22 +282,31 @@ export default {
 		publish: function(){
 			var _this = this;
 			//_this.$message(_this.title);
-			//_this.judge();
+			_this.judge();
 			if(_this.isok == 0){
-				//_this.upphoto();
-				_this.uptitle();
-				//_this.$router.push({path: '/home'});
-			}
-			for(let i = 0; i<10; i++){
-				console.log(i)
+				_this.upfile('ok',6);
+				_this.$message('发布成功！');
+				_this.$router.push({path: '/manage'});
 			}
 		},
-		//测试获取ifrem内容
-		huoqu: function(){
+
+
+		//cookie测试
+		 cookie: function(){
 			var _this = this;
-			var aa = document.getElementById('fwbFrame').contentWindow.document.getElementById('btn1').attr('data-id')
-			alert(aa);
-		}
+			_this.$axios.get('http://127.0.0.1:4040/getcookie', {
+			})
+			.then(function (response) {
+				var data = response.data;
+				var id = data.id;
+				alert(id);
+			})
+			.catch(function (error) {
+			    console.log(error);
+			    alert(error);
+			    Router.push({path: '/'});
+			});
+		},
 	    
 	},
 	mounted:function(){this.manage();this.justit();},

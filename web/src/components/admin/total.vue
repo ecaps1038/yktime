@@ -13,16 +13,16 @@
     				<p class="all-data">{{outsum}}</p>
     			</div>
     			<ul>
-    				<li v-for="nav in navs">
+    				<li v-for="(nav,index) in navs">
     					<svg class="title-icon" aria-hidden="true">
 							<use :xlink:href="nav.icon"></use>
 						</svg>
 						<p>{{nav.num}}</p>
-                        <router-link :to="nav.path" :style="note">
+                        <a :style="note" @click="createdb(index)">
 						<svg class="add-icon" aria-hidden="true">
 							<use xlink:href="#icon-add"></use>
 						</svg>
-                        </router-link>
+                        </a>
     				</li>
     			</ul>
     		</div>

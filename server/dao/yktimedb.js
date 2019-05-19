@@ -8,14 +8,14 @@ var WorksSchema = new Schema({
     userid: {type: String},					   					//用户id
     types: {type: Number},                                      //属性
     name: {type: String},                                       //名称
-    classlfy: {type: String},					   				//分类
+    classlfy: {type: Number},					   				//分类
     tep: {type: String},                                        //标签
     introduc: {type: String},					   				//简介
     content: {type: String},					   				//正文内容
     icon: {type: String},					                    //封面图片
     time: {type: Date},  										//保存时间
     release: {type: Number},  									//是否发布
-    times: {type: Number,default: 0},  									//查看次数
+    times: {type: Number,default: 0},  							//查看次数
 });
 
 // //群成员表
