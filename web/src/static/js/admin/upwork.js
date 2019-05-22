@@ -10,30 +10,30 @@ import F from '../lib/wangEditor'
 //文章
 var article=[
 	{
-	 	value: '1',
+	 	value: '0',
 	    label: '我的故事'
 	}, {
-	    value: '2',
+	    value: '1',
 	    label: '观点'
 	}, {
-	    value: '3',
+	    value: '2',
 	    label: '非我'
 	}];
 var diary=[
 	{
-	 	value: '1',
+	 	value: '0',
 	    label: '摄影'
 	}, {
-	    value: '2',
+	    value: '1',
 	    label: '插画'
 	}, {
-	    value: '3',
+	    value: '2',
 	    label: 'UI'
 	}, {
-	    value: '4',
+	    value: '3',
 	    label: '平面'
 	}, {
-	    value: '5',
+	    value: '4',
 	    label: '杂'
 }];
 
@@ -85,9 +85,8 @@ export default {
 			_this.$axios.post('http://127.0.0.1:4040/upwork', {
 			})
 			.then(function (response) {
-				var data = response.data;
+				var data = response.data.data;
 				var tep = data.tep;
-				console.log(tep)
 				var wid = data.wid;
 				if(tep == 0){
 					Router.push({path: '/'});
@@ -95,8 +94,15 @@ export default {
 					_this.user = '<img src="http://127.0.0.1:4040/user/user1.png">';
 					//alert(wid);
 				}else if(tep == 2){
-					console.log(data.context);
-					_this.title = 'data.tep';
+					var res = data.res;
+					console.log(res)
+					_this.title = res.name;
+					_this.label = res.tep;
+					_this.value = _this.options[res.classlfy].label;
+					_this.intro = res.introduc;
+					if(res.icon){
+						_this.src = 'http://127.0.0.1:4040/cover/'+res.icon;
+					}					 
 				}
 			})
 			.catch(function (error) {
@@ -192,7 +198,7 @@ export default {
 			if(_this.intro==''){
 				_this.introa = "请填简介";
 			}else{
-				_this.upfile(_this.value,3);
+				_this.upfile(_this.intro,3);
 			}
 		},
 		//上传文章上部分

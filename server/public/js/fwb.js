@@ -59,12 +59,31 @@
           i++
         })
 
+        function onload(){
+            $.ajax({
+                url: '/fwbonload',
+                type: 'get',
+                data: {},
+                success: function(data){
+                    if(data.success){
+                        var now = data.data.res;
+                        editor2.txt.html(now.content);
+                    }else{
+                        alert('发生返回错误')
+                    }
+                },
+                error: function(){
+                    $("#result").html("与服务器通信发生错误");
+                }
+           });
+        }
+
         // document.getElementById('btn2').addEventListener('click', function () {
         //     alert(editor2.txt.text())
         // }, false)
         
         window.onload = function () {
-
+            onload();
         }
     })
 })(jQuery,window,document);

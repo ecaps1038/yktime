@@ -26,5 +26,19 @@ export default {
             url = window.webkitURL.createObjectURL(file) ;
         }
         return url ;
-    }
+    },
+    changeTime2(date){
+	    var d = new Date(date);
+		var Y = d.getFullYear();
+		var M = d.getMonth() + 1;
+		var D = d.getDate();
+		if(M<10){
+			M = '0'+M;
+		}
+		if(D<10){
+			D = '0'+D;
+		}
+		var tiems = Y+'-'+M+'-'+D;
+		return tiems;
+	}
 }

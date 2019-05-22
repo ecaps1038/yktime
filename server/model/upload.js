@@ -17,7 +17,7 @@ exports.insert = function(req,res){
 exports.uptop = function(req,res){ 
 	var wid = req.session.workid;
 	var num = req.body.num;
-	console.log(num);
+	//console.log(num);
 	if(num == 0){
 		var value = req.body.data;
 		var data = {
@@ -50,7 +50,7 @@ exports.uptop = function(req,res){
 		}
 	}else if(num == 5){
 		var fwb = req.body.html;
-		console.log(fwb);
+		//console.log(fwb);
 		var data = {
 			content: fwb,
 			time: new Date(),
@@ -71,6 +71,13 @@ exports.uptop = function(req,res){
 exports.getdata = function(req,res){
 	wid = req.session.workid;
 	dbserver.getoneData(wid,res);
+}
+exports.getfwb = function(req,res){
+	wid = req.session.workid;
+	dbserver.getoneData(wid,res);
+}
+exports.getall = function(req,res){
+	dbserver.getallData(res);
 }
 
 /*********其他*********/

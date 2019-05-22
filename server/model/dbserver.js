@@ -52,24 +52,25 @@ exports.getoneData = function(id,res){
         if(err){
             console.log('搜索失败');
         }else{
-            // var context = {
-            //     res: res.map(function(vacation){
-            //         return {
-            //             id: vacation._id,
-            //             userid: vacation.userid,
-            //             content: vacation.content,
-            //             // explain: vacation.explain,
-            //             // sex: vacation.sex,
-            //             // imgurl: vacation.imgurl,
-            //             // online: vacation.online,
-            //         }
-            //     })
-            // };
-            var context = {
+            var data = {
                 res:ress,
                 tep:2,
             }
-            res.send({success:true,context});
+            res.send({success:true,data:data});
+        }
+    });
+};
+
+//查询所有数据
+exports.getallData = function(res){
+    var wherestr = {'release':1};
+    //var age = {'userage':{$gte:12,$lte:14}};
+    var out = {};
+    Works.find(wherestr, out, function(err, ress){
+        if(err){
+            console.log('搜索失败');
+        }else{
+            res.send({success:true,ress});
         }
     });
 };

@@ -11,20 +11,20 @@
             <li v-for="html in htmls">
                 <section class="cont-inf">
                     <div class="icon">
-                        <img v-if="html.icon === '1'" src="../static/images/icon/artic.png">
-                        <img v-else-if="html.icon === '2'" src="../static/images/icon/design.png">
-                        <img v-else-if="html.icon === '3'" src="../static/images/icon/photograp.png">
-                        <img v-else-if="html.icon === '4'" src="../static/images/icon/note.png">
+                        <img v-if="html.types == '0'" src="../static/images/icon/artic.png">
+                        <img v-else-if="html.types == '1'" src="../static/images/icon/design.png">
+                        <img v-else-if="html.types == '2'" src="../static/images/icon/photograp.png">
+                        <img v-else-if="html.types == '3'" src="../static/images/icon/note.png">
                     </div>
-                    <p class="date">{{html.date}}</p>
+                    <p class="date">{{dtime(html.time)}}</p>
                     <div class="introduce-div">
-                      <p class="title">{{html.title}}</p>
-                      <p class="introduce">{{html.introduce}}</p>
+                      <p class="title">{{html.name}}</p>
+                      <p class="introduce">{{html.introduc}}</p>
                     </div>
                 </section>
                 <div class="photo-div">
                     <div class="photo-img-div">
-                        <img :src="html.photo" class="photo-img"/>
+                        <img :src="'http://127.0.0.1:4040/cover/'+html.icon" class="photo-img"/>
                     </div>
                 </div>
             </li>

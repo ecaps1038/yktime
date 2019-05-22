@@ -108,12 +108,17 @@ module.exports = function(app){
 			console.log('b');
 			req.session.workid = req.signedCookies.workid;
 			wid = req.session.workid;
-			res.send({success:true,tep:1,wid:wid});
+			var data = {
+				tep:1,
+				wid:wid,
+			}
+			res.send({success:true,data:data});
 			//aaa = path;
 		}else if(req.session.workid){
 			//wid = req.session.workid;
 			updata.getdata(req,res);
-			//res.send({success:true,tep:1,wid:wid});
+			//console.log('不是初次编辑');
+			//res.send({success:true,tep:2});
 		}
 		else{
 			res.send({success:true,tep:0});
@@ -147,9 +152,15 @@ module.exports = function(app){
 	app.post('/upfwb',function(req,res){
 		updata.uptop(req,res);
 	});
-	//cookie测试
-	app.get('/getcookie',function(req,res){
-		wid = req.signedCookies.workid;
-		res.send({success:true,id:wid});
+	app.get('/fwbonload',function(req,res){
+		if(req.session.workid){
+			updata.getfwb(req,res);
+		}
+	});
+
+	//前台页面
+	//home页面获取文章数据
+	app.post('/showwork',function(req,res){
+		updata.getall(req,res);
 	})
 }
