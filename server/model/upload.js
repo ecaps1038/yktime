@@ -77,7 +77,8 @@ exports.getfwb = function(req,res){
 	dbserver.getoneData(wid,res);
 }
 exports.getall = function(req,res){
-	dbserver.getallData(res);
+	var num = req.body.num;
+	dbserver.getallData1(res,num);
 }
 
 /*********其他*********/

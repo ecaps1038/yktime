@@ -93,7 +93,7 @@ function uploadFile(){
             formData.append('file',file.files[i]);
     }
     $.ajax({
-        url: '/upload',
+        url: '/fwbuploadphoto',
         type: 'POST',
         data: formData,
         cache: false,

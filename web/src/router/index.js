@@ -5,19 +5,19 @@ import Router from 'vue-router'
 import store from './../store/store'
 
 // 导入相应的子组件
-import Nav from './../components/Nav'
-import Hello from './../components/Hello'
-import Yike from './../components/Home'
+import Nav from './../views/Nav'
+import Hello from './../views/Hello'
+import Yike from './../views/Home'
 //import Works from './../components/Works'
 
 //后台页面
-import login from './../components/admin/login'
-import manage from './../components/admin/manage'
-import total from './../components/admin/total'
-import files from './../components/admin/files'
-import fworks from './../components/admin/fworks'
-import add from './../components/admin/add'
-import upwork from './../components/admin/upwork'
+import login from './../views/admin/login'
+import manage from './../views/admin/manage'
+import total from './../views/admin/total'
+import files from './../views/admin/files'
+import fworks from './../views/admin/fworks'
+import add from './../views/admin/add'
+import upwork from './../views/admin/upwork'
 
 Vue.use(Router)
 

@@ -64,6 +64,7 @@ exports.getoneData = function(id,res){
 //查询所有数据
 exports.getallData = function(res){
     var wherestr = {'release':1};
+    var updatestr = {'status': 1};
     //var age = {'userage':{$gte:12,$lte:14}};
     var out = {};
     Works.find(wherestr, out, function(err, ress){
@@ -74,6 +75,36 @@ exports.getallData = function(res){
         }
     });
 };
+
+//分页查询所有数据
+exports.getallData1 = function(res,id,nowPage){
+    var sel = {'release':1};
+    // if(select){
+    //     sel = {'name':{$regex : select}};
+    // }
+    var pageSize = 8;                   //一页多少条
+    var sort = {'time':-1};        //排序（按登录时间倒序）
+    var condition = {};                 //条件
+    var skipnum = (nowPage - 1) * pageSize;   //跳过数
+    var d = skipnum;
+
+    var query = Works.find({});
+    //根据userID查询
+    query.where(sel);
+    //按照最后会话时间倒序排列
+    query.sort(sort);
+    //跳过数
+    query.skip(skipnum);
+    //一页多少条
+    query.limit(pageSize);
+    //查询结果
+    query.exec().then(function(ress){
+        res.send({success:true,ress});
+    }).catch(function(err){
+        console.log(err);
+    });
+}
+
 
 //退出
 exports.logout = function(req,res){

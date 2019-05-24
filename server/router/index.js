@@ -20,7 +20,17 @@ var storage = multer.diskStorage({
   		}
   	}
 })
+var storage1 = multer.diskStorage({
+  	destination: function (req, file, cb) {
+	    cb(null, './data/works/')
+  	},
+  	filename: function (req, file, cb) {
+  		var str = file.originalname.split('.');
+	    cb(null, Date.now()+'.'+str[1]);
+  	}
+})
 var upload = multer({ storage: storage });
+var upload1 = multer({storage: storage1});
 
 module.exports = function(app){
 	//查询数据库信息
@@ -85,6 +95,14 @@ module.exports = function(app){
 		res.json({
 			code:200,
 			data:arr
+		})
+		//res.send({success:true});
+	});
+	//fwb上传图片
+	app.post("/fwbuploadphoto",upload.array("file",20),function(req,res,next){
+		
+		res.json({
+			code:200,
 		})
 		//res.send({success:true});
 	});

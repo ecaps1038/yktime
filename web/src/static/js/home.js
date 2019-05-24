@@ -49,7 +49,8 @@ export default {
 				backgroundSize: "cover",
 	        },
 			msg: '溶于世，却恋那山石。<br/>世上太多美好，却折磨着选择。<br/>如果不能选择，那就自己创造一块境地。<br/>依旧恋那山石。为此汇记纯粹的自己。',
-			htmls: []
+			htmls: [],
+			mum: 1,
 		}
 	},
     computed:{
@@ -84,6 +85,7 @@ export default {
         content: function(){
 			var _this = this;
 			_this.$axios.post('http://127.0.0.1:4040/showwork', {
+				num:_this.num
 			})
 			.then(function (response) {
 				var data = response.data;
