@@ -15,7 +15,8 @@ import login from './../views/admin/login'
 import manage from './../views/admin/manage'
 import total from './../views/admin/total'
 import files from './../views/admin/files'
-import fworks from './../views/admin/fworks'
+import works from './../views/admin/fworks'
+import artic from './../views/admin/fartic'
 import add from './../views/admin/add'
 import upwork from './../views/admin/upwork'
 
@@ -48,6 +49,14 @@ var router = new Router({
                 {
                     path: 'files',
                     component: files
+                },
+                {
+                    path: 'works',
+                    component: works
+                },
+                {
+                    path: 'artic',
+                    component: artic
                 }
             ]
         },

@@ -1,0 +1,189 @@
+@import "../common.scss";
+.fworks{
+    background: #fff;
+    padding: 30px;
+}
+.works{
+	li{
+		@include w-h(100%,120px,#fff);
+		margin:20px 0;
+		position: relative;
+		&:hover{
+				background: #fafafa;
+				.list-operation{
+					display: block;
+				}
+			}
+		.left{
+			width: 290px;
+			float: left;
+			background: #fff;
+			.left-lep{
+				width: 130px;
+				float: left;padding: 8px 0 0 20px;
+				.date{
+					@include fonts(16px,#333,20px);
+				}
+				.no-release{
+					@include fonts(14px,#ff7f26,24px);
+				}
+				.yes-release{
+					@include fonts(14px,#999,24px);
+				}
+			}
+
+		}
+		.photo-img-div{
+			@include w-h-n(160px,120px);
+			float: right;
+			overflow: hidden;
+			position: relative;
+			img{
+				@include positions(absolute,0,0,0,0);
+				margin: auto;
+				height: 120px;
+			}
+		}
+		.works-list{
+			float: left;
+			position: relative;
+			width: 560px;
+			height: 120px;
+			padding:10px 20px 0 20px;
+			.tep{
+				display: inline-block;
+				padding: 0 5px;
+				@include fonts(12px,#666,22px);
+				background: #f0f0f0;
+			}
+			.title{
+				display: inline-block;
+				margin-left: 10px;
+				@include fonts(18px,#333,22px);
+				vertical-align: bottom;
+			}
+			.introduce{
+				@include fonts(14px,#999,36px);
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+			}
+		}
+		.reback{
+			position: absolute;
+			width: 100%;
+			bottom: 6px;
+			.times{
+				float: left;
+				margin-right: 30px;
+				.title-icon{
+					width: 18px;
+					height: 20px;
+					fill: #999;
+					vertical-align: top;
+				}
+			}
+			.comment{
+				.title-icon{
+					width: 14px;
+					height: 14px;
+					fill: #999;
+					vertical-align: middle;
+				}
+			}
+			span{
+				@include fonts(14px,#333,18px);
+			}
+			
+		}
+		.list-operation{
+			position: absolute;
+			display: none;
+			right: 40px;
+			top: 42px;
+			.send{
+				cursor: pointer;
+				@include w-h-n(36px,36px);
+				display: inline-block;
+				padding-top: 6px;
+				.title-icon{
+					width: 24px;
+					height: 24px;
+					fill: #ff7f26
+				}
+			}
+			.revoke{
+				cursor: pointer;
+				@include w-h-n(36px,36px);
+				display: inline-block;
+				padding-top: 6px;
+				.title-icon{
+					width: 24px;
+					height: 24px;
+					fill: #999;
+				}
+				&:hover .title-icon{
+					fill: #333;
+				}
+			}
+			.modify{
+				cursor: pointer;
+				@include w-h(36px,36px);
+				padding: 5px 9px;
+				margin-right: 10px;
+				.title-icon{
+					width: 16px;
+					height: 24px;
+					fill: #999;
+				}
+				&:hover .title-icon{
+					fill: #333;
+				}
+				@include bord-st(1px,50%,#dedede);
+			}
+			.delete{
+				cursor: pointer;
+				@include w-h(36px,36px);
+				padding: 5px 9px;
+				.title-icon{
+					width: 16px;
+					height: 24px;
+					fill: #999;
+				}
+				&:hover .title-icon{
+					fill: #333;
+				}
+				@include bord-st(1px,50%,#dedede);
+			}
+		}
+	}
+}
+.pages{
+	margin-top: 40px;
+	height: 24px;
+	ul{
+		float: right;
+	}
+	li{
+		float: left;
+		margin: 0 2px;
+		height: 22px;
+		min-width: 22px;
+		border-radius: 12px;
+		font-size: 12px;
+		line-height: 22px;
+		padding: 0 8px;
+		cursor: pointer;
+		&:hover{
+			background: #f0f0f0;
+		}
+	}
+	//现在所在页码
+	.now-page{
+		background: #ff7f26;
+		color: #fff;
+		&:hover{
+			background: #ff7f26;
+		}
+	}
+}

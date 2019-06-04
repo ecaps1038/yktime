@@ -1,4 +1,4 @@
-
+//被wangEditor.js调用
 //获取file内容并选择
 function fileSelect(){
     var html = '';
@@ -101,8 +101,9 @@ function uploadFile(){
         processData: false,
         success: function(data){
             if(200 === data.code) {
-                $('#result').html("上传成功！");
-                $('#file').val('');
+                //$('#result').html("上传成功！");
+                //$('#file').val('');
+                alert('上传成功！')
                 fileSelect();
             } else {
                 $('#result').html("上传失败！");
@@ -115,15 +116,10 @@ function uploadFile(){
     });
 }
 
-function postPage1() {
+function postPage() {
+    // alert('bbl');
     var uploada = document.getElementById('upload');
     uploada.addEventListener("click",function () {
-        uploadFile();
-    },false);
-}
-function postPage() {
-       var uploada = document.getElementById('upload');
-    window.addEventListener("beforeunload",function () {
         uploadFile();
     },false);
 }

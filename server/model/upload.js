@@ -62,13 +62,10 @@ exports.uptop = function(req,res){
 		}
 	}
 	dbserver.update(data,wid,res);
-    //console.log(req.body.title);
-    //title,label,intro,value,just
-    //res.send({success:true,tep:0});
 };
 
-//获取数据
-exports.getdata = function(req,res){
+//获取当前id数据
+exports.getone = function(req,res){
 	wid = req.session.workid;
 	dbserver.getoneData(wid,res);
 }
@@ -76,9 +73,41 @@ exports.getfwb = function(req,res){
 	wid = req.session.workid;
 	dbserver.getoneData(wid,res);
 }
-exports.getall = function(req,res){
+//获取文章/作品
+exports.getData = function(req,res){
+	dbserver.getdata(req,res);
+}
+//获取文章/作品
+exports.getCount = function(req,res){
+	dbserver.getCount(req,res);
+}
+//后台文章和作品页面操作
+exports.sessions = function(req,res){
+	req.session.workid = req.signedCookies.workid;
+	console.log('workid'+req.session.workid)
+	res.send({success:true,tep:0});
+}
+exports.dataChange = function(req,res){
+	var id = req.body.data;
 	var num = req.body.num;
-	dbserver.getallData1(res,num);
+	if(num == 0){
+		var data = {
+			release: 1,
+			time: new Date(),
+		}
+		dbserver.update(data,id,res);
+	}else if(num == 1){
+		var data = {
+			release: 0,
+			time: new Date(),
+		}
+		dbserver.update(data,id,res);
+	}else if(num == 2){
+		res.cookie('workid',id,{signed:true, path:'http://localhost:8080', maxAge: 1000*10});
+		res.send({success:true,tep:0});
+	}else if(num ==3){
+		dbserver.remove(id,res);
+	}
 }
 
 /*********其他*********/

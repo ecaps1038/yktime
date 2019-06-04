@@ -19,7 +19,7 @@ var article=[
 	    value: '2',
 	    label: '非我'
 	}];
-var diary=[
+var works=[
 	{
 	 	value: '0',
 	    label: '摄影'
@@ -80,37 +80,6 @@ export default {
 			var _this = this;
 			console.log(_this.inputData);
 		},
-        manage: function(){
-			var _this = this;
-			_this.$axios.post('http://127.0.0.1:4040/upwork', {
-			})
-			.then(function (response) {
-				var data = response.data.data;
-				var tep = data.tep;
-				var wid = data.wid;
-				if(tep == 0){
-					Router.push({path: '/'});
-				}else if(tep == 1){
-					_this.user = '<img src="http://127.0.0.1:4040/user/user1.png">';
-					//alert(wid);
-				}else if(tep == 2){
-					var res = data.res;
-					console.log(res)
-					_this.title = res.name;
-					_this.label = res.tep;
-					_this.value = _this.options[res.classlfy].label;
-					_this.intro = res.introduc;
-					if(res.icon){
-						_this.src = 'http://127.0.0.1:4040/cover/'+res.icon;
-					}					 
-				}
-			})
-			.catch(function (error) {
-			    console.log(error);
-			    alert(error);
-			    Router.push({path: '/'});
-			});
-		},
 		//判断入口
 		justit: function(){
 			var _this = this;
@@ -124,11 +93,52 @@ export default {
 			}else if(_this.$route.query.n==1){
 				_this.options = [];
 				_this.just = '作品';
-				for(var i=0;i<diary.length;i++){
-					_this.options.push(diary[i]);
+				for(var i=0;i<works.length;i++){
+					_this.options.push(works[i]);
 				}
 				
 			}
+		},
+        manage: function(){
+			var _this = this;
+			_this.$axios.post('http://127.0.0.1:4040/upwork', {
+			})
+			.then(function (response) {
+				var data = response.data.data;
+				var tep = data.tep;
+				//alert(tep);
+				var wid = data.wid;
+				if(tep == 0){
+					Router.push({path: '/'});
+				}else if(tep == 1){
+					var res = data.res;
+					//console.log(res)
+					if(typeof res.name!=="undefined"){
+						_this.title = res.name;
+					}
+					if(typeof res.tep!=="undefined"){
+						_this.label = res.tep;
+					}
+					if(typeof res.classlfy!=="undefined"){
+						_this.value = _this.options[res.classlfy].label;
+					}
+					if(typeof res.introduc!=="undefined"){
+						_this.intro = res.introduc;
+					}
+					// _this.title = res.name;
+					// _this.label = res.tep;
+					// _this.value = _this.options[res.classlfy].label;
+					// _this.intro = res.introduc;
+					if(typeof res.icon!=="undefined"){
+						_this.src = 'http://127.0.0.1:4040/cover/'+res.icon;
+					}					 
+				}
+			})
+			.catch(function (error) {
+			    console.log(error);
+			    alert(error);
+			    Router.push({path: '/'});
+			});
 		},
 		//载入富文本编辑器
 		fwb1: function(){
@@ -245,7 +255,8 @@ export default {
 					)
 					.then(function (response) {
 						if(response.data.code === 200){
-							_this.upfile(response.data.data,4);							
+							_this.upfile(response.data.data,4);	
+							//alert('aaa')						
 						}				    
 					})
 					.catch(function (error) {

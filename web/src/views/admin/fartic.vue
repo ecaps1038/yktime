@@ -7,15 +7,15 @@
 	            		<div class="left-lep">
 		            		<p class="date">{{dtime(html.time)}}</p>
 		            		<p v-if="html.release == '0'" class="no-release">未发布</p>
-		            		<p v-if="html.release == '1'" class="yes-release">已发布</p>	
-	            		</div> 
+		            		<p v-if="html.release == '1'" class="yes-release">已发布</p>	 
+		            	</div>
 	            		<div class="photo-img-div">
 	                        <img v-if="html.icon" :src="'http://127.0.0.1:4040/cover/'+html.icon" class="photo-img"/>
 	                        <img v-if="!html.icon" :src="'http://127.0.0.1:4040/user/one.jpg'" class="photo-img"/>
 	                    </div>          		
 	            	</div>
 	                <section class="works-list">
-	                    <div class="top"><p class="tep">{{works[html.classlfy]}}</p><p class="title">{{html.name}}</p><span>{{pages}}</span></div>
+	                    <div class="top"><p class="tep">{{article[html.classlfy]}}</p><p class="title">{{html.name}}</p><span>{{count}}</span></div>
 	                    <p class="introduce">{{html.introduc}}</p>
 	                  	<div class="reback">
 	                  		<div class="times">
@@ -54,19 +54,12 @@
 							</svg>
                   		</div>
 	                </div>
-	            </li>
+				</li>
 	        </ul>
-        </div>
-        <div class="pages">
-        	<ul class="pages-ul" v-if="pages>1">
-        		<li class="back" v-if="nowpage>0" @click="clickBack">左</li>
-        		<li v-for="(page,index) in pages" :class="nowPage(index)" @click="clickPage(index)">{{index+1}}</li> 
-        		<li class="go" v-if="nowpage<pages-1" @click="clickGo">右</li>
-        	</ul>
         </div>
 	</div>
 </template>
-<script type="text/javascript" src="../../static/js/admin/fworks.js"></script>
+<script type="text/javascript" src="../../static/js/admin/fartic.js"></script>
 <style lang="scss">
   @import "../../static/css/admin/fworks.scss";
 </style>

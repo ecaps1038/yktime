@@ -218,7 +218,7 @@ export default {
 					num = navss[i].num;
 				}
 			}
-			if(_this.photoindex<num-1){
+			if(_this.photoindex<num-2){
 				_this.photoindex ++;
 				_this.nowphoto = _this.spath+_this.fpath+_this.pharr[_this.photoindex].filename;
 			}

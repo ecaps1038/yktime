@@ -3,12 +3,16 @@ var file = require('../model/file');
 var updata = require('../model/upload');
 var multer = require("multer");
 
-var aaa='./data/cover/';
+var aaa='./data/works/';
 var photoname = '';
 var wid = '';
 var storage = multer.diskStorage({
   	destination: function (req, file, cb) {
-	    cb(null, aaa)
+	    if(wid){
+	    	cb(null, './data/cover/');
+  		}else{
+  			cb(null,aaa);
+  		}
   	},
   	filename: function (req, file, cb) {
   		if(wid){
@@ -99,7 +103,7 @@ module.exports = function(app){
 		//res.send({success:true});
 	});
 	//fwb上传图片
-	app.post("/fwbuploadphoto",upload.array("file",20),function(req,res,next){
+	app.post("/fwbuploadphoto",upload1.array("file",20),function(req,res,next){
 		
 		res.json({
 			code:200,
@@ -126,16 +130,17 @@ module.exports = function(app){
 			console.log('b');
 			req.session.workid = req.signedCookies.workid;
 			wid = req.session.workid;
-			var data = {
-				tep:1,
-				wid:wid,
-			}
-			res.send({success:true,data:data});
+			// var data = {
+			// 	tep:1,
+			// 	wid:wid,
+			// }
+			// res.send({success:true,data:data});
+			updata.getone(req,res);
 			//aaa = path;
 		}else if(req.session.workid){
 			//wid = req.session.workid;
-			updata.getdata(req,res);
-			//console.log('不是初次编辑');
+			updata.getone(req,res);
+			console.log('不是初次编辑');
 			//res.send({success:true,tep:2});
 		}
 		else{
@@ -176,9 +181,21 @@ module.exports = function(app){
 		}
 	});
 
-	//前台页面
-	//home页面获取文章数据
-	app.post('/showwork',function(req,res){
-		updata.getall(req,res);
+	//后台文章和作品页面处理
+	app.post('/dataChange',function(req,res){
+		var num = req.body.num;
+		updata.dataChange(req,res);
 	})
+
+
+	//获取文章数据
+	app.post('/getData',function(req,res){
+		updata.getData(req,res);
+	})
+	//获取文章数据
+	app.post('/getCount',function(req,res){
+		updata.getCount(req,res);
+	})
+
+	//前台页面
 }

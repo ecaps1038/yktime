@@ -42,6 +42,19 @@ exports.updateWorks = function(data,wid,ress){
         }
     });
 }
+//删除一条信息
+exports.remove = function(id,ress){
+    //var id ={'_id':'5bc852dd89cdd953d0dc0938'};
+    
+    Works.findByIdAndRemove(id, function(err, res){
+        if (err) {
+            console.log("数据删除失败：" + err);
+        }
+        else {
+            ress.send({success:true,tep:0});
+        }
+    });
+};
 
 //根据id查询一条数据
 exports.getoneData = function(id,res){
@@ -54,7 +67,7 @@ exports.getoneData = function(id,res){
         }else{
             var data = {
                 res:ress,
-                tep:2,
+                tep:1,
             }
             res.send({success:true,data:data});
         }
@@ -76,8 +89,26 @@ exports.getallData = function(res){
     });
 };
 
-//分页查询所有数据
-exports.getallData1 = function(res,id,nowPage){
+//获取文章数据总数
+exports.getCount = function(req,res){
+    var judge = req.body.judge;
+    var sel = {};
+    if(judge == 1){
+        sel = {'types':0};
+    }else if(judge == 2){
+        sel = {'types':1}
+    }
+    Works.count(sel,function(err, ress){
+        if(err){
+            console.log('搜索失败');
+        }else{
+            res.send({success:true,ress});
+        }
+    });
+}
+
+//分页查询发布数据
+exports.getpublish= function(res,id,nowPage){
     var sel = {'release':1};
     // if(select){
     //     sel = {'name':{$regex : select}};
@@ -104,6 +135,43 @@ exports.getallData1 = function(res,id,nowPage){
         console.log(err);
     });
 }
+//分页查询数据
+exports.getdata = function(req,res){
+    var nowPage = req.body.num;
+    var judge = req.body.judge;
+    var sel = {};
+    if(judge == 0){
+        sel = {'release':1};
+    }else if(judge == 1){
+        sel = {'types':0};
+    }else if(judge == 2){
+        sel = {'types':1}
+    }
+    // if(select){
+    //     sel = {'name':{$regex : select}};
+    // }
+    var pageSize = 2;                   //一页多少条
+    var sort = {'time':-1};        //排序（按登录时间倒序）
+    var condition = {};                 //条件
+    var skipnum = nowPage * pageSize;   //跳过数
+    var d = skipnum;
+
+    var query = Works.find({});
+    //根据userID查询
+    query.where(sel);
+    //按照最后会话时间倒序排列
+    query.sort(sort);
+    //跳过数
+    query.skip(skipnum);
+    //一页多少条
+    query.limit(pageSize);
+    //查询结果
+    query.exec().then(function(ress){
+        res.send({success:true,ress});
+    }).catch(function(err){
+        console.log(err);
+    });
+}
 
 
 //退出
@@ -112,3 +180,4 @@ exports.logout = function(req,res){
     delete req.session.userId;
     res.send({success:true});
 };
+

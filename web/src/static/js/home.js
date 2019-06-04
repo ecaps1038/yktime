@@ -84,8 +84,9 @@ export default {
 		//初始化
         content: function(){
 			var _this = this;
-			_this.$axios.post('http://127.0.0.1:4040/showwork', {
-				num:_this.num
+			_this.$axios.post('http://127.0.0.1:4040/getData', {
+				num:_this.num,
+				judge: 0,
 			})
 			.then(function (response) {
 				var data = response.data;

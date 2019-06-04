@@ -17,17 +17,17 @@ export default {
 					name: "文件"
 				},
 				{
-					path: "/manage/article",
+					path: "/manage/artic",
 					icon: "#icon-wenzhang",
+					name: "文章"
+				},
+				{
+					path: "/manage/works",
+					icon: "#icon-sheying",
 					name: "作品"
 				},
 				{
 					path: "/manage/diary",
-					icon: "#icon-sheying",
-					name: "文章"
-				},
-				{
-					path: "/manage/suiji",
 					icon: "#icon-biji",
 					name: "随记"
 				},

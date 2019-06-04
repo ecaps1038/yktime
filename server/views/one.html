@@ -8,12 +8,12 @@
 	list-style:none;
 }
 .upimg .files{
-	height: 420px;
+	height: 410px;
 	overflow-y: auto;
 	border-bottom: 1px solid #ddd;
 }
 .upimg .w-e-button-container{
-	height: 56px;
+	height: 18px;
 }
 .upimg .w-e-button-container .right{
 	margin-top: 18px;
@@ -36,6 +36,7 @@
 	position: relative;
 	float: left;
 	width: 160px;
+	height: 184px;
 	margin: 12px;
 	text-align: center;
 }
@@ -57,6 +58,11 @@
 .files li p{
 	line-height: 24px;
 	font-size: 14px;
+	text-align: center;
+    font-weight: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .delete{
 	cursor: pointer;
@@ -148,11 +154,14 @@
 	color: #333;
 	background: #FAFAFA;
 }
+#upload{
+	/*background: #00aaee;*/
+}
 
 	</style>
 </head>
 <body>
-	<div id="div3" change="alert('aaa')"></div>
+	<div id="div3"></div>
 	<button id="btn1" data-id="0">获取内容</button>
 	<script src="/lib/jquery.js" type="text/javascript"></script>
 	<script src="/js/myfunc.js" type="text/javascript"></script>

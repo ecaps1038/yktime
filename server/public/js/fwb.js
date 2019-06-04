@@ -84,6 +84,7 @@
         
         window.onload = function () {
             onload();
+            //postPage1();
         }
     })
 })(jQuery,window,document);
