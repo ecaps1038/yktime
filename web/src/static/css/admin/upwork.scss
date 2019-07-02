@@ -9,6 +9,10 @@
 		@include fonts(14px,#333,50px);
 		padding-left: 30px;
 		border-bottom:1px solid #eee;
+		span{
+			color: #999;
+			padding-left: 6px;
+		}
 	}
 }
 .inf-input{

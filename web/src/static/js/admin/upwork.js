@@ -2,9 +2,6 @@
 import Router from '../../../router/index'
 
 import s from '../myfunc.js'
-import {fileSelect} from'../filefwb.js'
-import E from 'wangeditor'
-import F from '../lib/wangEditor'
 
 
 //文章
@@ -140,20 +137,7 @@ export default {
 			    Router.push({path: '/'});
 			});
 		},
-		//载入富文本编辑器
-		fwb1: function(){
-			var _this = this;
-	        //var E = window.F;
-			_this.editor2 = new F('#divs');
-			_this.editor2.create();
-		},
-		//载入富文本编辑器
-		fwb: function(){
-			var _this = this;
-	         _this.editor2 = new E('#divs')
-        _this.editor2.create();
-       
-		},
+		
 		//上传文件
 		upfile: function(data,num){
 			var _this = this;

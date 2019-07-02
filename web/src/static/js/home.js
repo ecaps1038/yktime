@@ -51,6 +51,7 @@ export default {
 			msg: '溶于世，却恋那山石。<br/>世上太多美好，却折磨着选择。<br/>如果不能选择，那就自己创造一块境地。<br/>依旧恋那山石。为此汇记纯粹的自己。',
 			htmls: [],
 			mum: 1,
+			display: 8,
 		}
 	},
     computed:{
@@ -62,41 +63,40 @@ export default {
 		dtime: function(time){
     		return s.changeTime2(time);
     	},
-		aaa: function(){
-			alert('aaa');
-			this.$axios.post('/user', {
-			    firstName: 'Fred',
-			    lastName: 'Flintstone'
-			})
-			.then(function (response) {
-				var data = response.data.context.from;
-			    //console.log(response);
-			    console.log(data)
-			})
-			.catch(function (error) {
-			    console.log(error);
-			    alert('aa')
-			});
-		},
-		img: function(){
-			this.htmls = arr;
-		},
 		//初始化
         content: function(){
 			var _this = this;
 			_this.$axios.post('http://127.0.0.1:4040/getData', {
 				num:_this.num,
+				display: _this.display,
 				judge: 0,
 			})
 			.then(function (response) {
 				var data = response.data;
 				_this.htmls = data.ress;
-				console.log(data.ress)
+				//console.log(data.ress)
 			})
 			.catch(function (error) {
 			    console.log(error);
 			    alert(error);
 			    Router.push({path: '/'});
+			});
+		},
+		//详情页跳转
+		detial: function(id){
+			var _this = this;
+			_this.$axios.post('http://127.0.0.1:4040/toDetial', {
+			    data: id,
+			})
+			.then(function (response) {
+				var tep = response.data.tep;
+			    if(tep == 0){
+			    	console.log('详情页请求成功！');
+				}
+			})
+			.catch(function (error) {
+			    console.log(error);
+			    alert(error)
 			});
 		},
 	},

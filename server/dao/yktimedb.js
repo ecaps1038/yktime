@@ -18,7 +18,15 @@ var WorksSchema = new Schema({
     times: {type: Number,default: 0},  							//查看次数
 });
 
-// //群成员表
+//评论表
+var CommentSchema = new Schema({
+    worksID: {type:Schema.Types.ObjectId,ref:'Works'},    //文章id
+    comment:{type:String},
+    time:{type:Date},
+    ip:{type:String},
+    name:{type:String},
+    icon: {type:String},
+})
 // var GroupuserSchema = new Schema({          
 //     groupID: {type:Schema.Types.ObjectId,ref:'Group'},          //群id
 //     userID: {type:Schema.Types.ObjectId,ref:'User'},            //用户id
@@ -39,5 +47,6 @@ var WorksSchema = new Schema({
 // });
 
 module.exports = db.model('Works',WorksSchema);
+module.exports = db.model('Comment',CommentSchema);
 // module.exports = mongoose.model('Groupuser',GroupuserSchema);
 // module.exports = mongoose.model('Groupmsg',GroupmsgSchema);

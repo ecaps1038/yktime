@@ -6,8 +6,9 @@ export default {
 	data () {
 		return {
 		  htmls: [],
-			mum: 1,
-			count: 0,
+			total: 0,
+			nowpage: 1,
+			display: 4,
 			article:['我的故事','观点','非我'],
 		}
 	},
@@ -22,12 +23,11 @@ export default {
     	counts: function(){
 			var _this = this;
 			_this.$axios.post('http://127.0.0.1:4040/getCount', {
-				num:_this.num,
 				judge: 1,
 			})
 			.then(function (response) {
 				var data = response.data;
-				_this.count = data.ress;
+				_this.total = data.ress;
 				//console.log(data.ress)
 			})
 			.catch(function (error) {
@@ -40,7 +40,8 @@ export default {
         content: function(){
 			var _this = this;
 			_this.$axios.post('http://127.0.0.1:4040/getData', {
-				num:_this.num,
+				num:_this.nowpage,
+				display:_this.display,
 				judge: 1,
 			})
 			.then(function (response) {
@@ -146,6 +147,12 @@ export default {
 	            });          
 	        });
 	    },
+	     //页码部分
+		pagechange: function(nowpages){
+			var _this = this;
+			_this.nowpage = nowpages;
+			_this.content();
+		}
 	},
 	mounted:function(){this.content();},
 

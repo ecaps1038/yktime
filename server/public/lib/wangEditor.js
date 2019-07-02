@@ -4065,7 +4065,7 @@ UploadImg.prototype = {
             }
         }
 
-        editor.cmd.do('insertHTML', '<img src="' + link + '" style="max-width:100%;"/>');
+        editor.cmd.do('insertHTML', '<img src="' + link + '" style="max-width:1080px;"/>');
 
         // 验证图片 url 是否有效，无效的话给出提示
         var img = document.createElement('img');
@@ -4101,7 +4101,7 @@ UploadImg.prototype = {
         var a=link.split(",");
 
         a.map(function(ver){
-            html += '<img src="'+ver+'" style="max-width:100%;"/>'
+            html += '<img src="'+ver+'" style="max-width:1080px;"/>'
         })
 
         editor.cmd.do('insertHTML', html);

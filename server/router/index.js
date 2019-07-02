@@ -1,6 +1,7 @@
 var login = require('../model/login');
 var file = require('../model/file');
 var updata = require('../model/upload');
+var fdesk = require('../model/fdesk');
 var multer = require("multer");
 
 var aaa='./data/works/';
@@ -185,17 +186,32 @@ module.exports = function(app){
 	app.post('/dataChange',function(req,res){
 		var num = req.body.num;
 		updata.dataChange(req,res);
-	})
+	});
 
 
 	//获取文章数据
 	app.post('/getData',function(req,res){
 		updata.getData(req,res);
-	})
-	//获取文章数据
+	});
+	//获取文章总数
 	app.post('/getCount',function(req,res){
 		updata.getCount(req,res);
-	})
+	});
 
-	//前台页面
+	//前台进入文章详情
+	app.post('/toDetial',function(req,res){
+		fdesk.toDetial(req,res);
+	})
+	//文章详情页面获取内容
+	app.post('/detial',function(req,res){
+		fdesk.detial(req,res);
+	})
+	//文章详情页面评论提交
+	app.post('/upcomment',function(req,res){
+		fdesk.upcomment(req,res);
+	})
+	//文章详情评论列表
+	app.post('/commentlist',function(req,res){
+		fdesk.getcomment(req,res);
+	})
 }

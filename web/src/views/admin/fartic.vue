@@ -15,7 +15,7 @@
 	                    </div>          		
 	            	</div>
 	                <section class="works-list">
-	                    <div class="top"><p class="tep">{{article[html.classlfy]}}</p><p class="title">{{html.name}}</p><span>{{count}}</span></div>
+	                    <div class="top"><p class="tep">{{article[html.classlfy]}}</p><p class="title">{{html.name}}</p></div>
 	                    <p class="introduce">{{html.introduc}}</p>
 	                  	<div class="reback">
 	                  		<div class="times">
@@ -33,11 +33,11 @@
 	                  	</div>
 	                </section>
 	                <div class="list-operation" :data-id="html._id">
-	                	<div class="send" v-if="html.release == '0'" @click="publish(html._id)">
+	                	<!-- <div class="send" v-if="html.release == '0'" @click="publish(html._id)">
                   			<svg class="title-icon" aria-hidden="true">
 								<use xlink:href="#icon-fasong"></use>
 							</svg>
-                  		</div>
+                  		</div> -->
                   		<div class="revoke" v-if="html.release == '1'" @click="revoke(html._id)">
                   			<svg class="title-icon" aria-hidden="true">
 								<use xlink:href="#icon-chongzuo"></use>
@@ -57,6 +57,7 @@
 				</li>
 	        </ul>
         </div>
+         <router-view :total="total" :nowpage='nowpage' :display="display" @pagechange="pagechange"></router-view>
 	</div>
 </template>
 <script type="text/javascript" src="../../static/js/admin/fartic.js"></script>

@@ -8,7 +8,10 @@ import store from './../store/store'
 import Nav from './../views/Nav'
 import Hello from './../views/Hello'
 import Yike from './../views/Home'
+import detial from './../views/detial'
 //import Works from './../components/Works'
+
+import pages from './../components/pages'
 
 //后台页面
 import login from './../views/admin/login'
@@ -35,6 +38,10 @@ var router = new Router({
                 {
                     path: 'works',
                     component: Hello
+                },
+                {
+                    path: 'detial',
+                    component: detial
                 }
             ]
         },
@@ -52,11 +59,13 @@ var router = new Router({
                 },
                 {
                     path: 'works',
-                    component: works
+                    component: works,
+                    children:[ {path: '',component:pages}]
                 },
                 {
                     path: 'artic',
-                    component: artic
+                    component: artic,
+                    children:[ {path: '',component:pages}]
                 }
             ]
         },

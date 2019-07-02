@@ -41,66 +41,68 @@ export default {
 		var tiems = Y+'-'+M+'-'+D;
 		return tiems;
 	},
-	//初始化翻页
-    pages(count){
-    	var page = Math.ceil(aa.i/4); 
-    	if(page>1&&page<=5){
-			var htmls='';
-			for(i=1;i<=page;i++){
-				htmls+='<li>'+i+'</li>';
+	detiaTime(date){
+		var time;
+		var d = new Date(date);
+		var n = new Date();
+		//获取时间戳
+		var dd = d.getTime();
+		var nn = n.getTime();
+		if((nn-dd)<120*1000){
+			time = '1分种前';
+			return time;
+		}else if(120*1000<(nn-dd) && (nn-dd)<60*60*1000){
+			time = Math.ceil((nn-dd)/60/1000)+'分钟前';
+			return time;
+		}else if(60*60*1000<(nn-dd) && d.getDate() == n.getDate()){
+			var h = d.getHours();
+			var m = d.getMinutes();
+			if(m<10){
+				m = '0'+m;
 			}
-			$('.page ul span').html(htmls);
-			$('.page ul span li').eq(0).addClass('select');
-		}else if(page>5){
-			var htmls='';
-			for(i=1;i<5;i++){
-				htmls+='<li>'+i+'</li>';
+			time = h+':'+m;
+			return time;
+		}else if(d.getDate() < n.getDate() && d.getFullYear() == n.getFullYear()){
+			var Y = d.getFullYear();
+			var M = d.getMonth() + 1;
+			var D = d.getDate();
+			var h = d.getHours();
+			var m = d.getMinutes();
+			if(M<10){
+				M = '0'+M;
 			}
-			htmls+='<p class="none">...</p>';
-			htmls+='<li>'+page+'</li>';
-			$('.page ul span').html(htmls);
-			$('.page ul span li').eq(0).addClass('select');
+			if(D<10){
+				D = '0'+D;
+			}
+			if(h<10){
+			h = '0'+h;
+			}
+			if(m<10){
+				m = '0'+m;
+			}
+			time = M+'月'+D+'日 '+h+':'+m;
+			return tiem;
 		}else{
-			$('.page ul').html('');
+			var Y = d.getFullYear();
+			var M = d.getMonth() + 1;
+			var D = d.getDate();
+			var h = d.getHours();
+			var m = d.getMinutes();
+			if(M<10){
+				M = '0'+M;
+			}
+			if(D<10){
+				D = '0'+D;
+			}
+			if(h<10){
+			h = '0'+h;
+			}
+			if(m<10){
+				m = '0'+m;
+			}
+			time = Y+'年'+M+'月'+D+'日 '+h+':'+m;
+			return tiem;
 		}
-    },
-
-    //实现翻页
-    acpage(nowpage,allpage,html){
-    	if(allpage>5){
-		    if(nowpage>3 && nowpage<allpage-2){
-		    	html +='<li>1</li>'+'<p class="none">...</p>';
-		    	for(i=nowpage-1;i<nowpage+2;i++){
-		    		if(i==nowpage){
-		    			html+='<li class="select">'+i+'</li>';
-		    		}else{
-		    			html+='<li>'+i+'</li>';
-		    		}
-		    	}
-		    	html +='<p class="none">...</p>'+'<li>'+allpage+'</li>';
-		    	$('.page ul span').html(html);
-		    }else if(nowpage<4){
-		    	for(i=1;i<5;i++){
-		    		if(i==nowpage){
-		    			html+='<li class="select">'+i+'</li>';
-		    		}else{
-		    			html+='<li>'+i+'</li>';
-		    		}
-		    	}
-		   		html +='<p class="none">...</p>'+'<li>'+allpage+'</li>';
-		   		$('.page ul span').html(html);
-		    }else if(nowpage>allpage-3){
-		    	html +='<li>1</li>'+'<p class="none">...</p>';
-		    	for(i=allpage-3;i<=allpage;i++){
-		    		if(i==nowpage){
-		    			html+='<li class="select">'+i+'</li>';
-		    		}else{
-		    			html+='<li>'+i+'</li>';
-		    		}
-		    	}
-		    	$('.page ul span').html(html);
-		    }
-		}
-    }
+	}
 
 }

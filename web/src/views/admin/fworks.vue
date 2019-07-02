@@ -15,7 +15,7 @@
 	                    </div>          		
 	            	</div>
 	                <section class="works-list">
-	                    <div class="top"><p class="tep">{{works[html.classlfy]}}</p><p class="title">{{html.name}}</p><span>{{pages}}</span></div>
+	                    <div class="top"><p class="tep">{{works[html.classlfy]}}</p><p class="title">{{html.name}}</p></div>
 	                    <p class="introduce">{{html.introduc}}</p>
 	                  	<div class="reback">
 	                  		<div class="times">
@@ -33,11 +33,11 @@
 	                  	</div>
 	                </section>
 	                <div class="list-operation" :data-id="html._id">
-	                	<div class="send" v-if="html.release == '0'" @click="publish(html._id)">
+	                	<!-- <div class="send" v-if="html.release == '0'" @click="publish(html._id)">
                   			<svg class="title-icon" aria-hidden="true">
 								<use xlink:href="#icon-fasong"></use>
 							</svg>
-                  		</div>
+                  		</div> -->
                   		<div class="revoke" v-if="html.release == '1'" @click="revoke(html._id)">
                   			<svg class="title-icon" aria-hidden="true">
 								<use xlink:href="#icon-chongzuo"></use>
@@ -57,13 +57,7 @@
 	            </li>
 	        </ul>
         </div>
-        <div class="pages">
-        	<ul class="pages-ul" v-if="pages>1">
-        		<li class="back" v-if="nowpage>0" @click="clickBack">左</li>
-        		<li v-for="(page,index) in pages" :class="nowPage(index)" @click="clickPage(index)">{{index+1}}</li> 
-        		<li class="go" v-if="nowpage<pages-1" @click="clickGo">右</li>
-        	</ul>
-        </div>
+        <router-view :total="total" :nowpage='nowpage' :display="display" @pagechange="pagechange"></router-view>
 	</div>
 </template>
 <script type="text/javascript" src="../../static/js/admin/fworks.js"></script>

@@ -1,7 +1,7 @@
 //加入跳转页面的位置
 import Router from '../../../router/index'
 //引入文字图标
-import s from '../lib/iconfont.js'
+//import s from '../lib/iconfont.js'
 export default {
 	data () {
 		return {

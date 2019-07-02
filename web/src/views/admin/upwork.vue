@@ -48,7 +48,7 @@
 				</div>
 			</div>
 			<div class="inform last-inf">
-				<p class="inf-title">上传封面</p>
+				<p class="inf-title">上传封面<span>(560*420)</span></p>
 				<div class="inf-photo">
 					<i class="tp"></i>
 					<div class="up-cover">

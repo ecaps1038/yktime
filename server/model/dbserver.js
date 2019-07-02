@@ -1,5 +1,6 @@
 var workdb = require("../dao/yktimedb.js");
 var Works = workdb.model('Works');
+var Comments = workdb.model('Comment')
 var bcrypt = require('bcryptjs');
 
 //获取数据添加works表
@@ -18,9 +19,23 @@ exports.insertWorks = function(data,ress){
         }
     });
 };
+
 //更新文本提交内容
 exports.update = function(data,wid,ress){
     var id = {_id:wid};
+    Works.findOneAndUpdate(id, data, function(err, res){
+        if (err) {
+            console.log("数据修改出错：" + err);
+        }
+        else {
+            ress.send({success:true,tep:0});
+        }
+    });
+}
+//更新文本查看数
+exports.addTimes = function(id,ress){
+    var id = {_id:id};
+    var data = {$inc:{times:1}};
     Works.findOneAndUpdate(id, data, function(err, res){
         if (err) {
             console.log("数据修改出错：" + err);
@@ -139,6 +154,7 @@ exports.getpublish= function(res,id,nowPage){
 exports.getdata = function(req,res){
     var nowPage = req.body.num;
     var judge = req.body.judge;
+    var display = req.body.display;
     var sel = {};
     if(judge == 0){
         sel = {'release':1};
@@ -150,10 +166,10 @@ exports.getdata = function(req,res){
     // if(select){
     //     sel = {'name':{$regex : select}};
     // }
-    var pageSize = 2;                   //一页多少条
+    var pageSize = display;                   //一页多少条
     var sort = {'time':-1};        //排序（按登录时间倒序）
     var condition = {};                 //条件
-    var skipnum = nowPage * pageSize;   //跳过数
+    var skipnum = (nowPage-1) * pageSize;   //跳过数
     var d = skipnum;
 
     var query = Works.find({});
@@ -173,11 +189,48 @@ exports.getdata = function(req,res){
     });
 }
 
-
 //退出
 exports.logout = function(req,res){
     var id = req.session.userId;
     delete req.session.userId;
     res.send({success:true});
 };
+
+
+
+//comment数据表
+
+//获取数据添加comments表
+exports.insertComment = function(data,ress){
+
+    var comment = new Comments(data);
+
+    comment.save(function (err, res) {
+        if (err) {
+            console.log("works添加失败" + err);
+        }
+        else {
+            //ress.cookie('workid',res._id,{signed:true, path:'http://localhost:8080', maxAge: 1000*10});
+            ress.send({success:true,tep:0});
+            //console.log("群添加成功");
+        }
+    });
+};
+
+// 获取comment数据
+exports.getaCommentData = function(workid,res){
+    var wherestr = {'worksID':workid};
+    var updatestr = {'status': 1};
+    //var age = {'userage':{$gte:12,$lte:14}};
+    var out = {};
+    Comments.find(wherestr, out, function(err, ress){
+        if(err){
+            console.log('搜索失败');
+        }else{
+            res.send({success:true,ress});
+        }
+    });
+};
+
+
 

@@ -61,11 +61,16 @@
 			width: 630px;
 			padding: 24px 24px 24px 0;
 			.photo-img-div{
+				display: inline-block;
 				overflow: hidden;
 				height: 312px;
+				width: 606px;
 				cursor: pointer;
+				position: relative;
 				img{
 					width: 606px;
+					@include positions(absolute,0,0,0,0);
+					margin: auto;
 				}
 			}
 		}

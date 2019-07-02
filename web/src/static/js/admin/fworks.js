@@ -6,9 +6,11 @@ import s from '../myfunc.js'
 export default {
 	data () {
 		return {
-		  htmls: [],
+		  	htmls: [],
+		  	total: 0,
 			pages: 0,
-			nowpage: 0,
+			nowpage: 1,
+			display: 4,
 			works:['摄影','插画','UI','平面','杂'],
 		}
 	},
@@ -28,7 +30,8 @@ export default {
 			.then(function (response) {
 				var data = response.data;
 				//_this.count = data.ress;
-				_this.pages = Math.ceil(data.ress/2)
+				_this.total = data.ress;
+				_this.pages = Math.ceil(data.ress/2);
 				//console.log(data.ress)
 			})
 			.catch(function (error) {
@@ -42,6 +45,7 @@ export default {
 			var _this = this;
 			_this.$axios.post('http://127.0.0.1:4040/getData', {
 				num:_this.nowpage,
+				display:_this.display,
 				judge: 2,
 			})
 			.then(function (response) {
@@ -172,34 +176,10 @@ export default {
 	    },
 
 	    //页码部分
-	    //定位现在页码
-		nowPage: function(num){
+		pagechange: function(nowpages){
 			var _this = this;
-			if(num == _this.nowpage){
-				return 'now-page';
-			}
-		},
-		//点击对应的页码
-		clickPage: function(num){
-			var _this = this;
-			_this.nowpage = num;
+			_this.nowpage = nowpages;
 			_this.content();
-		},
-		//点击左
-		clickBack: function(){
-			var _this = this;
-			if(_this.nowpage>0){
-				_this.nowpage--;
-				_this.content();
-			}
-		},
-		//点击右
-		clickGo: function(){
-			var _this = this;
-			if(_this.nowpage<_this.pages){
-				_this.nowpage++;
-				_this.content();
-			}
 		}
 	},
 	mounted:function(){this.content();},

@@ -18,14 +18,14 @@
                     </div>
                     <p class="date">{{dtime(html.time)}}</p>
                     <div class="introduce-div">
-                      <p class="title">{{html.name}}</p>
+                      <a class="title"  href="/detial" target="_blank" @click="detial(html._id)">{{html.name}}</a>
                       <p class="introduce">{{html.introduc}}</p>
                     </div>
                 </section>
                 <div class="photo-div">
-                    <div class="photo-img-div">
+                    <a class="photo-img-div" href="/detial" target="_blank"  @click="detial(html._id)">
                         <img :src="'http://127.0.0.1:4040/cover/'+html.icon" class="photo-img"/>
-                    </div>
+                    </a>
                 </div>
             </li>
         </ul>
