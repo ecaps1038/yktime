@@ -57,7 +57,7 @@
 }
 
 $h1: 80px;
-$mh: 600px;
+$mh: 800px;
 
 
 
@@ -73,4 +73,7 @@ ul,li{
 .inner{
 	width: 1080px;
     margin: 0 auto;
+}
+.clear{
+	clear: both;
 }

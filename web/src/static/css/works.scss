@@ -1,11 +1,21 @@
 @import "../static/css/common.scss";
-.aaa{
-	@include w-h(120px,60px,#00aaee);
-	@include fonts(24px,#fff,60px,center);
-	@include bord-st(1px,6px,#00bbcc,);
-	cursor: pointer;
-}
-.router-link-active{
-	font-size:16px;
-	color:#00aaee;
+
+.work{
+	padding-bottom: 60px;
+	.pages{
+		text-align: center;
+		margin-top: 30px;
+		ul{
+			float: none;
+			display: inline-block;
+			li{
+			    margin: 0 4px;
+			    height: 36px;
+			    min-width: 36px;
+			    border-radius: 0px;
+			    font-size: 14px;
+			    line-height: 36px;
+			}
+		}
+	}
 }

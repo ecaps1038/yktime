@@ -10,6 +10,7 @@ export default {
 			nowpage: 1,
 			display: 4,
 			article:['我的故事','观点','非我'],
+			comments:[],
 		}
 	},
     computed:{
@@ -47,6 +48,7 @@ export default {
 			.then(function (response) {
 				var data = response.data;
 				_this.htmls = data.ress;
+				_this.commentcont();
 				//console.log(data.ress)
 			})
 			.catch(function (error) {
@@ -55,6 +57,27 @@ export default {
 			    Router.push({path: '/'});
 			});
 			_this.counts();
+		},
+		commentcont: function(){
+			var _this = this;
+			for(var i=0;i<_this.htmls.length;i++){
+
+			
+			_this.$axios.post('http://127.0.0.1:4040/getCCount', {
+				id: _this.htmls[i]._id,
+			})
+			.then(function (response) {
+				var data = response.data;
+				//_this.count = data.ress;
+				//return data.ress;
+				_this.comments.push(data.ress);
+				//console.log(data.ress)
+			})
+			.catch(function (error) {
+			    console.log(error);
+			    alert(error);
+			    //Router.push({path: '/'});
+			});}
 		},
 		//点击发布
 		publish: function(id){

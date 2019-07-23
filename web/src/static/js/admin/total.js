@@ -103,17 +103,21 @@ export default {
 		//创建数据条
 		createdb: function(index){
 			var _this = this;
-			_this.$axios.post('http://127.0.0.1:4040/creatework', 
-			    {num: index}
-			)
-			.then(function (response) {
-				//var nowid = data.rest;
-				Router.push({path: '/add/upwork?n='+index});
-			})
-			.catch(function (error) {
-			    console.log(error);
-			    alert(error)
-			});
+			if(index == 0 && index == 1){
+				_this.$axios.post('http://127.0.0.1:4040/creatework', 
+				    {num: index}
+				)
+				.then(function (response) {
+					//var nowid = data.rest;
+					Router.push({path: '/add/upwork?n='+index});
+				})
+				.catch(function (error) {
+				    console.log(error);
+				    alert(error)
+				});			
+			}else if(index == 2){
+				Router.push({path: '/add/diary'});
+			}
 		}
 	},
 	mounted:function(){this.manage();this.outdata();this.indata();this.random()},

@@ -17,6 +17,10 @@ Vue.use(ElementUI);
 
 axios.defaults.withCredentials = true
 
+//lottie动画
+import lottie from 'vue-lottie';
+Vue.component('lottie', lottie)
+
 
 new Vue({
   el: '#app',

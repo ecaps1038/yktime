@@ -31,7 +31,9 @@ var arr = [
             ];
 
 
-import s from './myfunc.js'
+import s from './myfunc.js';
+import c from './common.js';
+import * as loading from "../images/loading.json";
 
 export default {
 	data () {
@@ -50,8 +52,14 @@ export default {
 	        },
 			msg: '溶于世，却恋那山石。<br/>世上太多美好，却折磨着选择。<br/>如果不能选择，那就自己创造一块境地。<br/>依旧恋那山石。为此汇记纯粹的自己。',
 			htmls: [],
-			mum: 1,
-			display: 8,
+			num: 1,
+			display: 4,
+			total: '',
+			defaultOptions: { animationData: loading },     //lottie动画
+	        animationSpeed: 1,
+	        anim: {},
+	        lotties: true,
+	        tobottom: '',
 		}
 	},
     computed:{
@@ -63,8 +71,25 @@ export default {
 		dtime: function(time){
     		return s.changeTime2(time);
     	},
+    	counts: function(){
+			var _this = this;
+			_this.$axios.post('http://127.0.0.1:4040/getCount', {
+				judge: 0,
+			})
+			.then(function (response) {
+				var data = response.data;
+				//_this.count = data.ress;
+				_this.total = data.ress;
+				//console.log(data.ress)
+			})
+			.catch(function (error) {
+			    console.log(error);
+			    alert(error);
+			    //Router.push({path: '/'});
+			});
+		},
 		//初始化
-        content: function(){
+        content: function(num){
 			var _this = this;
 			_this.$axios.post('http://127.0.0.1:4040/getData', {
 				num:_this.num,
@@ -73,7 +98,9 @@ export default {
 			})
 			.then(function (response) {
 				var data = response.data;
-				_this.htmls = data.ress;
+				_this.htmls = _this.htmls.concat(data.ress);
+				_this.num ++;
+				_this.lotties = true;
 				//console.log(data.ress)
 			})
 			.catch(function (error) {
@@ -81,25 +108,34 @@ export default {
 			    alert(error);
 			    Router.push({path: '/'});
 			});
+			_this.counts();
 		},
 		//详情页跳转
-		detial: function(id){
-			var _this = this;
-			_this.$axios.post('http://127.0.0.1:4040/toDetial', {
-			    data: id,
-			})
-			.then(function (response) {
-				var tep = response.data.tep;
-			    if(tep == 0){
-			    	console.log('详情页请求成功！');
-				}
-			})
-			.catch(function (error) {
-			    console.log(error);
-			    alert(error)
-			});
+		detials: function(id){
+			var _this = this
+			return c.detial(_this,id);
 		},
+		//lottie动画
+        handleAnimation: function(anim) {
+	        this.anim = anim;
+	        console.log(anim); //这里可以看到 lottie 对象的全部属性
+	    },
+	    //加载更多
+	    morepage: function(){
+	    	var _this = this;
+	    	if(document.documentElement.scrollTop + window.innerHeight >= document.body.offsetHeight-100) {
+                if(_this.num<Math.ceil(_this.total/_this.display)){
+                	_this.tobottom = "";
+                	var nowm = _this.num +1;
+                	this.lotties = false;
+                	this.content(nowm);
+                }else{
+                	_this.tobottom = "已到底部...";
+                }
+                
+            }
+	    }
 	},
-	mounted:function(){this.content();},
+	mounted:function(){this.content(this.num);s.addEvent(window,'scroll',this.morepage);},
 
 }

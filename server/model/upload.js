@@ -77,6 +77,12 @@ exports.getfwb = function(req,res){
 exports.getData = function(req,res){
 	dbserver.getdata(req,res);
 }
+//获取评论数
+exports.getCCount = function(req,res){
+	var workid = req.body.id;
+	//console.log('workid是'+workid);
+	dbserver.getCommentCount(workid,res);
+}
 //获取文章/作品
 exports.getCount = function(req,res){
 	dbserver.getCount(req,res);

@@ -18,12 +18,12 @@
                     </div>
                     <p class="date">{{dtime(html.time)}}</p>
                     <div class="introduce-div">
-                      <a class="title"  href="/detial" target="_blank" @click="detial(html._id)">{{html.name}}</a>
+                      <a class="title"  href="/detial" target="_blank" @click="detials(html._id)">{{html.name}}</a>
                       <p class="introduce">{{html.introduc}}</p>
                     </div>
                 </section>
                 <div class="photo-div">
-                    <a class="photo-img-div" href="/detial" target="_blank"  @click="detial(html._id)">
+                    <a class="photo-img-div" href="/detial" target="_blank"  @click="detials(html._id)">
                         <img :src="'http://127.0.0.1:4040/cover/'+html.icon" class="photo-img"/>
                     </a>
                 </div>
@@ -31,6 +31,9 @@
         </ul>
     </div>
     <!-- <router-link to="/hello">Goto Ap</router-link> -->
+     <router-view></router-view>
+     <lottie :options="defaultOptions" :height="160" :width="200" v-on:animCreated="handleAnimation" :class="{lottie:lotties}"/>
+     <p class="bottoms">{{tobottom}}</p>
   </div>
 </template>
 <script type="text/javascript" src="../static/js/home.js"></script>

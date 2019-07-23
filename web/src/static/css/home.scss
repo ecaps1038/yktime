@@ -19,7 +19,7 @@
 .content{
 	width: 1080px;
 	margin: 0 auto;
-	padding-bottom: 40px;
+	padding-bottom: 20px;
 	ul li{
 		@include w-h(100%,360px,#fff);
 		margin-top: 30px;
@@ -46,6 +46,10 @@
 				padding: 60px 40px 0 40px;
 				.title{
 					@include fonts(26px,#222,52px);
+					display:block;
+					white-space:nowrap; 
+					text-overflow:ellipsis; 
+					overflow: hidden; 
 					&:hover{
 						color: #ff7f26;
 					}
@@ -75,4 +79,10 @@
 			}
 		}
 	}
+}
+.lottie{
+	display:none;
+}
+.bottoms{
+	@include fonts(14px,#999,40px,center);
 }

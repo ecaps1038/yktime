@@ -4,9 +4,9 @@
     		<li :class="{'disabled': current == 1}">
     			<a href="javascript:;" @click="setCurrent(current - 1)"> « </a>
     		</li>
-			<li :class="{'disabled': current == 1}" v-if="current>3" @click="setCurrent(1)">1</li>
+			<li :class="{'disabled': current == 1}" v-if="current>4" @click="setCurrent(1)">1</li>
     		<li v-for="pages in grouplist" :class="nowPage(pages.val)" @click="setCurrent(pages.val)">{{pages.text}}</li> 
-    		<li :class="{'disabled': current == page}" @click="setCurrent(page)" v-if="page-current>2">{{page}}</li>
+    		<li :class="{'disabled': current == page}" @click="setCurrent(page)" v-if="page-current>3">{{page}}</li>
 			<li :class="{'disabled': current == page}">
 				<a href="javascript:;" @click="setCurrent(current + 1)"> »</a>
 			</li>
@@ -134,6 +134,7 @@
 		border-radius: 12px;
 		font-size: 12px;
 		line-height: 22px;
+		text-align: center;
 		padding: 0 7px;
 		cursor: pointer;
 		&:hover{

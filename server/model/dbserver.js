@@ -108,10 +108,16 @@ exports.getallData = function(res){
 exports.getCount = function(req,res){
     var judge = req.body.judge;
     var sel = {};
-    if(judge == 1){
+    if(judge == 0){
+        sel = {'release':1};
+    }else if(judge == 1){
         sel = {'types':0};
     }else if(judge == 2){
         sel = {'types':1}
+    }else if(judge == 3){
+        sel = {'types':0,'release':1}
+    }else if(judge == 4){
+        sel = {'types':1,'release':1}
     }
     Works.count(sel,function(err, ress){
         if(err){
@@ -162,6 +168,10 @@ exports.getdata = function(req,res){
         sel = {'types':0};
     }else if(judge == 2){
         sel = {'types':1}
+    }else if(judge == 3){
+        sel = {'types':0,'release':1}
+    }else if(judge == 4){
+        sel = {'types':1,'release':1}
     }
     // if(select){
     //     sel = {'name':{$regex : select}};
@@ -218,12 +228,12 @@ exports.insertComment = function(data,ress){
 };
 
 // 获取comment数据
-exports.getaCommentData = function(workid,res){
+exports.getCommentData = function(workid,res){
     var wherestr = {'worksID':workid};
     var updatestr = {'status': 1};
     //var age = {'userage':{$gte:12,$lte:14}};
     var out = {};
-    Comments.find(wherestr, out, function(err, ress){
+Comments.find(wherestr, out, {sort: {'time': -1}},function(err, ress){
         if(err){
             console.log('搜索失败');
         }else{
@@ -231,6 +241,20 @@ exports.getaCommentData = function(workid,res){
         }
     });
 };
+
+//获取文章评论总数
+exports.getCommentCount = function(workid,res){
+    var wherestr = {'worksID':workid};
+    Comments.count(wherestr,function(err, ress){
+        if(err){
+            console.log('搜索失败');
+        }else{
+            res.send({success:true,ress});
+            //console.log(ress)
+        }
+    });
+}
+
 
 
 

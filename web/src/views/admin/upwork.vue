@@ -64,7 +64,7 @@
 			</div>
 			<div class="btn-div">
 				<button class="publish" @click="publish">发布</button>
-				<button class="preview">预览</button>
+				<button class="preview" @click="preview">预览</button>
 				<span class="save"><i :class="icon"></i>{{save}}</span>
 			</div>
 		</div>

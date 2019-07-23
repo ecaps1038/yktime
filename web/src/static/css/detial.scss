@@ -6,7 +6,7 @@
 	@include w-h-n(1080px,auto);
 	margin: 12px auto;
 }
-.title{
+.detial .title{
 	padding-top: 12px;
 	border-bottom: 1px solid #eee;
 	.name{
@@ -128,6 +128,7 @@
 		.abled{
 			background: #bbb !important;
 			border-color: #bbb !important;
+			cursor: default;
 		}
 		
 	}
@@ -166,12 +167,63 @@
 		}
 	}
 	.commentlist{
-		height: 600px;
 		width: 1080px;
 		margin: -12px auto 30px auto;
 		background: #fff;
 		border-top: 1px solid #eee;
-
+		ul{
+			padding: 0 30px;
+			border-bottom: 1px solid #eee;
+		}
+		ul li{
+			padding: 30px 0;
+			border-bottom: 1px solid #f4f4f4;
+			&:last-child{
+				border-bottom: 1px solid #fff;
+			}
+		}
+		.icon{
+			@include w-h-n(48px,48px);
+			border-radius: 50%;
+			overflow: hidden;
+			float: left;
+			img{
+				width: 100%;
+			}
+		}
+		.commm{
+			padding-left: 70px;
+			.name{
+				@include fonts(16px,#333,24px);
+				span{
+					padding-left: 16px;
+					@include fonts(14px,#999,24px);
+				}
+			}
+			.comment-con{
+				padding-top: 4px;
+				@include fonts(14px,#666,22px);
+				width: 800px;
+			}
+		}
+	}
+	.write{
+		@include w-h(1080px,72px,#fff);
+		p{
+			float: right;
+			padding-right: 30px;
+			line-height: 72px;
+			cursor: pointer;
+			.bi-icon{
+				width: 16px;
+				height: 72px;
+				vertical-align: top;
+				fill:#999;
+			}
+			span{
+				@include fonts(14px,#999,26px);
+			}
+		}
 	}
 
 }

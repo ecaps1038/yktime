@@ -2,7 +2,7 @@
   	<div class="main fworks">
     	<div class="works">
 	 		<ul>
-	            <li v-for="html in htmls">
+	            <li v-for="(html,index) in htmls">
 	            	<div class="left">
 	            		<div class="left-lep">
 		            		<p class="date">{{dtime(html.time)}}</p>
@@ -28,7 +28,7 @@
 	                  			<svg class="title-icon" aria-hidden="true">
 									<use xlink:href="#icon-comment"></use>
 								</svg>
-								<span>{{html.times}}</span>
+								<span>{{comments[index]}}</span>
 	                  		</div>
 	                  	</div>
 	                </section>

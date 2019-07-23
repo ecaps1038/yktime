@@ -59,6 +59,14 @@ export default {
 			    console.log(error);
 			    alert('请求失败')
 			});
+        },
+        aaaa: function(){
+        	 this.$router.push({
+          name: 'Works',
+          params: {
+            id: 123
+          }
+        })
         }
 	},
 	mounted:function(){this.login();},

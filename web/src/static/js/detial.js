@@ -18,7 +18,7 @@ export default {
 			comment: '',									//评论
 			comname:'',										//评论者
 			num1: 10,										//限定评论名长度
-			commentnum:'123',								//评论数
+			commentnum:'',									//评论数
 			icons: 13,										//评论头像数
 			icon: 1,										//当前头像
 			show: false,
@@ -65,16 +65,17 @@ export default {
 					}else if(res.types == 1){
 						_this.classlfy = _this.works[res.classlfy];
 					}	
-
-					_this.commentlist();
 				}else if(tep == 0){
 					console.log('没有')
 				}
+				_this.commentcont();
+			_this.commentlist();
 			})
 			.catch(function (error) {
 			    console.log(error);
 			    alert(error)
 			});
+
 		},
 		getnb: function(num){
 			var _this = this;
@@ -92,11 +93,29 @@ export default {
 			.then(function (response) {
 				var data = response.data;
 				_this.comlist = data.ress;
-				console.log(_this.comlist);
+				//console.log(_this.comlist);
 			})
 			.catch(function (error) {
 			    console.log(error);
 			    alert(error)
+			});
+		},
+		//获取评论数
+		commentcont: function(){
+			var _this = this;
+			_this.$axios.post('http://127.0.0.1:4040/getCommentCount', {
+				judge: 0,
+			})
+			.then(function (response) {
+				var data = response.data;
+				//_this.count = data.ress;
+				_this.commentnum = data.ress;
+				//console.log(data.ress)
+			})
+			.catch(function (error) {
+			    console.log(error);
+			    alert(error);
+			    //Router.push({path: '/'});
 			});
 		},
 		//上传评论
@@ -116,6 +135,9 @@ export default {
 				var tep = response.data.tep;
 			    if(tep == 0){
 			    	//alert('评论成功！')
+			    	_this.commentlist();
+			    	_this.commentcont();
+			    	_this.comment='';
 				}
 			})
 			.catch(function (error) {
@@ -125,6 +147,10 @@ export default {
 		},
 		detia: function(data){
 			return s.detiaTime(data);
+		},
+		//光标定位
+		write: function(){
+			document.getElementById("comment").focus(); 
 		}
 
 	},

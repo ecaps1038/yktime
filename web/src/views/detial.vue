@@ -38,6 +38,7 @@
 					autosize
 					:placeholder="'想说些什么呢...'"
 					v-model="comment"
+					id="comment"
 				>
 				</el-input>
 				<div class="t-name">
@@ -66,13 +67,27 @@
 			</div>
 			<div class="commentlist">
 				<ul>
-					<li v-for="list in comlist">
-						<p>{{list.comment}}</p>
-						<p>时间：{{detia(list.time)}}</p>
+					<li v-for="(list,index) in comlist">
+						<div class="icon">
+							<img :src="'http://127.0.0.1:4040/user/tx'+list.icon+'.png'"/>
+						</div>
+						<div class="commm">
+							<p class="name">{{list.name}}<span>{{detia(list.time)}}</span></p>
+							<p class="comment-con">{{list.comment}}</p>
+						</div>
 					</li>
 				</ul>
+				<div class="write">
+					<p @click="write">
+						<svg class="bi-icon" aria-hidden="true">
+							<use xlink:href="#icon-bi"></use>
+						</svg>
+						<span>写评论</span>
+					</p>
+				</div>
 			</div>
 		</div>
+		<router-view></router-view>
     </div>
 </template>
 <script type="text/javascript" src="../static/js/detial.js"></script>

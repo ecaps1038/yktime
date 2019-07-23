@@ -3,14 +3,14 @@ var dbserver = require('./dbserver');
 //跳转详情页面前期准备
 exports.toDetial = function(req,res){
 	var id = req.body.data;
-	res.cookie('detialid',id,{signed:true, path:'http://localhost:8080', maxAge: 1000*10});
+	res.cookie('workid',id,{signed:true, path:'http://localhost:8080', maxAge: 1000*10});
 	dbserver.addTimes(id,res);
 	//res.send({success:true,tep:0});	
 };
 //进入detail页面
 exports.detial = function(req,res){
-	if(req.signedCookies.detialid){
-		req.session.detialId = req.signedCookies.detialid;
+	if(req.signedCookies.workid){
+		req.session.detialId = req.signedCookies.workid;
 		var id = req.session.detialId;
 		dbserver.getoneData(id,res);
 	}else if(req.session.detialId){
@@ -44,6 +44,12 @@ exports.upcomment = function(req,res){
 //获取评论
 exports.getcomment = function(req,res){
 	var workid = req.session.detialId;
-	console.log('workid是'+workid);
-	dbserver.getaCommentData(workid,res);
+	//console.log('workid是'+workid);
+	dbserver.getCommentData(workid,res);
+}
+//获取评论数
+exports.getcommentcount = function(req,res){
+	var workid = req.session.detialId;
+	//console.log('workid是'+workid);
+	dbserver.getCommentCount(workid,res);
 }

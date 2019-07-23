@@ -9,9 +9,12 @@ import Nav from './../views/Nav'
 import Hello from './../views/Hello'
 import Yike from './../views/Home'
 import detial from './../views/detial'
-//import Works from './../components/Works'
+import Works from './../views/Works'
+import Article from './../views/article'
 
 import pages from './../components/pages'
+import top from './../components/top'
+import workMd from './../components/work-md'
 
 //后台页面
 import login from './../views/admin/login'
@@ -22,6 +25,8 @@ import works from './../views/admin/fworks'
 import artic from './../views/admin/fartic'
 import add from './../views/admin/add'
 import upwork from './../views/admin/upwork'
+import preview from './../views/admin/preview'
+import diary from './../views/admin/diary'
 
 Vue.use(Router)
 
@@ -33,15 +38,23 @@ var router = new Router({
             children:[
                 {
                     path:'home',
-                    component:Yike
+                    component:Yike,
+                    children:[ {path: '',component:top}]
                 },
                 {
                     path: 'works',
-                    component: Hello
+                    component: Works,
+                    children:[ {path: '',components:{workMd,pages,top}}]
+                },
+                {
+                    path: 'article',
+                    component: Article,
+                    children:[ {path: '',components:{workMd,pages,top}}]
                 },
                 {
                     path: 'detial',
-                    component: detial
+                    component: detial,
+                    children:[ {path: '',component:top}]
                 }
             ]
         },
@@ -79,6 +92,14 @@ var router = new Router({
                 {
                     path: 'files',
                     component: files
+                },
+                {
+                    path: 'diary',
+                    component: diary
+                },
+                {
+                    path: 'preview',
+                    component: preview
                 }
             ]
         }

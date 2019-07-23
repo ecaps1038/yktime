@@ -290,6 +290,11 @@ export default {
 				_this.$router.push({path: '/manage'});
 			}
 		},
+		//点击预览
+		preview: function(){
+			var _this = this;
+			_this.$router.push({path: '/add/preview'});
+		},
 
 
 		//cookie测试

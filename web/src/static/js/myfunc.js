@@ -49,7 +49,7 @@ export default {
 		var dd = d.getTime();
 		var nn = n.getTime();
 		if((nn-dd)<120*1000){
-			time = '1分种前';
+			time = '刚刚';
 			return time;
 		}else if(120*1000<(nn-dd) && (nn-dd)<60*60*1000){
 			time = Math.ceil((nn-dd)/60/1000)+'分钟前';
@@ -80,8 +80,8 @@ export default {
 			if(m<10){
 				m = '0'+m;
 			}
-			time = M+'月'+D+'日 '+h+':'+m;
-			return tiem;
+			time = M+'/'+D+' '+h+':'+m;
+			return time;
 		}else{
 			var Y = d.getFullYear();
 			var M = d.getMonth() + 1;
@@ -100,9 +100,18 @@ export default {
 			if(m<10){
 				m = '0'+m;
 			}
-			time = Y+'年'+M+'月'+D+'日 '+h+':'+m;
-			return tiem;
+			time = Y+'/'+M+'/'+D+' '+h+':'+m;
+			return time;
 		}
-	}
+	},
+	addEvent(obj,type,fn){
+	    if(obj.attachEvent){ //ie
+	        obj.attachEvent('on'+type,function(){
+	            fn.call(obj);
+	        })
+	    }else{
+	        obj.addEventListener(type,fn,false);
+	    }
+	},
 
 }

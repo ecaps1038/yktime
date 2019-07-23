@@ -197,6 +197,10 @@ module.exports = function(app){
 	app.post('/getCount',function(req,res){
 		updata.getCount(req,res);
 	});
+	//获取文章评论总数
+	app.post('/getCCount',function(req,res){
+		updata.getCCount(req,res);
+	});
 
 	//前台进入文章详情
 	app.post('/toDetial',function(req,res){
@@ -213,5 +217,9 @@ module.exports = function(app){
 	//文章详情评论列表
 	app.post('/commentlist',function(req,res){
 		fdesk.getcomment(req,res);
+	})
+	//文章详情评论数
+	app.post('/getCommentCount',function(req,res){
+		fdesk.getcommentcount(req,res);
 	})
 }
