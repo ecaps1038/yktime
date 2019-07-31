@@ -137,5 +137,11 @@ export default {
 	    }
 	},
 	mounted:function(){this.content(this.num);s.addEvent(window,'scroll',this.morepage);},
+	watch:{
+            '$route':function(to,from){
+　　　　　　　　　　 document.body.scrollTop = 0;
+                 document.documentElement.scrollTop = 0; 
+           }
+        },
 
 }

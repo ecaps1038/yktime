@@ -26,6 +26,14 @@ var CommentSchema = new Schema({
     ip:{type:String},
     name:{type:String},
     icon: {type:String},
+});
+
+//日志表
+var DiarySchema = new Schema({
+    content:{type:String},
+    time:{type:Date},
+    title:{type:String},
+    imgs: {type:String},
 })
 // var GroupuserSchema = new Schema({          
 //     groupID: {type:Schema.Types.ObjectId,ref:'Group'},          //群id
@@ -48,5 +56,6 @@ var CommentSchema = new Schema({
 
 module.exports = db.model('Works',WorksSchema);
 module.exports = db.model('Comment',CommentSchema);
+module.exports = db.model('Diary',DiarySchema);
 // module.exports = mongoose.model('Groupuser',GroupuserSchema);
 // module.exports = mongoose.model('Groupmsg',GroupmsgSchema);

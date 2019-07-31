@@ -34,8 +34,18 @@ var storage1 = multer.diskStorage({
 	    cb(null, Date.now()+'.'+str[1]);
   	}
 })
+var storage2 = multer.diskStorage({
+  	destination: function (req, file, cb) {
+	    cb(null, './data/diary/')
+  	},
+  	filename: function (req, file, cb) {
+  		var str = file.originalname.split('.');
+	    cb(null, Date.now()+'.'+str[1]);
+  	}
+})
 var upload = multer({ storage: storage });
 var upload1 = multer({storage: storage1});
+var upload2 = multer({storage: storage2});
 
 module.exports = function(app){
 	//查询数据库信息
@@ -160,6 +170,19 @@ module.exports = function(app){
 		})
 		//res.send({success:true});
 	});
+	//后台上传日志图片
+	app.post("/uploaddiary",upload2.array("file",20),function(req,res,next){
+		//获取文件名
+		var arr = [];
+		for(var i in req.files){
+			arr.push(req.files[i].filename);
+		}
+		res.json({
+			code:200,
+			data:arr
+		})
+		//res.send({success:true});
+	});
 
 	//获取图片
 	app.post('/showphoto',function(req,res){
@@ -180,6 +203,9 @@ module.exports = function(app){
 		if(req.session.workid){
 			updata.getfwb(req,res);
 		}
+	});
+	app.post('/updiary',function(req,res){
+		updata.updiary(req,res);
 	});
 
 	//后台文章和作品页面处理
@@ -222,4 +248,9 @@ module.exports = function(app){
 	app.post('/getCommentCount',function(req,res){
 		fdesk.getcommentcount(req,res);
 	})
+	//获取日志
+	app.post('/getDairy',function(req,res){
+		fdesk.getDiary(res);
+	})
+	
 }

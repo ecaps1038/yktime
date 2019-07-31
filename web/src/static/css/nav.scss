@@ -66,6 +66,8 @@
 	padding-top: $h1;
 }
 footer{
+	position: relative;
 	height: 160px;
+	z-index: 10;
 	background: #000;
 }

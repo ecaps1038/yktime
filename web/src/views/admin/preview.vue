@@ -77,6 +77,7 @@
 					var tep = response.data.data.tep;
 				    if(tep == 1){
 				    	var res = response.data.data.res;
+				    	console.log(res);
 				    	_this.name = res.name;
 				    	_this.introduc = res.introduc;
 				    	_this.content = res.content;
@@ -194,6 +195,7 @@
 			padding: 12px 0;
 			img{
 				margin-left: -140px;
+				padding: 4px 0;
 			}
 		}
 	}

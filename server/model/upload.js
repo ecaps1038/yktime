@@ -64,6 +64,12 @@ exports.uptop = function(req,res){
 	dbserver.update(data,wid,res);
 };
 
+//上传日志文章
+exports.updiary = function(req,res){
+	var data = req.body;
+	dbserver.insertDiary(data,res);
+}
+
 //获取当前id数据
 exports.getone = function(req,res){
 	wid = req.session.workid;

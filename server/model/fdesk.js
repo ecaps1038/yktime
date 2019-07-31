@@ -53,3 +53,7 @@ exports.getcommentcount = function(req,res){
 	//console.log('workid是'+workid);
 	dbserver.getCommentCount(workid,res);
 }
+//获取日志
+exports.getDiary = function(res){
+	dbserver.getDiary(res);
+}

@@ -155,12 +155,12 @@ export default {
 		delfile: function(index){
 			var _this = this;
 			_this.path[0] = _this.nowpath+_this.pharr[index].filename;
-			console.log(_this.path)
+			//console.log(_this.path)
             _this.$axios.post('http://127.0.0.1:4040/delfile', {path:_this.path})
 			.then(function (response) {
 				if(response.data.code === 200) {
 					_this.pharr.splice(index,1);
-					console.log(_this.pharr)
+					//console.log(_this.pharr)
 				}
 			})
 			.catch(function (error) {

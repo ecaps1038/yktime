@@ -1,6 +1,7 @@
 var workdb = require("../dao/yktimedb.js");
 var Works = workdb.model('Works');
 var Comments = workdb.model('Comment')
+var Diarys = workdb.model('Diary')
 var bcrypt = require('bcryptjs');
 
 //获取数据添加works表
@@ -254,6 +255,53 @@ exports.getCommentCount = function(workid,res){
         }
     });
 }
+
+//diary表
+//获取数据添加Diary表
+exports.insertDiary = function(data,ress){
+
+    var diary = new Diarys(data);
+
+    diary.save(function (err, res) {
+        if (err) {
+            console.log("Diarys添加失败" + err);
+        }
+        else {
+            //ress.cookie('workid',res._id,{signed:true, path:'http://localhost:8080', maxAge: 1000*10});
+            ress.send({success:true,tep:0});
+            //console.log("群添加成功");
+        }
+    });
+};
+
+//查询日志
+exports.getDiary= function(res,id,nowPage){
+    var sel = {};
+    // if(select){
+    //     sel = {'name':{$regex : select}};
+    // }
+    var pageSize = 8;                   //一页多少条
+    var sort = {'time':-1};        //排序（按登录时间倒序）
+    var condition = {};                 //条件
+    var skipnum = (nowPage - 1) * pageSize;   //跳过数
+
+    var query = Diarys.find({});
+    //根据userID查询
+    query.where(sel);
+    //按照最后会话时间倒序排列
+    query.sort(sort);
+    //跳过数
+    //query.skip(skipnum);
+    //一页多少条
+    //query.limit(pageSize);
+    //查询结果
+    query.exec().then(function(ress){
+        res.send({success:true,ress});
+    }).catch(function(err){
+        console.log(err);
+    });
+}
+
 
 
 

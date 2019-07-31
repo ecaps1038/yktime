@@ -25,20 +25,20 @@
 					<div class="upphoto">
 						<ul class="img-n">
 							<li v-for="(num,index) in photohtml">
-								<span @click="deleteimg(index)">删</span>
-								<img :src="num"/>
+								<span @click="deleteimg(index)" class="delete">x</span>
+								<div class="img"><img :src="num"/></div>
 							</li>
 						</ul>
 						<p class="input-img">
 							<i class="heng"></i><i class="shu"></i>
 							<input type="file" name="file" id="file" multiple="multiple" ref="aaa" @change="eimg" >
 						</p>
+						<!-- <p @click="upphoto">上传</p> -->
 					</div>
 				</div>
 			</div>
-			<div class="btn-div">
+			<div class="btn-div diary-up">
 				<button class="publish" @click="publish">发布</button>
-				<span class="save"><i :class="icon"></i>{{save}}</span>
 			</div>
 		</div>
     </div>
@@ -51,24 +51,19 @@ import s from '../../static/js/myfunc.js';
 export default {
 	data () {
 		return {
-			title: '',	
-			label: '',
+			title: '无题',	
 			intro: '',
 			num1: 56,
 			num2: 1200,
-			just: '',
-			options: [],
-	        value: '',
-	        editor2: '',
 	        src: 'http://127.0.0.1:4040/user/nomare.png',
-	        titlea: '',
-	        selecta: '',
-	        introa: '',
-	        photoa: '',
 	        isok: '0',
+	        titlea:'',
+	        introa: '',
 	        icon: '',
 	        save: '文档自动保存',
-	        photohtml:[],
+	        photohtml:[],           //前端显示用
+	        files:[],				//后台保存用
+	        photonames: '',
 		}
 	},
     computed:{
@@ -82,44 +77,20 @@ export default {
 			var num = s.getByteLen(_this.intro);
 			return _this.num2-num;
 		},
-		titlelen: function(){
-			
-		}
 	},
 	methods:{
         manage: function(){
 			var _this = this;
-			_this.$axios.post('http://127.0.0.1:4040/upwork', {
+			_this.$axios.get('http://127.0.0.1:4040/manage', {
 			})
 			.then(function (response) {
-				var data = response.data.data;
+				var data = response.data;
 				var tep = data.tep;
-				//alert(tep);
-				var wid = data.wid;
 				if(tep == 0){
 					Router.push({path: '/'});
 				}else if(tep == 1){
-					var res = data.res;
-					//console.log(res)
-					if(typeof res.name!=="undefined"){
-						_this.title = res.name;
-					}
-					if(typeof res.tep!=="undefined"){
-						_this.label = res.tep;
-					}
-					if(typeof res.classlfy!=="undefined"){
-						_this.value = _this.options[res.classlfy].label;
-					}
-					if(typeof res.introduc!=="undefined"){
-						_this.intro = res.introduc;
-					}
-					// _this.title = res.name;
-					// _this.label = res.tep;
-					// _this.value = _this.options[res.classlfy].label;
-					// _this.intro = res.introduc;
-					if(typeof res.icon!=="undefined"){
-						_this.src = 'http://127.0.0.1:4040/cover/'+res.icon;
-					}					 
+					_this.imgurl = 'http://127.0.0.1:4040/user/user1.png';
+					_this.name = data.myname;
 				}
 			})
 			.catch(function (error) {
@@ -129,29 +100,7 @@ export default {
 			});
 		},
 		
-		//上传文件
-		upfile: function(data,num){
-			var _this = this;
-			_this.icon = 'el-icon-loading';
-				_this.save = '正在保存...';
-				_this.$axios.post('http://127.0.0.1:4040/uptitle', {
-				    data: data,
-				    num: num,
-				})
-				.then(function (response) {
-					var tep = response.data.tep;
-				    if(tep == 0){
-				    	_this.icon = '';
-						_this.save = '已自动保存';
-					}
-				})
-				.catch(function (error) {
-				    console.log(error);
-				    alert(error)
-				});
-		},
-
-		//inpiut失去焦点自动上传
+		//inpiut失去焦点判断
 		uptitle: function(){
 			var _this = this;
 			_this.titlea = '';
@@ -159,13 +108,6 @@ export default {
 				_this.titlea = '请填标题';
 			}else{
 				//_this.upfile(_this.title,0);
-			}
-		},
-		uplabel: function(){
-			var _this = this;
-			if(_this.label==''){
-			}else{
-				//_this.upfile(_this.label,2);
 			}
 		},
 		upintro: function(){
@@ -177,98 +119,66 @@ export default {
 				//_this.upfile(_this.intro,3);
 			}
 		},
-		//上传文章上部分
-		uptitle1: function(){
+		
+		//图片显示
+		eimg: function(){
 			var _this = this;
-			_this.$axios.post('http://127.0.0.1:4040/uptitle', {
-			    title: _this.title,
-			    label: _this.label,
-			    intro: _this.intro,
-			    value: _this.value,
-			    just: _this.just,
-
-			})
+			var aa='';
+			var file = document.getElementById("file");
+			for(var i=0;i<file.files.length;i++){
+				aa=s.getObjectURL(file.files[i]);
+				_this.photohtml.push(aa);
+				_this.files.push(file.files[i]);
+			}
+			
+		},
+		//删除图片
+		deleteimg: function(index){
+			var _this = this;
+			_this.photohtml.splice(index,1);
+			_this.files.splice(index,1);
+		},
+		//封面上传
+		upphoto: function(){
+			var _this = this;
+			var formData = new FormData();
+			if(_this.files.length>0){
+				for(var i=0;i<_this.files.length;i++){
+	            	formData.append('file',_this.files[i]);
+	        	}
+			}
+	        _this.$axios.post('http://127.0.0.1:4040/uploaddiary', 
+			    formData
+			)
 			.then(function (response) {
-				var tep = response.data.tep;
-			    if(tep == 0){
-			    	//_this.upphoto();
-					//Router.push({path: '/'})
-				}
+				if(response.data.code === 200){
+					//_this.upfile(response.data.data,4);	
+					//console.log(response.data.data);
+					//将数组转为用","隔开的字符串
+					_this.photonames = response.data.data.join(",");
+					var data = {title:_this.title,content:_this.intro,imgs:_this.photonames,time:new Date()}
+					console.log(_this.photonames);
+					_this.upfile(data);			
+				}				    
 			})
 			.catch(function (error) {
 			    console.log(error);
 			    alert(error)
 			});
 		},
-		//图片显示
-		eimg1: function(){
-			var _this = this;
-			var aa = s.getObjectURL(document.getElementById("file").files[0]);
-			_this.src = aa;
-			_this.photohtml +='<span><img src="'+aa+'"/></span>';
-			//_this.upphoto();
-		},
-			//图片显示
-		eimg: function(){
-			var _this = this;
-			var aa=[];
-			for(var i=0;i<document.getElementById("file").files.length;i++){
-				aa[i]=s.getObjectURL(document.getElementById("file").files[i]);
-				_this.photohtml.push(aa[i]);
-			}
-		},
-		//删除图片
-		deleteimg: function(index){
-			var _this = this;
-			_this.photohtml.splice(index,1);
-		},
-		//封面上传
-		upphoto: function(){
-			var _this = this;
-			var file = document.getElementById("file");
-			//console.log(file.files);
-			if(file.files.length>0){
-	            var formData = new FormData();
-	            formData.append('file',file.files[0])
-	            //console.log(formData);
-	            _this.$axios.post('http://127.0.0.1:4040/uploadcover', 
-					    formData
-					)
-					.then(function (response) {
-						if(response.data.code === 200){
-							_this.upfile(response.data.data,4);	
-							//alert('aaa')						
-						}				    
-					})
-					.catch(function (error) {
-					    console.log(error);
-					    alert(error)
-					});
-			}
-		},
 		//文章判断
 	    judge: function(){
 			var _this = this;
 			//基本信息上传
 			_this.titlea='';
-	        _this.selecta= '';
 	        _this.introa= '';
-	        _this.photoa='';
 	        _this.isok = 0;
 			if(_this.title==''){
 				_this.titlea = '请填标题';
 				_this.isok = 1;
 			}
-			if(_this.value==''){
-				_this.selecta = "请选择分类";
-				_this.isok = 1;
-			}
 			if(_this.intro==''){
-				_this.introa = "请填简介";
-				_this.isok = 1;
-			}
-			if(_this.src== 'http://127.0.0.1:4040/user/nomare.png'){
-				_this.photoa = "请选择封面";
+				_this.introa = "请填内容";
 				_this.isok = 1;
 			}
 			if(_this.isok == 1){
@@ -276,15 +186,34 @@ export default {
 			}
 			return _this.isok;
 		},
+		//上传文章部分
+		upfile: function(data){
+			var _this = this;
+			_this.icon = 'el-icon-loading';
+				_this.save = '正在保存...';
+				_this.$axios.post('http://127.0.0.1:4040/updiary', data)
+				.then(function (response) {
+					var tep = response.data.tep;
+				    if(tep == 0){
+				    	console.log('上传成功了')
+				    	_this.icon = '';
+						//_this.save = '已自动保存';
+					}
+				})
+				.catch(function (error) {
+				    console.log(error);
+				    alert(error)
+				});
+		},
 		//点击发布
 		publish: function(){
 			var _this = this;
 			//_this.$message(_this.title);
 			_this.judge();
 			if(_this.isok == 0){
-				_this.upfile('ok',6);
-				_this.$message('发布成功！');
-				_this.$router.push({path: '/manage'});
+				_this.upphoto();
+				// _this.$message('发布成功！');
+				// _this.$router.push({path: '/manage'});
 			}
 		},
 		//点击预览
@@ -313,7 +242,7 @@ export default {
 	    
 	},
 	mounted:function(){
-		//this.manage();
+		this.manage();
 		//this.justit();
 	},
 	watch: {
@@ -460,12 +389,36 @@ export default {
 		padding-left: 16px;
 		height: 80px;
 		margin-top: 24px;
+		.delete{
+			@include w-h(18px,18px,#fc8c30);
+			border-radius: 9px;
+			//border: 2px solid #fff;
+			box-shadow: 2px 3px 6px rgba(0,0,0,0.2);
+			position: absolute;
+			left: -6px;
+			top: -6px;
+			cursor: pointer;
+			color: #fff;
+			line-height: 16px;
+			text-align: center;
+			display: none;
+		}
 		li{
 			@include w-h(80px,80px,#eee);
-			overflow: hidden;
+			position: relative;
 			margin-right: 16px;
+			&:hover{
+				.delete{
+					display: block;
+				}
+			}
+			.img{
+				overflow: hidden;
+				height: 100%;
+				width: 100%;
+			}
 			img{
-				width:100%;
+				height:100%;
 			}
 		}
 	}
@@ -553,6 +506,9 @@ export default {
 		top: 90px;
 		color: #ff504b;
 	}
+}
+.diary-up{
+	margin-top: 30px;
 }
 .btn-div{
 	height: 92px;

@@ -103,7 +103,7 @@ export default {
 		//创建数据条
 		createdb: function(index){
 			var _this = this;
-			if(index == 0 && index == 1){
+			if(index == 0 || index == 1){
 				_this.$axios.post('http://127.0.0.1:4040/creatework', 
 				    {num: index}
 				)

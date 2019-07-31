@@ -11,6 +11,8 @@ import Yike from './../views/Home'
 import detial from './../views/detial'
 import Works from './../views/Works'
 import Article from './../views/article'
+import Diary from './../views/diary'
+import About from './../views/about'
 
 import pages from './../components/pages'
 import top from './../components/top'
@@ -54,6 +56,16 @@ var router = new Router({
                 {
                     path: 'detial',
                     component: detial,
+                    children:[ {path: '',component:top}]
+                },
+                {
+                    path: 'diary',
+                    component: Diary,
+                    children:[ {path: '',component:top}]
+                },
+                {
+                    path: 'about',
+                    component: About,
                     children:[ {path: '',component:top}]
                 }
             ]
@@ -105,5 +117,7 @@ var router = new Router({
         }
     ]
 })
-
+router.afterEach((to,from,next) => {
+    window.scrollTo(0,0);
+});
 export default router

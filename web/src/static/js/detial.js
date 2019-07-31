@@ -19,7 +19,7 @@ export default {
 			comname:'',										//评论者
 			num1: 10,										//限定评论名长度
 			commentnum:'',									//评论数
-			icons: 13,										//评论头像数
+			icons: 14,										//评论头像数
 			icon: 1,										//当前头像
 			show: false,
 			abled: true,
