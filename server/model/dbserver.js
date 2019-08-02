@@ -105,7 +105,7 @@ exports.getallData = function(res){
     });
 };
 
-//获取文章数据总数
+//获取文章数据总数返回
 exports.getCount = function(req,res){
     var judge = req.body.judge;
     var sel = {};
@@ -275,12 +275,14 @@ exports.insertDiary = function(data,ress){
 };
 
 //查询日志
-exports.getDiary= function(res,id,nowPage){
+exports.getDiary= function(req,res){
     var sel = {};
+    var nowPage = req.body.num;
+    var display = req.body.display;
     // if(select){
     //     sel = {'name':{$regex : select}};
     // }
-    var pageSize = 8;                   //一页多少条
+    var pageSize = display;                   //一页多少条
     var sort = {'time':-1};        //排序（按登录时间倒序）
     var condition = {};                 //条件
     var skipnum = (nowPage - 1) * pageSize;   //跳过数
@@ -291,9 +293,9 @@ exports.getDiary= function(res,id,nowPage){
     //按照最后会话时间倒序排列
     query.sort(sort);
     //跳过数
-    //query.skip(skipnum);
+    query.skip(skipnum);
     //一页多少条
-    //query.limit(pageSize);
+    query.limit(pageSize);
     //查询结果
     query.exec().then(function(ress){
         res.send({success:true,ress});
@@ -301,6 +303,130 @@ exports.getDiary= function(res,id,nowPage){
         console.log(err);
     });
 }
+
+
+//后台首页获取
+//获取文章数据总数返回
+exports.mageCount = function(num,res){
+    var sel = {};
+    if(num == 0){
+        sel = {'types':0,'release':1}
+        Works.count(sel,function(err, ress){
+            if(err){
+                console.log('搜索失败');
+            }else{
+                data={
+                    ress:ress,
+                    num :num
+                }
+                res.send({success:true,data});
+            }
+        });
+    }
+    else if(num == 1){
+        sel = {'types':1,'release':1}
+        Works.count(sel,function(err, ress){
+            if(err){
+                console.log('搜索失败');
+            }else{
+                data={
+                    ress:ress,
+                    num :num
+                }
+                res.send({success:true,data});
+            }
+        });
+    }
+    else  if(num == 2){
+        sel = {}
+        Diarys.count(sel,function(err, ress){
+            if(err){
+                console.log('搜索失败');
+            }else{
+                data={
+                    ress:ress,
+                    num :num
+                }
+                res.send({success:true,data});
+            }
+        });
+    }
+}
+
+// 获取comment数据
+exports.getAllComment1 = function(res){
+    var wherestr = {};
+    //var age = {'userage':{$gte:12,$lte:14}};
+    var out = {};
+Comments.find(wherestr, out, {sort: {'time': -1}},function(err, ress){
+        if(err){
+            console.log('搜索失败');
+        }else{
+            res.send({success:true,ress});
+        }
+    });
+};
+
+//查询日志
+exports.getAllComment= function(req,res){
+    var sel = {};
+    var nowPage = req.body.num;
+    var display = req.body.display;
+    // if(select){
+    //     sel = {'name':{$regex : select}};
+    // }
+    var pageSize = display;                   //一页多少条
+    var sort = {'time':-1};        //排序（按登录时间倒序）
+    var condition = {};                 //条件
+    var skipnum = (nowPage - 1) * pageSize;   //跳过数
+
+    var query = Comments.find({});
+    //根据userID查询
+    query.where(sel);
+    //查出friendID的user对象
+    query.populate('worksID');
+    //按照最后会话时间倒序排列
+    query.sort(sort);
+    //跳过数
+    query.skip(skipnum);
+    //一页多少条
+    query.limit(pageSize);
+    //查询结果
+    query.exec().then(function(ress){
+        res.send({success:true,ress});
+    }).catch(function(err){
+        console.log(err);
+    });
+}
+
+//获取文章评论总数
+exports.getAllCommentCount = function(res){
+    var wherestr = {};
+    Comments.count(wherestr,function(err, ress){
+        if(err){
+            console.log('搜索失败');
+        }else{
+            res.send({success:true,ress});
+            //console.log(ress)
+        }
+    });
+}
+
+//删除一条评论
+exports.deleteComment = function(req,res){
+    var id = req.body.id;
+    Comments.findByIdAndRemove(id, function(err, ress){
+        if (err) {
+            console.log("数据删除失败：" + err);
+        }
+        else {
+            res.send({success:true,tep:0});
+        }
+    });
+};
+
+
+
 
 
 

@@ -212,8 +212,8 @@ export default {
 			_this.judge();
 			if(_this.isok == 0){
 				_this.upphoto();
-				// _this.$message('发布成功！');
-				// _this.$router.push({path: '/manage'});
+				_this.$message('发布成功！');
+				_this.$router.push({path: '/manage'});
 			}
 		},
 		//点击预览
@@ -419,6 +419,8 @@ export default {
 			}
 			img{
 				height:100%;
+				width: 100%;
+				object-fit: cover;
 			}
 		}
 	}

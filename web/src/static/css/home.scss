@@ -73,8 +73,8 @@
 				position: relative;
 				img{
 					width: 606px;
-					@include positions(absolute,0,0,0,0);
-					margin: auto;
+					height: 312px;
+                    object-fit: cover;
 				}
 			}
 		}

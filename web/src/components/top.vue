@@ -49,7 +49,7 @@ import s from '../static/js/myfunc.js'
 	mounted:function(){
 		s.addEvent(window,'scroll',this.aaa);
 	},
-}
+};
 </script>
 <style lang="scss">
 .top{
@@ -62,6 +62,7 @@ import s from '../static/js/myfunc.js'
 	margin-left: 560px;
 	transition: all 0.3s;
 	cursor:pointer;
+	z-index: 1000;
 	p{
 		line-height: 48px;
 		padding-left:12px;

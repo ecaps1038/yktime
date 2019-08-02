@@ -2,6 +2,8 @@ var outs = [23,43,76];
 var ins = [54,73];
 //加入跳转页面的位置
 import Router from '../../../router/index'
+import s from '../myfunc.js'
+import c from '../common.js';
 
 export default {
 	data () {
@@ -26,7 +28,7 @@ export default {
 			innavs: [
 				{
 					name: "私信",
-					num: ""
+					num: "22"
 				},
 				{
 					name: "留言",
@@ -50,16 +52,35 @@ export default {
 			backgroundSize: "cover",
         	},
 
-		  outsum: 0,
-		  insum: 0,
-		  imgurl: '',
-		  tep: '哈哈',
+			outsum: 0,
+			insum: 0,
+			imgurl: '',
+			tep: '哈哈',
+			drawer: false,
+			drawer1: false,
+			direction: 'rtl',
+			title:'',
+			nowPage: 1,
+			display: 10,
+			comments: [],
+			isbottom: false,
+			comentclick: '加载更多',
 		}
 	},
     computed:{
 		
 	},
 	methods:{
+		//时间换算
+		detia: function(data){
+			return s.detiaTime(data);
+		},
+		//详情页跳转
+        detial: function(id){
+            var _this = this;
+            return c.detial(_this,id);
+        },
+        //加载判断
 		manage: function(){
 			var _this = this;
 			_this.$axios.get('http://127.0.0.1:4040/manage', {
@@ -80,20 +101,82 @@ export default {
 			    Router.push({path: '/'});
 			});
 		},
-		outdata: function(){
-			var _this = this;
-			for(var i=0;i<outs.length;i++){
-				_this.navs[i].num = outs[i];
-				_this.outsum += outs[i];
-			}
-		},
-		indata: function(){
-			var _this = this;
-			for(var i=0;i<ins.length;i++){
-				_this.innavs[i].num = ins[i];
-				_this.insum += ins[i];
-			}
-		},
+		//获取付出数据
+		mageCount: function(){
+            var _this = this;
+            for(var i=0;i<3;i++){
+            	_this.$axios.post('http://127.0.0.1:4040/mageCount',{num:i})
+	            .then(function (response) {
+	                var data = response.data.data;
+	                _this.navs[data.num].num = data.ress;
+	                //console.log(data);
+	                _this.outsum += data.ress;
+	            })
+	            .catch(function (error) {
+	                console.log(error);
+	                alert(error);
+	                //Router.push({path: '/'});
+	            });
+            }
+        },
+        //获得评论总数
+        inmageCount: function(){
+            var _this = this;
+        	_this.$axios.post('http://127.0.0.1:4040/getAllCommentCount')
+            .then(function (response) {
+                var data = response.data.ress;
+                _this.innavs[1].num = data;
+                //console.log(data);
+                _this.insum += data;
+            })
+            .catch(function (error) {
+                console.log(error);
+                alert(error);
+                //Router.push({path: '/'});
+            });
+        },
+        //侧边栏内容
+        draw: function(index){
+        	var  _this = this;
+        	if(index == 0){
+        		_this.drawer = true;
+        		_this.title = '私信管理';
+        	}else{
+        		_this.getcomment();
+        	}
+        },
+        //获取评论
+        getcomment: function(){
+        	var _this = this;
+        	//获取评论
+    		_this.drawer1 = true;
+    		_this.title = '评论管理'+_this.innavs[1].num;
+    		if(!_this.isbottom){
+	    		_this.$axios.post('http://127.0.0.1:4040/getAllComment',{
+	    			num:_this.nowPage,
+	    			display:_this.display,
+	    		})
+	            .then(function (response) {
+	                var data = response.data.ress;
+	                if(data.length>0){
+	                	_this.comments = _this.comments.concat(data);
+	                	_this.nowPage++;
+	                	//console.log(_this.comments)
+	                }else{
+	                	_this.isbottom = true;
+	                	_this.comentclick = "已经到底...";
+
+	                }
+	                //console.log(data);
+	            })
+	            .catch(function (error) {
+	                console.log(error);
+	                alert(error);
+	                //Router.push({path: '/'});
+	            });
+	        }
+        },
+        //获取随机语句
 		random: function(){
 			var _this = this;
 			var i = 0; var j = _this.teps.length;
@@ -118,8 +201,26 @@ export default {
 			}else if(index == 2){
 				Router.push({path: '/add/diary'});
 			}
-		}
+		},
+		//删除对应的评论
+		deleteComment: function(id,index){
+			var _this = this;
+			_this.$axios.post('http://127.0.0.1:4040/deleteComment', 
+			    {id: id}
+			)
+			.then(function (response) {
+				var tep = response.data.tep;
+				if(tep == 0){
+					_this.comments.splice(index,1);
+					_this.innavs[1].num--;
+				}
+			})
+			.catch(function (error) {
+			    console.log(error);
+			    alert(error)
+			});	
+		},
 	},
-	mounted:function(){this.manage();this.outdata();this.indata();this.random()},
+	mounted:function(){this.manage();this.mageCount();this.inmageCount();this.random();},
 
 }

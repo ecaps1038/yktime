@@ -32,13 +32,42 @@
     				<p class="all-data">{{insum}}</p>
     			</div>
     			<ul>
-    				<li v-for="nav in innavs">
-						<p>{{nav.num}}</p>
+    				<li v-for="(nav,index) in innavs">
+						<p @click="draw(index)">{{nav.num}}</p>
 						<span>{{nav.name}}</span>
     				</li>
     			</ul>
     		</div>
     	</div>
+        <el-drawer
+          :title="title"
+          :visible.sync="drawer"
+          :direction="direction">
+          <span>我是私信!</span>
+        </el-drawer> 
+        <el-drawer
+          :title="title"
+          :visible.sync="drawer1"
+          :direction="direction">
+          <div class="comments">
+              <ul>
+                    <li v-for="(num,index) in comments">
+                        <div class="img">
+                            <img :src="'http://127.0.0.1:4040/user/tx'+num.icon+'.png'"/>
+                        </div>
+                        <div class="comment-right">
+                            <p class="top">{{num.name}}<span>{{detia(num.time)}}</span></p>
+                            <p class="comment-m">{{num.comment}}</p>
+                            <a class="artic" href="/detial" target="_blank" @click="detial(num.worksID._id)" v-if="num.worksID != null">{{num.worksID.name}}</a>
+                            <p class="noartic" v-if="num.worksID == null">文章已删除</p>
+                            <p class="delete" @click="deleteComment(num._id,index)">删除</p>
+                        </div>
+                    </li>
+                    <p @click="getcomment" class="combott">{{comentclick}}</p>
+
+              </ul>
+          </div>
+        </el-drawer>
 	</div>
 </template>
 <script type="text/javascript" src="../../static/js/admin/total.js"></script>

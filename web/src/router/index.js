@@ -91,7 +91,12 @@ var router = new Router({
                     path: 'artic',
                     component: artic,
                     children:[ {path: '',component:pages}]
-                }
+                },
+                {
+                    path: 'diary',
+                    component: Diary,
+                    children:[ {path: '',component:top}]
+                },
             ]
         },
         {

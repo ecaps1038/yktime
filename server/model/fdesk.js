@@ -54,6 +54,24 @@ exports.getcommentcount = function(req,res){
 	dbserver.getCommentCount(workid,res);
 }
 //获取日志
-exports.getDiary = function(res){
-	dbserver.getDiary(res);
+exports.getDiary = function(req,res){
+	dbserver.getDiary(req,res);
+}
+
+//后台获取总数
+exports.mageCount = function(req,res){
+	var num = req.body.num;
+	dbserver.mageCount(num,res);
+}
+//后台获取总数
+exports.getAllCommentCount = function(req,res){
+	dbserver.getAllCommentCount(res);
+}
+//后台获取总数
+exports.getAllComment = function(req,res){
+	dbserver.getAllComment(req,res);
+}
+//后台获取总数
+exports.deleteComment = function(req,res){
+	dbserver.deleteComment(req,res);
 }

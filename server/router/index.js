@@ -250,7 +250,24 @@ module.exports = function(app){
 	})
 	//获取日志
 	app.post('/getDairy',function(req,res){
-		fdesk.getDiary(res);
+		fdesk.getDiary(req,res);
+	})
+
+	//后台获取总数日志
+	app.post('/mageCount',function(req,res){
+		fdesk.mageCount(req,res);
+	})
+	//后台获取评论总数
+	app.post('/getAllCommentCount',function(req,res){
+		fdesk.getAllCommentCount(req,res);
+	})
+	//后台获取评论总数
+	app.post('/getAllComment',function(req,res){
+		fdesk.getAllComment(req,res);
+	})
+	//后台删除某评论
+	app.post('/deleteComment',function(req,res){
+		fdesk.deleteComment(req,res);
 	})
 	
 }

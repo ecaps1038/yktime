@@ -48,9 +48,9 @@ app.set('views', path.join(__dirname, '/views'));
 app.engine('html', require('ejs').__express);  
 app.set('view engine', 'html');
 
-app.get('/aaa', function (req, res) {
+app.get('/', function (req, res) {
   res.type('html');
-  res.render('index');
+  res.render('index1');
 });
 app.get('/one', function (req, res) {
   res.type('html');

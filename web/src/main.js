@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router/index'
 import store from './store/store'
+import globalVariable from '@/static/js/global_variable.js'
 
 //引入elememt-ui
 import ElementUI from 'element-ui';
@@ -14,6 +15,9 @@ Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 
 Vue.use(ElementUI);
+
+//引入全局变量
+Vue.prototype.GLOBAL = globalVariable
 
 axios.defaults.withCredentials = true
 
