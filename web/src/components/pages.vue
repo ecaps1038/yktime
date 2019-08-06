@@ -1,5 +1,6 @@
 <template>
-   <div class="pages">
+	<div>
+   <div class="pages" v-if="total != 0">
     	<ul class="pages-ul" v-if="page>1">
     		<li :class="{'disabled': current == 1}">
     			<a href="javascript:;" @click="setCurrent(current - 1)"> « </a>
@@ -12,6 +13,11 @@
 			</li>
     	</ul>
     </div>
+    <div v-if="total == 0" class="kong">
+        <img src="../static/images/kong.png">
+        <p>这个人不知道忙什么去了～</p>
+    </div>
+</div>
 </template>
 <script type="text/javascript">
 	export default {
@@ -117,9 +123,10 @@
 			}
 		},
 	},
-}
+};
 </script>
 <style lang="scss">
+@import "../static/css/common.scss";
 .pages{
 	margin-top: 40px;
 	height: 24px;
@@ -149,5 +156,20 @@
 			background: #ff7f26;
 		}
 	}
+
 }
+.kong{
+        @include w-h(100%,900px,#fff);
+        position: absolute;
+        top: 0px;
+        img{
+            width: 240px;
+            margin: 0 auto;
+            padding-top: 280px;
+        }
+        p{
+            padding-top: 20px;
+            @include fonts(24px,#cbccdc,40px,center);
+            //font-weight: bold;
+       }}
 </style>

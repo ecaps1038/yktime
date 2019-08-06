@@ -274,6 +274,19 @@ exports.insertDiary = function(data,ress){
     });
 };
 
+//删除一条日志
+exports.deleteDiary = function(req,res){
+    var id = req.body.id;
+    Diarys.findByIdAndRemove(id, function(err, ress){
+        if (err) {
+            console.log("数据删除失败：" + err);
+        }
+        else {
+            res.send({success:true,tep:0});
+        }
+    });
+};
+
 //查询日志
 exports.getDiary= function(req,res){
     var sel = {};

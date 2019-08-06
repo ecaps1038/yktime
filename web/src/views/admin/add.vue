@@ -16,5 +16,76 @@
 </template>
 <script type="text/javascript" src="../../static/js/admin/add.js"></script>
 <style lang="scss">
-    @import "../../static/css/nav.scss";
+   @import "../../static/css/common.scss";
+.header{
+	@include w-h(100%,80px,#1c1c21,block);
+	@include positions(fixed,0px,0px);
+	z-index: 1001;
+	text-align: center;
+	.logo{
+		@include positions(absolute,24px,40px);
+		a{
+			@include w-h(72px,32px,#1c1c21);
+		}
+	}
+	.nav{
+		display: inline;
+		a{
+			display: inline-block;
+			position: relative;
+			width: 76px;
+			@include fonts(14px,rgba(255,255,255,0.5),80px,center);
+			&:hover{
+				color: #fff;
+				background: #232329;
+			}
+		}
+		.router-link-active{
+			color: #fff;
+			i{
+				@include positions(absolute,58px,31px);
+				@include w-h(16px,2px,#fff);
+			}
+		}
+	}
+	.user{
+
+		@include positions(absolute,20px,auto,40px,auto);
+		width: 40px;
+		.user-inner{
+			@include w-h(40px,40px,#232329);
+			border-radius: 50%;
+			overflow: hidden;
+			//cursor: pointer;
+			img{
+				width: 40px;
+			}		
+		}
+		.quit{
+			// @include w-h(40px,28px,#3b3c41);
+			background: #3b3c41;
+			border-radius: 5px;
+			@include fonts(14px,#ff7f26,28px,center);
+			display: none;
+			cursor: pointer;
+			opacity: 0.5;
+			&:hover{
+				opacity: 1;
+			}
+		}
+		&:hover .quit{
+			display: block;
+		}
+	}
+}
+.main{
+	min-height: $mh;
+	padding-top: $h1;
+}
+footer{
+	position: relative;
+	height: 160px;
+	z-index: 10;
+	background: #000;
+}
 </style>

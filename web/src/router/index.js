@@ -19,12 +19,12 @@ import top from './../components/top'
 import workMd from './../components/work-md'
 
 //后台页面
-import login from './../views/admin/login'
 import manage from './../views/admin/manage'
 import total from './../views/admin/total'
 import files from './../views/admin/files'
 import works from './../views/admin/fworks'
 import artic from './../views/admin/fartic'
+import fdiary from './../views/admin/fdiary'
 import add from './../views/admin/add'
 import upwork from './../views/admin/upwork'
 import preview from './../views/admin/preview'
@@ -70,7 +70,7 @@ var router = new Router({
                 }
             ]
         },
-        { name: 'login', path: '/login', component: login },
+        //{ name: 'login', path: '/login', component: login },
         { 
             name: 'manage', path: '/manage', redirect:'/manage/total', component: manage,
             children:[
@@ -94,7 +94,7 @@ var router = new Router({
                 },
                 {
                     path: 'diary',
-                    component: Diary,
+                    component: fdiary,
                     children:[ {path: '',component:top}]
                 },
             ]

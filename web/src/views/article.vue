@@ -14,7 +14,7 @@
             pages: 0,
             nowpage: 1,
             display: 8,
-            total: '',
+            total: 0,
             path:2,
             judge: 3,
         }

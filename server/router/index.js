@@ -252,6 +252,10 @@ module.exports = function(app){
 	app.post('/getDairy',function(req,res){
 		fdesk.getDiary(req,res);
 	})
+	//删除日志
+	app.post('/deleteDiary',function(req,res){
+		fdesk.deleteDiary(req,res);
+	})
 
 	//后台获取总数日志
 	app.post('/mageCount',function(req,res){
@@ -268,6 +272,12 @@ module.exports = function(app){
 	//后台删除某评论
 	app.post('/deleteComment',function(req,res){
 		fdesk.deleteComment(req,res);
+	})
+	//获取IP测试
+	app.get('/toip',function(req,res){
+		console.log(req.ip);
+		var ip = req.ip.match(/\d+\.\d+\.\d+\.\d+/)
+		res.send({success:true,tep:ip});
 	})
 	
 }

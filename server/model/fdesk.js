@@ -57,6 +57,10 @@ exports.getcommentcount = function(req,res){
 exports.getDiary = function(req,res){
 	dbserver.getDiary(req,res);
 }
+//删除日志
+exports.deleteDiary = function(req,res){
+	dbserver.deleteDiary(req,res);
+}
 
 //后台获取总数
 exports.mageCount = function(req,res){

@@ -4,8 +4,8 @@
         <!-- <div class="show" v-html="showimg"></div> -->
         <div class="detial-photo" :class="{'displays':photoclick}">
             <div class="ptbg"  @click="photoclick = false"></div>
-            <i class="left" :style="{ 'background-image': 'url(' + require('../static/images/icon/left.svg') + ')'}" @click="clickleft(nowdiary)"></i>
-            <i class="right" :style="{ 'background-image': 'url(' + require('../static/images/icon/right.svg') + ')'}"  @click="clickright(nowdiary)"></i>
+            <i class="left" :style="{ 'background-image': 'url(' + require('../../static/images/icon/left.svg') + ')'}" @click="clickleft(nowdiary)"></i>
+            <i class="right" :style="{ 'background-image': 'url(' + require('../../static/images/icon/right.svg') + ')'}"  @click="clickright(nowdiary)"></i>
             <div>
                 <img :src="nowphoto">
             </div>
@@ -13,10 +13,14 @@
         <div class="diary-div">
             <ul>
                 <li v-for="(html,index) in htmls">
-                    <p class="time">{{time(html.time)}}<span></span></p>
+                    <div class="delete" @click="deleted(html._id,index)">
+              			<svg class="title-icon" aria-hidden="true">
+							<use xlink:href="#icon-shanchu"></use>
+						</svg>
+              		</div>
                     <div class="diary-tt">
-                        <p class="title">{{html.title}}</p>
-                        <p class="content" @click="icon(html.imgs)"><i></i><span v-html="html.content"></span></p>
+                        <p class="title">{{html.title}}<span>{{time(html.time)}}</span></p>
+                        <p class="content" @click="icon(html.imgs)"><span v-html="html.content"></span></p>
                     </div>
                     <div class="imgs">
                         <div class="img" v-for="(img,indexs) in html.imgs">
@@ -26,18 +30,14 @@
                 </li>
                 <p class="tobt">{{tobottom}}</p>
             </ul>
-            <div v-if="htmls.length == 0" class="kong">
-                <img src="../static/images/kong.png">
-                <p>这个人不知道忙什么去了～</p>
-            </div>
         </div>
         <router-view></router-view>
     </div>
   
 </template>
 <script type="text/javascript">
-    import s from '../static/js/myfunc.js';
-    import c from '../static/js/common.js';
+    import s from '../../static/js/myfunc.js';
+    import c from '../../static/js/common.js';
 
  export default{
     data(){
@@ -142,7 +142,40 @@
                 }
                 
             }
-        }
+        },
+        //删除日志
+        deleted(id,index) {
+	        this.$confirm('此操作将永久删除该日志, 是否继续?', '提示', {
+	            confirmButtonText: '确定',
+	            cancelButtonText: '取消',
+	            type: 'warning'
+	        }).then(() => {
+	        	var _this = this;
+				_this.$axios.post('http://127.0.0.1:4040/deleteDiary', {
+				    id: id,
+				})
+				.then(function (response) {
+					var tep = response.data.tep;
+				    if(tep == 0){
+				    	//_this.content();
+				    	_this.htmls.splice(index,1);
+				    	_this.$message({
+				            type: 'success',
+				            message: '删除成功!'
+				        });
+					}
+				})
+				.catch(function (error) {
+				    console.log(error);
+				    alert(error)
+				});
+	        }).catch(() => {
+	            this.$message({
+	                type: 'info',
+	            	message: '已取消删除'
+	            });          
+	        });
+	    },
     },
     mounted:function(){
        this.getDairy();
@@ -152,28 +185,23 @@
 
 </script>
 <style lang="scss">
-@import "../static/css/common.scss";
-    .bdbg{
-        @include w-h(4px,1000px,#e0e0e0);
-        position: fixed;
-        right: 50%;
-        top: 0;
-        z-index: 1;
-        margin-right: 370px;
-    }
+@import "../../static/css/common.scss";
     .diary{
-        width: 1080px;
-        margin: 0 auto;
+   		padding-left: 40px;
     }
     .diary-div{
         ul{
             padding-bottom: 60px;
         }
         li{
+        	padding-left: 30px;
             position: relative;
             display: block;
             clear: both;
             padding-top: 28px;
+            &:hover .delete{
+            	display:block;
+            }
         }
         .time{
             padding-right: 40px;
@@ -190,12 +218,35 @@
                 border-radius:50%;
             }
         }
+        .delete{
+        	display: none;
+        	position: absolute;
+        	left: 0;
+        	top: 80px;
+			cursor: pointer;
+			@include w-h-n(36px,36px);
+			background: #fff;
+			padding: 5px 9px;
+			.title-icon{
+				width: 16px;
+				height: 24px;
+				fill: #999;
+			}
+			&:hover .title-icon{
+				fill: #333;
+			}
+			@include bord-st(1px,50%,#dedede);
+		}
         .diary-tt{
             padding-left: 20px;
             float: left;
             .title{
                @include fonts(18px,#333,40px);
                font-weight: bold; 
+               span{
+               	padding-left: 10px;
+               	font-weight: lighter;
+               }
             }
             .content{
                 position: relative;
@@ -276,19 +327,4 @@
         padding-top: 40px;
         clear: both;
     }
-    .kong{
-        @include w-h(100%,900px,#fff);
-        position: absolute;
-        top: 0px;
-        img{
-            width: 240px;
-            margin: 0 auto;
-            padding-top: 280px;
-        }
-        p{
-            padding-top: 20px;
-            @include fonts(24px,#cbccdc,40px,center);
-            //font-weight: bold;
-       }
-   }
 </style>

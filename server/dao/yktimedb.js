@@ -34,7 +34,10 @@ var DiarySchema = new Schema({
     time:{type:Date},
     title:{type:String},
     imgs: {type:String},
-})
+});
+
+//页面浏览记录
+
 // var GroupuserSchema = new Schema({          
 //     groupID: {type:Schema.Types.ObjectId,ref:'Group'},          //群id
 //     userID: {type:Schema.Types.ObjectId,ref:'User'},            //用户id
