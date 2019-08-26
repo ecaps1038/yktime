@@ -1,4 +1,4 @@
-@import "../static/css/common.scss";
+ @import "../static/css/common.scss";
 .detial{
 	background: #fff;
 }
@@ -53,12 +53,15 @@
 		@include fonts(14px,#333,24px);
 		padding: 12px 0;
 		img{
-			margin-left: -140px;
-			padding: 4px 0;
+			position: relative;
+			// //max-width: 1200px;
+			// margin: -140px;
+			// padding: 4px 0;
 		}
 	}
 }
 .comment{
+	clear: both;
 	background: #f3f3f3;
 	border-top: 1px solid #eee;
 	.inner{

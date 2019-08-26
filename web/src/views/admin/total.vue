@@ -43,7 +43,17 @@
           :title="title"
           :visible.sync="drawer"
           :direction="direction">
-          <span>我是私信!</span>
+            <div class="comments">
+                <ul>
+                    <li v-for="(num,index) in replys">
+                        <div class="comment-right">
+                            <p class="top">{{num.name}}<span>{{detia(num.time)}}</span></p>
+                            <p class="comment-m">{{num.replys}}</p>
+                        </div>
+                    </li>
+                    <p  class="combott">{{comentclick}}</p>
+                </ul>
+            </div>
         </el-drawer> 
         <el-drawer
           :title="title"

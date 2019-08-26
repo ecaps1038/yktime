@@ -28,7 +28,7 @@ export default {
 			innavs: [
 				{
 					name: "私信",
-					num: "22"
+					num: ""
 				},
 				{
 					name: "留言",
@@ -53,7 +53,6 @@ export default {
         	},
 
 			outsum: 0,
-			insum: 0,
 			imgurl: '',
 			tep: '哈哈',
 			drawer: false,
@@ -61,14 +60,18 @@ export default {
 			direction: 'rtl',
 			title:'',
 			nowPage: 1,
+			nowReply: 1,
 			display: 10,
 			comments: [],
+			replys: [],
 			isbottom: false,
 			comentclick: '加载更多',
 		}
 	},
     computed:{
-		
+		insum: function(){
+			return this.innavs[0].num+this.innavs[1].num;
+		}
 	},
 	methods:{
 		//时间换算
@@ -127,7 +130,6 @@ export default {
                 var data = response.data.ress;
                 _this.innavs[1].num = data;
                 //console.log(data);
-                _this.insum += data;
             })
             .catch(function (error) {
                 console.log(error);
@@ -139,8 +141,7 @@ export default {
         draw: function(index){
         	var  _this = this;
         	if(index == 0){
-        		_this.drawer = true;
-        		_this.title = '私信管理';
+        		_this.getReply();
         	}else{
         		_this.getcomment();
         	}
@@ -160,7 +161,59 @@ export default {
 	                var data = response.data.ress;
 	                if(data.length>0){
 	                	_this.comments = _this.comments.concat(data);
+	                	_this.comentclick = "加载更多";
 	                	_this.nowPage++;
+	                	//console.log(_this.comments)
+	                }else{
+	                	_this.isbottom = true;
+	                	_this.comentclick = "已经到底...";
+
+	                }
+	                //console.log(data);
+	            })
+	            .catch(function (error) {
+	                console.log(error);
+	                alert(error);
+	                //Router.push({path: '/'});
+	            });
+	        }
+        },
+        //获取回复数
+        getReplycount: function(num){
+			var _this = this;
+    		_this.$axios.post('http://127.0.0.1:4040/getReplyCount',{
+    			num:num,
+    		})
+            .then(function (response) {
+                var data = response.data.ress;
+                if(num == 1){
+                	_this.innavs[0].num = data;
+                }
+                //console.log(data);
+            })
+            .catch(function (error) {
+                console.log(error);
+                alert(error);
+                //Router.push({path: '/'});
+            });
+        },
+        //获取回复
+        getReply: function(){
+        	var _this = this;
+        	//获取评论
+    		_this.drawer = true;
+    		_this.title = '评论管理'+_this.innavs[1].num;
+    		if(!_this.isbottom){
+	    		_this.$axios.post('http://127.0.0.1:4040/getAllReply',{
+	    			num:_this.nowPage,
+	    			display:_this.display,
+	    		})
+	            .then(function (response) {
+	                var data = response.data.ress;
+	                if(data.length>0){
+	                	_this.replys = _this.replys.concat(data);
+	                	_this.nowReply++;
+	                	_this.comentclick = "加载更多";
 	                	//console.log(_this.comments)
 	                }else{
 	                	_this.isbottom = true;
@@ -221,6 +274,6 @@ export default {
 			});	
 		},
 	},
-	mounted:function(){this.manage();this.mageCount();this.inmageCount();this.random();},
+	mounted:function(){this.manage();this.mageCount();this.inmageCount();this.random();this.getReplycount(1)},
 
 }

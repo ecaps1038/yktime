@@ -62,15 +62,10 @@ var router = new Router({
                     path: 'diary',
                     component: Diary,
                     children:[ {path: '',component:top}]
-                },
-                {
-                    path: 'about',
-                    component: About,
-                    children:[ {path: '',component:top}]
                 }
             ]
         },
-        //{ name: 'login', path: '/login', component: login },
+        { name: 'about', path: '/about', component: About },
         { 
             name: 'manage', path: '/manage', redirect:'/manage/total', component: manage,
             children:[

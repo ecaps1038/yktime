@@ -79,3 +79,22 @@ exports.getAllComment = function(req,res){
 exports.deleteComment = function(req,res){
 	dbserver.deleteComment(req,res);
 }
+//后台获取总数
+exports.reply = function(req,res){
+	var ip = req.ip.match(/\d+\.\d+\.\d+\.\d+/)[0];
+	var data = {
+		replys:req.body.replyss,
+		name:req.body.name,
+		ip:ip,
+		time:new Date()
+	}
+	dbserver.insertReply(data,res);
+}
+exports.getReplyCount = function(req,res){
+	var data = req.body.num;
+	dbserver.getReplyCount(data,res);
+}
+exports.getAllReply = function(req,res){
+	dbserver.getAllReply(req,res);
+}
+

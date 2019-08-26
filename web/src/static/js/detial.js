@@ -24,6 +24,7 @@ export default {
 			show: false,
 			abled: true,
 			comlist: [],
+			imgs: [],
 		}
 	},
     computed:{
@@ -64,7 +65,7 @@ export default {
 						_this.classlfy = _this.article[res.classlfy];
 					}else if(res.types == 1){
 						_this.classlfy = _this.works[res.classlfy];
-					}	
+					}
 				}else if(tep == 0){
 					console.log('没有')
 				}
@@ -151,10 +152,28 @@ export default {
 		//光标定位
 		write: function(){
 			document.getElementById("comment").focus(); 
-		}
-
+		},
 	},
 	mounted:function(){this.primary();},
+	updated() {
+		console.log(document.body.offsetWidth)
+    this.imgs = this.$refs.detailCont.querySelectorAll("img");
+    for (let i = 0; i < this.imgs.length; i++) {
+      this.imgs[i].addEventListener("load", ele => {
+        let e = ele || window.event;
+        let target = e.target || e.srcElement;
+        //target.style.marginBottom = "30px";
+        if (target.offsetWidth >= 1200) {
+        	//let mwidth = document.body.offsetWidth*0.8;
+        	target.style.width = "1200px";
+          target.style.left = "-200px";
+        }else if(target.offsetWidth >= 800 && target.offsetWidth < 1200){
+          let lwidth = (target.offsetWidth-800)/2;
+          target.style.left = "-"+lwidth+"px";
+        } 
+      });
+    }
+  },
 	watch: {
         comname() {
             if (this.comname.length > this.num1) {

@@ -108,7 +108,7 @@
 .comments{
 	height: 100%;
 	ul{
-		padding: 0 20px 120px 20px;
+		padding: 0 20px 20px 20px;
 		height: 100%;
 		//border: 1px solid red;
 		overflow-y:auto;
@@ -156,6 +156,7 @@
 	}
 	.combott{
 		@include fonts(14px,#666,30px,center);
+		cursor: pointer;
 	}
 	.img{
 		float: left;

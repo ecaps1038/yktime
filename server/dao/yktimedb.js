@@ -36,8 +36,21 @@ var DiarySchema = new Schema({
     imgs: {type:String},
 });
 
-//页面浏览记录
+//回复我表
+var ReplySchema = new Schema({
+    replys:{type:String},
+    time:{type:Date},
+    name: {type:String},
+    ip: {type:String},
+    chak: {type: Number,default: 0},                        //是否查看，0为未查看。
+});
 
+//页面浏览记录
+var VisitSchema = new Schema({
+    ip: {type:String},                                           //访问ip
+    time: {type:Date},                                           //访问时间
+    types: {type: Number},                                       //访问位置 0，1，2，3，4
+});
 // var GroupuserSchema = new Schema({          
 //     groupID: {type:Schema.Types.ObjectId,ref:'Group'},          //群id
 //     userID: {type:Schema.Types.ObjectId,ref:'User'},            //用户id
@@ -60,5 +73,6 @@ var DiarySchema = new Schema({
 module.exports = db.model('Works',WorksSchema);
 module.exports = db.model('Comment',CommentSchema);
 module.exports = db.model('Diary',DiarySchema);
+module.exports = db.model('Reply',ReplySchema);
 // module.exports = mongoose.model('Groupuser',GroupuserSchema);
 // module.exports = mongoose.model('Groupmsg',GroupmsgSchema);

@@ -2,6 +2,7 @@ var workdb = require("../dao/yktimedb.js");
 var Works = workdb.model('Works');
 var Comments = workdb.model('Comment')
 var Diarys = workdb.model('Diary')
+var Replys = workdb.model('Reply')
 var bcrypt = require('bcryptjs');
 
 //获取数据添加works表
@@ -437,6 +438,74 @@ exports.deleteComment = function(req,res){
         }
     });
 };
+
+//回复reply
+
+//reply表
+//获取数据添加reply表
+exports.insertReply = function(data,ress){
+
+    var reply = new Replys(data);
+    console.log(data);
+    reply.save(function (err, res) {
+        if (err) {
+            console.log("Diarys添加失败" + err);
+        }
+        else {
+            //ress.cookie('workid',res._id,{signed:true, path:'http://localhost:8080', maxAge: 1000*10});
+            ress.send({success:true,tep:0});
+            //console.log("群添加成功");
+        }
+    });
+};
+
+//获取reply总数
+exports.getReplyCount = function(num,res){
+    if(num == 0){
+        var wherestr = {'chak':0};
+    }else if(num == 1){
+        var wherestr = {};
+    }
+    Replys.count(wherestr,function(err, ress){
+        if(err){
+            console.log('搜索失败');
+        }else{
+            res.send({success:true,ress});
+            //console.log(ress)
+        }
+    });
+}
+
+//查询回复
+exports.getAllReply= function(req,res){
+    var sel = {};
+    var nowPage = req.body.num;
+    var display = req.body.display;
+    // if(select){
+    //     sel = {'name':{$regex : select}};
+    // }
+    var pageSize = display;                   //一页多少条
+    var sort = {'time':-1};        //排序（按登录时间倒序）
+    var condition = {};                 //条件
+    var skipnum = (nowPage - 1) * pageSize;   //跳过数
+
+    var query = Replys.find({});
+    //根据userID查询
+    query.where(sel);
+    //按照最后会话时间倒序排列
+    query.sort(sort);
+    //跳过数
+    query.skip(skipnum);
+    //一页多少条
+    query.limit(pageSize);
+    //查询结果
+    query.exec().then(function(ress){
+        res.send({success:true,ress});
+    }).catch(function(err){
+        console.log(err);
+    });
+}
+
 
 
 

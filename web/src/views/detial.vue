@@ -27,7 +27,7 @@
 			<p class="introduc-p">{{introduc}}</p>
 		</div>
 		<div class="contain">
-			<div class="inner" v-html="content">
+			<div class="inner" ref="detailCont" v-html="content">
 			</div>
 		</div>
 		<div class="comment">

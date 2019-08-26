@@ -273,11 +273,24 @@ module.exports = function(app){
 	app.post('/deleteComment',function(req,res){
 		fdesk.deleteComment(req,res);
 	})
+	//给我写信
+	app.post('/reply',function(req,res){
+		fdesk.reply(req,res);
+	})
 	//获取IP测试
 	app.get('/toip',function(req,res){
 		console.log(req.ip);
 		var ip = req.ip.match(/\d+\.\d+\.\d+\.\d+/)
 		res.send({success:true,tep:ip});
 	})
+	//后台获取回复总数
+	app.post('/getReplyCount',function(req,res){
+		fdesk.getReplyCount(req,res);
+	})
+	//后台获取回复
+	app.post('/getAllReply',function(req,res){
+		fdesk.getAllReply(req,res);
+	})
+
 	
 }
