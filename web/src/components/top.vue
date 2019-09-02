@@ -18,7 +18,7 @@ import s from '../static/js/myfunc.js'
 	methods:{
 	    aaa: function(){
 			var _this = this;
-    		if(document.documentElement.scrollTop >800) {
+    		if(window.pageYOffset >800) {
                 this.tops = true;
         	}else{
         		this.tops = false;
@@ -32,7 +32,7 @@ import s from '../static/js/myfunc.js'
 		var timer;			// 回到顶部方法
         clearInterval(timer);
         timer = setInterval(function() {
-            let curHeight = document.documentElement.scrollTop || document.body.scrollTop;  // 得到当前高度
+            let curHeight = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;  // 得到当前高度
             var now = curHeight;
             var speed = (0 - now) / 7;								// 随着高度减速
             speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);

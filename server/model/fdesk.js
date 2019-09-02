@@ -75,15 +75,20 @@ exports.getAllCommentCount = function(req,res){
 exports.getAllComment = function(req,res){
 	dbserver.getAllComment(req,res);
 }
-//后台获取总数
-exports.deleteComment = function(req,res){
-	dbserver.deleteComment(req,res);
+//删除评论或留言
+exports.deleteCoR = function(req,res){
+	var num = req.body.num;
+	if(num == 0){
+		dbserver.deleteReply(req,res);
+	}else if(num ==1){
+		dbserver.deleteComment(req,res);
+	}
 }
 //后台获取总数
 exports.reply = function(req,res){
 	var ip = req.ip.match(/\d+\.\d+\.\d+\.\d+/)[0];
 	var data = {
-		replys:req.body.replyss,
+		replys:req.body.replys,
 		name:req.body.name,
 		ip:ip,
 		time:new Date()

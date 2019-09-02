@@ -32,7 +32,7 @@ import c from './common.js';
         counts: function(){
             var _this = this;
             //_this.path=this.$route.path;
-            _this.$axios.post('http://127.0.0.1:4040/getCount', {
+            _this.$axios.post(_this.GLOBAL.baseUrl+'/getCount', {
                 judge: _this.judge,
             })
             .then(function (response) {
@@ -50,7 +50,7 @@ import c from './common.js';
         //初始化
         content: function(num){
             var _this = this;
-            _this.$axios.post('http://127.0.0.1:4040/getData', {
+            _this.$axios.post(_this.GLOBAL.baseUrl+'/getData', {
                 num:_this.nowpage,
                 display: _this.display,
                 judge: _this.judge,

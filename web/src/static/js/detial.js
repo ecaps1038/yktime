@@ -47,7 +47,7 @@ export default {
 		//初始化
 		primary: function(){
 			var _this = this;
-			_this.$axios.post('http://127.0.0.1:4040/detial', {
+			_this.$axios.post(_this.GLOBAL.baseUrl+'/detial', {
 			})
 			.then(function (response) {
 				var tep = response.data.data.tep;
@@ -87,7 +87,7 @@ export default {
 		//获取评论列表
 		commentlist: function(){
 			var _this = this;
-			_this.$axios.post('http://127.0.0.1:4040/commentlist', {
+			_this.$axios.post(_this.GLOBAL.baseUrl+'/commentlist', {
 				workid: _this.workid,
 
 			})
@@ -104,7 +104,7 @@ export default {
 		//获取评论数
 		commentcont: function(){
 			var _this = this;
-			_this.$axios.post('http://127.0.0.1:4040/getCommentCount', {
+			_this.$axios.post(_this.GLOBAL.baseUrl+'/getCommentCount', {
 				judge: 0,
 			})
 			.then(function (response) {
@@ -125,7 +125,7 @@ export default {
 			if(_this.comname.length>0){
 				cname = _this.comname
 			}
-			_this.$axios.post('http://127.0.0.1:4040/upcomment', {
+			_this.$axios.post(_this.GLOBAL.baseUrl+'/upcomment', {
 				workid: _this.workid,
 			    comment: _this.comment,
 			    name: cname,

@@ -64,7 +64,7 @@ module.exports = function(app){
 	});
 	//首页验证
 	app.get('/login',function(req,res){
-		console.log(req.signedCookies.id)
+		//console.log(req.signedCookies.id)
 		if(req.signedCookies.id){
 			req.session.userId = req.signedCookies.id;
 			req.session.username = req.signedCookies.username;
@@ -73,16 +73,16 @@ module.exports = function(app){
 		    var myimgurl = req.session.imgurl;
 		    var myname = req.session.username;
 			res.send({success:true,id:id,myimgurl:myimgurl,myname:myname});
-			console.log('bbb');
+			//console.log('bbb');
 		}else if(req.session.userId){
 			var id = req.session.userId;
 			var myimgurl = req.session.imgurl;
 		    var myname = req.session.username;
 			res.send({success:true,id:id,myimgurl:myimgurl,myname:myname});
-			console.log('ccc');
+			//console.log('ccc');
 		}else{
 			//res.redirect('/');
-			console.log('ddd');
+			//console.log('ddd');
 		}
 	});
 	//用户退出
@@ -90,7 +90,7 @@ module.exports = function(app){
         login.logout(req,res);
 	});	
 	//用户管理权限
-	app.get('/manage', function(req,res) {
+	app.get('/manages', function(req,res) {
 		if(req.session.userId){
 			var myimgurl = req.session.imgurl;
 			var myname = req.session.username;
@@ -269,9 +269,9 @@ module.exports = function(app){
 	app.post('/getAllComment',function(req,res){
 		fdesk.getAllComment(req,res);
 	})
-	//后台删除某评论
-	app.post('/deleteComment',function(req,res){
-		fdesk.deleteComment(req,res);
+	//后台删除某评论或留言
+	app.post('/deleteCoR',function(req,res){
+		fdesk.deleteCoR(req,res);
 	})
 	//给我写信
 	app.post('/reply',function(req,res){
@@ -291,6 +291,5 @@ module.exports = function(app){
 	app.post('/getAllReply',function(req,res){
 		fdesk.getAllReply(req,res);
 	})
-
 	
 }

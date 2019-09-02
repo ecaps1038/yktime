@@ -1,7 +1,8 @@
 export default {
 	//详情页跳转
 	detial(rem,id){
-		rem.$axios.post('http://127.0.0.1:4040/toDetial', {
+		console.log('详情跳转'+id);
+		rem.$axios.post(rem.GLOBAL.baseUrl+'/toDetial', {
 		    data: id,
 		})
 		.then(function (response) {

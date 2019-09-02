@@ -1,5 +1,5 @@
 <template>
-  	<div class="main files">
+  	<div class="files">
     	<ul class="files-nav">
 			<li v-for="(nav,index) in navs" @click="selected(index)">
                 <a :class="{ selectcss:changes == index}">

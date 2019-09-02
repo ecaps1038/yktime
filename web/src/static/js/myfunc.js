@@ -40,6 +40,14 @@ export default {
 		}
 		var tiems = Y+'-'+M+'-'+D;
 		return tiems;
+	}, 
+	changeTime3(date){
+	    var d = new Date(date);
+		var Y = d.getFullYear();
+		var M = d.getMonth() + 1;
+		var D = d.getDate();
+		var tiems = Y+'/'+M+'/'+D;
+		return tiems;
 	},
 	detiaTime(date){
 		var time;

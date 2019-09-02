@@ -46,7 +46,7 @@ export default {
 			options: [],
 	        value: '',
 	        editor2: '',
-	        src: 'http://127.0.0.1:4040/user/nomare.png',
+	        src: this.GLOBAL.baseUrl+'/user/nomare.png',
 	        titlea: '',
 	        selecta: '',
 	        introa: '',
@@ -98,7 +98,7 @@ export default {
 		},
         manage: function(){
 			var _this = this;
-			_this.$axios.post('http://127.0.0.1:4040/upwork', {
+			_this.$axios.post(_this.GLOBAL.baseUrl+'/upwork', {
 			})
 			.then(function (response) {
 				var data = response.data.data;
@@ -127,7 +127,7 @@ export default {
 					// _this.value = _this.options[res.classlfy].label;
 					// _this.intro = res.introduc;
 					if(typeof res.icon!=="undefined"){
-						_this.src = 'http://127.0.0.1:4040/cover/'+res.icon;
+						_this.src = _this.GLOBAL.baseUrl+'/cover/'+res.icon;
 					}					 
 				}
 			})
@@ -143,7 +143,7 @@ export default {
 			var _this = this;
 			_this.icon = 'el-icon-loading';
 				_this.save = '正在保存...';
-				_this.$axios.post('http://127.0.0.1:4040/uptitle', {
+				_this.$axios.post(_this.GLOBAL.baseUrl+'/uptitle', {
 				    data: data,
 				    num: num,
 				})
@@ -198,7 +198,7 @@ export default {
 		//上传文章上部分
 		uptitle1: function(){
 			var _this = this;
-			_this.$axios.post('http://127.0.0.1:4040/uptitle', {
+			_this.$axios.post(_this.GLOBAL.baseUrl+'0/uptitle', {
 			    title: _this.title,
 			    label: _this.label,
 			    intro: _this.intro,
@@ -234,7 +234,7 @@ export default {
 	            var formData = new FormData();
 	            formData.append('file',file.files[0])
 	            //console.log(formData);
-	            _this.$axios.post('http://127.0.0.1:4040/uploadcover', 
+	            _this.$axios.post(_this.GLOBAL.baseUrl+'/uploadcover', 
 					    formData
 					)
 					.then(function (response) {
@@ -270,7 +270,7 @@ export default {
 				_this.introa = "请填简介";
 				_this.isok = 1;
 			}
-			if(_this.src== 'http://127.0.0.1:4040/user/nomare.png'){
+			if(_this.src== _this.GLOBAL.baseUrl+'0/user/nomare.png'){
 				_this.photoa = "请选择封面";
 				_this.isok = 1;
 			}
@@ -300,7 +300,7 @@ export default {
 		//cookie测试
 		 cookie: function(){
 			var _this = this;
-			_this.$axios.get('http://127.0.0.1:4040/getcookie', {
+			_this.$axios.get(_this.GLOBAL.baseUrl+'/getcookie', {
 			})
 			.then(function (response) {
 				var data = response.data;

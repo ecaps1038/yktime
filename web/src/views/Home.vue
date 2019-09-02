@@ -7,6 +7,7 @@
   		</div>
   	</div>
     <div class="content">
+      <!-- <p @click="mobile">详情页测试调整</p> -->
         <ul>
             <li v-for="html in htmls">
                 <section class="cont-inf">
@@ -24,7 +25,7 @@
                 </section>
                 <div class="photo-div">
                     <a class="photo-img-div" href="/detial" target="_blank"  @click="detials(html._id)">
-                        <img :src="'http://127.0.0.1:4040/cover/'+html.icon" class="photo-img"/>
+                        <img :src="GLOBAL.baseUrl+'/cover/'+html.icon" class="photo-img"/>
                     </a>
                 </div>
             </li>

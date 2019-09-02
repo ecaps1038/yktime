@@ -48,10 +48,6 @@ app.set('views', path.join(__dirname, '/views'));
 app.engine('html', require('ejs').__express);  
 app.set('view engine', 'html');
 
-app.get('/', function (req, res) {
-  res.type('html');
-  res.render('index1');
-});
 app.get('/one', function (req, res) {
   res.type('html');
   res.render('one');
@@ -72,7 +68,8 @@ app.use(require('express-session')({
 }));
 
 //引入后台路由
-require('./router/index.js')(app);
+require('./router/index.js')(app);//引入后台路由
+require('./router/htrouter.js')(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

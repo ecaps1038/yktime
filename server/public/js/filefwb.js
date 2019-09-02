@@ -14,7 +14,7 @@ function fileSelect(){
                 data.data.map(function(ver){
                     var aa = ver.filename.match(patt1)[1];
                     if(aa == 'jpg' || aa == 'png' || aa == 'jpeg'){
-                    html += '<li><div class="img"><img src="http://127.0.0.1:4040/works/'+ver.filename+'"/></div>'+
+                    html += '<li><div class="img"><img src="/works/'+ver.filename+'"/></div>'+
                         '<p>'+ver.filename+'</p>'+
                         '<i class="select"></i></li>';
                     }
@@ -59,7 +59,7 @@ function selectFuc(path){
         $('.files ul li').each(function(){
             var that = $(this);
             if(that.hasClass('selected')){
-                var val = 'http://127.0.0.1:4040/works/'+that.find('p').text();
+                var val = '/works/'+that.find('p').text();
                 paths[j] = val;
                 j++;
                 //html+=path+that.find('p').text();

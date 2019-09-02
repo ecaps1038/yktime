@@ -16,9 +16,9 @@
                     <p class="time">{{time(html.time)}}<span></span></p>
                     <div class="diary-tt">
                         <p class="title">{{html.title}}</p>
-                        <p class="content" @click="icon(html.imgs)"><i></i><span v-html="html.content"></span></p>
+                        <p class="content" ><i></i><span v-html="html.content"></span></p>
                     </div>
-                    <div class="imgs">
+                    <div class="imgs" v-if="html.imgs[0]!=''">
                         <div class="img" v-for="(img,indexs) in html.imgs">
                             <img :src="GLOBAL.baseUrl+'/diary/'+img" @click="detialPhoto(index,indexs)" ref="deimg">
                         </div>
@@ -103,7 +103,7 @@
         },
         getDairy: function(){
             var _this = this;
-            _this.$axios.post('http://127.0.0.1:4040/getDairy',{
+            _this.$axios.post(_this.GLOBAL.baseUrl+'/getDairy',{
                 num:_this.num,
                 display: _this.display,
             })
@@ -132,7 +132,8 @@
         //加载更多
         morepage: function(){
             var _this = this;
-            if(document.documentElement.scrollTop + window.innerHeight >= document.body.offsetHeight-100) {
+            var scrolltop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            if(scrolltop + window.innerHeight >= document.body.offsetHeight-100) {
                 if(_this.isbottom){
                     _this.tobottom = "已到底部...";
                 }else{

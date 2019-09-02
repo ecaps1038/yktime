@@ -140,7 +140,7 @@
         methods:{
             getip: function(){
               var _this = this;
-                _this.$axios.get('http://127.0.0.1:4040/toip',{
+                _this.$axios.get(_this.GLOBAL.baseUrl+'/toip',{
                     
                 })
                 .then(function (response) {
@@ -233,7 +233,7 @@
                 if(_this.fname.length>0){
                     fname = _this.fname;
                 }
-                _this.$axios.post('http://127.0.0.1:4040/reply', {
+                _this.$axios.post(_this.GLOBAL.baseUrl+'/reply', {
                     replys: _this.reply,
                     name: fname,
                 })

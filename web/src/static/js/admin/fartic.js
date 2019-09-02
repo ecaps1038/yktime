@@ -23,7 +23,7 @@ export default {
     	},
     	counts: function(){
 			var _this = this;
-			_this.$axios.post('http://127.0.0.1:4040/getCount', {
+			_this.$axios.post(_this.GLOBAL.baseUrl+'/getCount', {
 				judge: 1,
 			})
 			.then(function (response) {
@@ -40,7 +40,7 @@ export default {
 		//初始化
         content: function(){
 			var _this = this;
-			_this.$axios.post('http://127.0.0.1:4040/getData', {
+			_this.$axios.post(_this.GLOBAL.baseUrl+'/getData', {
 				num:_this.nowpage,
 				display:_this.display,
 				judge: 1,
@@ -63,7 +63,7 @@ export default {
 			for(var i=0;i<_this.htmls.length;i++){
 
 			
-			_this.$axios.post('http://127.0.0.1:4040/getCCount', {
+			_this.$axios.post(_this.GLOBAL.baseUrl+'/getCCount', {
 				id: _this.htmls[i]._id,
 			})
 			.then(function (response) {
@@ -82,7 +82,7 @@ export default {
 		//点击发布
 		publish: function(id){
 			var _this = this;
-			_this.$axios.post('http://127.0.0.1:4040/dataChange', {
+			_this.$axios.post(_this.GLOBAL.baseUrl+'/dataChange', {
 			    data: id,
 			    num: 0,
 			})
@@ -102,7 +102,7 @@ export default {
 		//点击撤回
 		revoke: function(id){
 			var _this = this;
-			_this.$axios.post('http://127.0.0.1:4040/dataChange', {
+			_this.$axios.post(_this.GLOBAL.baseUrl+'/dataChange', {
 			    data: id,
 			    num: 1,
 			})
@@ -122,7 +122,7 @@ export default {
 		//点击修改
 		modify: function(id){
 			var _this = this;
-			_this.$axios.post('http://127.0.0.1:4040/dataChange', {
+			_this.$axios.post(_this.GLOBAL.baseUrl+'/dataChange', {
 			    data: id,
 			    num: 2,
 			})
@@ -145,7 +145,7 @@ export default {
 	            type: 'warning'
 	        }).then(() => {
 	        	var _this = this;
-				_this.$axios.post('http://127.0.0.1:4040/dataChange', {
+				_this.$axios.post(_this.GLOBAL.baseUrl+'/dataChange', {
 				    data: id,
 				    num: 3,
 				})

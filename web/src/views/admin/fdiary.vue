@@ -1,6 +1,5 @@
 <template>
-    <div class="main diary">
-        <div class="bdbg"></div>
+    <div class="fdiary">
         <!-- <div class="show" v-html="showimg"></div> -->
         <div class="detial-photo" :class="{'displays':photoclick}">
             <div class="ptbg"  @click="photoclick = false"></div>
@@ -10,7 +9,7 @@
                 <img :src="nowphoto">
             </div>
         </div>
-        <div class="diary-div">
+        <div class="fdiary-div">
             <ul>
                 <li v-for="(html,index) in htmls">
                     <div class="delete" @click="deleted(html._id,index)">
@@ -18,11 +17,11 @@
 							<use xlink:href="#icon-shanchu"></use>
 						</svg>
               		</div>
-                    <div class="diary-tt">
+                    <div class="fdiary-tt">
                         <p class="title">{{html.title}}<span>{{time(html.time)}}</span></p>
                         <p class="content" @click="icon(html.imgs)"><span v-html="html.content"></span></p>
                     </div>
-                    <div class="imgs">
+                    <div class="imgs" v-if="html.imgs[0]!=''">
                         <div class="img" v-for="(img,indexs) in html.imgs">
                             <img :src="GLOBAL.baseUrl+'/diary/'+img" @click="detialPhoto(index,indexs)" ref="deimg">
                         </div>
@@ -103,7 +102,7 @@
         },
         getDairy: function(){
             var _this = this;
-            _this.$axios.post('http://127.0.0.1:4040/getDairy',{
+            _this.$axios.post(_this.GLOBAL.baseUrl+'/getDairy',{
                 num:_this.num,
                 display: _this.display,
             })
@@ -132,7 +131,8 @@
         //加载更多
         morepage: function(){
             var _this = this;
-            if(document.documentElement.scrollTop + window.innerHeight >= document.body.offsetHeight-100) {
+            var scrolltop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            if(scrolltop + window.innerHeight >= document.body.offsetHeight-100) {
                 if(_this.isbottom){
                     _this.tobottom = "已到底部...";
                 }else{
@@ -151,7 +151,7 @@
 	            type: 'warning'
 	        }).then(() => {
 	        	var _this = this;
-				_this.$axios.post('http://127.0.0.1:4040/deleteDiary', {
+				_this.$axios.post(_this.GLOBAL.baseUrl+'/deleteDiary', {
 				    id: id,
 				})
 				.then(function (response) {
@@ -186,10 +186,10 @@
 </script>
 <style lang="scss">
 @import "../../static/css/common.scss";
-    .diary{
+    .fdiary{
    		padding-left: 40px;
     }
-    .diary-div{
+    .fdiary-div{
         ul{
             padding-bottom: 60px;
         }
@@ -237,7 +237,7 @@
 			}
 			@include bord-st(1px,50%,#dedede);
 		}
-        .diary-tt{
+        .fdiary-tt{
             padding-left: 20px;
             float: left;
             .title{

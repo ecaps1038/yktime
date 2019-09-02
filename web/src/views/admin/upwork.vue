@@ -1,5 +1,5 @@
 <template>
-    <div class="upwork main">
+    <div class="upwork">
     	<div class="inner">
 			<div class="inform">
 				<p class="inf-title">{{just}}信息</p>
@@ -44,7 +44,7 @@
 				<div class="inf-num">
 					<div id="divs"></div>
 					<i class="tp"></i>
-					<iframe name="ifm" id="fwbFrame" frameborder="0" scrolling="no" src="http://127.0.0.1:4040/one"></iframe>
+					<iframe name="ifm" id="fwbFrame" frameborder="0" scrolling="no" :src="GLOBAL.baseUrl+'/one'"></iframe>
 				</div>
 			</div>
 			<div class="inform last-inf">

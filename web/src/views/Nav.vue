@@ -68,7 +68,7 @@
 		methods:{
 			aaa: function(){
 				alert('aaa');
-				this.$axios.post('http://127.0.0.1:4040/user', {
+				this.$axios.post(_this.GLOBAL.baseUrl+'/user', {
 				    firstName: 'Fred',
 				    lastName: 'Flintstone'
 				})
@@ -94,7 +94,7 @@
 			submit: function(){
 				var _this = this;
 				if(_this.name && _this.psw){
-					_this.$axios.post('http://127.0.0.1:4040/login', {
+					_this.$axios.post(_this.GLOBAL.baseUrl+'/login', {
 					    name: _this.name,
 					    psw: _this.psw
 					})
@@ -119,11 +119,11 @@
 			},
 			login: function(){
 	        	var _this = this;
-	        	_this.$axios.get('http://127.0.0.1:4040/login',{})
+	        	_this.$axios.get(_this.GLOBAL.baseUrl+'/login',{})
 	        	.then(function (response) {
 					var data = response.data;
 					_this.id = data.id;
-				    _this.user = '<a href="manage"><img src="http://127.0.0.1:4040/user/user1.png"></a>';
+				    _this.user = '<a href="manage"><img src="'+_this.GLOBAL.baseUrl+'/user/user1.png"></a>';
 				    _this.sub = '退出';
 				})
 				.catch(function (error) {
@@ -133,7 +133,7 @@
 	        },
 	        quit: function(){
 	        	var _this = this;
-	        	_this.$axios.get('http://127.0.0.1:4040/quit',{})
+	        	_this.$axios.get(_this.GLOBAL.baseUrl+'/quit',{})
 	        	.then(function (response) {
 					var data = response.data;
 				    _this.user = '';

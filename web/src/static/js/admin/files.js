@@ -20,12 +20,12 @@ var navss = [
         num: ''
 	},
 ];
-var photos = [
-    {
-        photo     : 'http://127.0.0.1:4000/client/images/sql/1.png',
-        title     : '1232334341241.png',
-    }
-];
+// var photos = [
+//     {
+//         photo     : this.GLOBAL.baseUrl+'/client/images/sql/1.png',
+//         title     : '1232334341241.png',
+//     }
+// ];
 
 
 //加入跳转页面的位置
@@ -37,7 +37,7 @@ export default {
 	data () {
 		return {
 		    name: '',
-		    spath: 'http://127.0.0.1:4040',  //服务器根路径
+		    spath: this.GLOBAL.baseUrl,  //服务器根路径
 		    fpath: '/works/',                //初始化文件路径
 		    pharr: [],                       //服务器图片读取列表
 		    navs: [],	                     //文件数列表
@@ -76,7 +76,7 @@ export default {
 	                   formData.append('file',file.files[i]);
 	            }
 	            //console.log(formData);
-	            _this.$axios.post('http://127.0.0.1:4040/uploadphoto', 
+	            _this.$axios.post(_this.GLOBAL.baseUrl+'/uploadphoto', 
 					    formData
 					)
 					.then(function (response) {
@@ -93,7 +93,7 @@ export default {
 		},
 		showPhoto: function(path){
 			var _this = this;
-            _this.$axios.post('http://127.0.0.1:4040/showphoto', {path:path})
+            _this.$axios.post(_this.GLOBAL.baseUrl+'/showphoto', {path:path})
 			.then(function (response) {
 				if(response.data.code === 200) {
 					_this.pharr = [];
@@ -156,7 +156,7 @@ export default {
 			var _this = this;
 			_this.path[0] = _this.nowpath+_this.pharr[index].filename;
 			//console.log(_this.path)
-            _this.$axios.post('http://127.0.0.1:4040/delfile', {path:_this.path})
+            _this.$axios.post(_this.GLOBAL.baseUrl+'/delfile', {path:_this.path})
 			.then(function (response) {
 				if(response.data.code === 200) {
 					_this.pharr.splice(index,1);
@@ -181,7 +181,7 @@ export default {
 			}
 			console.log(_this.pathnb)
 			if(_this.path.length>0){
-	            _this.$axios.post('http://127.0.0.1:4040/delfile', {path:_this.path})
+	            _this.$axios.post(_this.GLOBAL.baseUrl+'/delfile', {path:_this.path})
 				.then(function (response) {
 					if(response.data.code === 200) {
 						_this.path = [];

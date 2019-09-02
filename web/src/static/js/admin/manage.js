@@ -52,7 +52,7 @@ export default {
 	methods:{
 		manage: function(){
 			var _this = this;
-			_this.$axios.get('http://127.0.0.1:4040/manage', {
+			_this.$axios.get(_this.GLOBAL.baseUrl+'/manages', {
 			})
 			.then(function (response) {
 				var data = response.data;
@@ -60,7 +60,7 @@ export default {
 				if(tep == 0){
 					Router.push({path: '/'});
 				}else if(tep == 1){
-					_this.imgurl = 'http://127.0.0.1:4040/user/user1.png';
+					_this.imgurl = _this.GLOBAL.baseUrl+'/user/user1.png';
 					_this.name = data.myname;
 				}
 			})

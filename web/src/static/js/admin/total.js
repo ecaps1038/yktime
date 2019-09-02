@@ -64,7 +64,8 @@ export default {
 			display: 10,
 			comments: [],
 			replys: [],
-			isbottom: false,
+			isbottomC: false,
+			isbottomR: false,
 			comentclick: '加载更多',
 		}
 	},
@@ -86,7 +87,7 @@ export default {
         //加载判断
 		manage: function(){
 			var _this = this;
-			_this.$axios.get('http://127.0.0.1:4040/manage', {
+			_this.$axios.get(_this.GLOBAL.baseUrl+'/manages', {
 			})
 			.then(function (response) {
 				var data = response.data;
@@ -94,7 +95,7 @@ export default {
 				if(tep == 0){
 					Router.push({path: '/'});
 				}else if(tep == 1){
-					_this.imgurl = 'http://127.0.0.1:4040/user/user1.png';
+					_this.imgurl = _this.GLOBAL.baseUrl+'/user/user1.png';
 					_this.name = data.myname;
 				}
 			})
@@ -108,7 +109,7 @@ export default {
 		mageCount: function(){
             var _this = this;
             for(var i=0;i<3;i++){
-            	_this.$axios.post('http://127.0.0.1:4040/mageCount',{num:i})
+            	_this.$axios.post(_this.GLOBAL.baseUrl+'/mageCount',{num:i})
 	            .then(function (response) {
 	                var data = response.data.data;
 	                _this.navs[data.num].num = data.ress;
@@ -125,7 +126,7 @@ export default {
         //获得评论总数
         inmageCount: function(){
             var _this = this;
-        	_this.$axios.post('http://127.0.0.1:4040/getAllCommentCount')
+        	_this.$axios.post(_this.GLOBAL.baseUrl+'/getAllCommentCount')
             .then(function (response) {
                 var data = response.data.ress;
                 _this.innavs[1].num = data;
@@ -146,14 +147,24 @@ export default {
         		_this.getcomment();
         	}
         },
+        handleClose(){
+        	this.drawer= false;
+        	this.drawer1= false;
+        	this.comments = [];
+        	this.replys = [];
+        	this.nowReply = 1;
+        	this.nowPage = 1;
+        	this.isbottomC = false;
+			this.isbottomR = false;
+        },
         //获取评论
         getcomment: function(){
         	var _this = this;
         	//获取评论
     		_this.drawer1 = true;
     		_this.title = '评论管理'+_this.innavs[1].num;
-    		if(!_this.isbottom){
-	    		_this.$axios.post('http://127.0.0.1:4040/getAllComment',{
+    		if(!_this.isbottomC){
+	    		_this.$axios.post(_this.GLOBAL.baseUrl+'/getAllComment',{
 	    			num:_this.nowPage,
 	    			display:_this.display,
 	    		})
@@ -165,7 +176,7 @@ export default {
 	                	_this.nowPage++;
 	                	//console.log(_this.comments)
 	                }else{
-	                	_this.isbottom = true;
+	                	_this.isbottomC = true;
 	                	_this.comentclick = "已经到底...";
 
 	                }
@@ -181,7 +192,7 @@ export default {
         //获取回复数
         getReplycount: function(num){
 			var _this = this;
-    		_this.$axios.post('http://127.0.0.1:4040/getReplyCount',{
+    		_this.$axios.post(_this.GLOBAL.baseUrl+'/getReplyCount',{
     			num:num,
     		})
             .then(function (response) {
@@ -202,10 +213,10 @@ export default {
         	var _this = this;
         	//获取评论
     		_this.drawer = true;
-    		_this.title = '评论管理'+_this.innavs[1].num;
-    		if(!_this.isbottom){
-	    		_this.$axios.post('http://127.0.0.1:4040/getAllReply',{
-	    			num:_this.nowPage,
+    		_this.title = '回复管理'+_this.innavs[0].num;
+    		if(!_this.isbottomR){
+	    		_this.$axios.post(_this.GLOBAL.baseUrl+'/getAllReply',{
+	    			num:_this.nowReply,
 	    			display:_this.display,
 	    		})
 	            .then(function (response) {
@@ -214,9 +225,10 @@ export default {
 	                	_this.replys = _this.replys.concat(data);
 	                	_this.nowReply++;
 	                	_this.comentclick = "加载更多";
+	                	//console.log(_this.replys);
 	                	//console.log(_this.comments)
 	                }else{
-	                	_this.isbottom = true;
+	                	_this.isbottomR = true;
 	                	_this.comentclick = "已经到底...";
 
 	                }
@@ -240,7 +252,7 @@ export default {
 		createdb: function(index){
 			var _this = this;
 			if(index == 0 || index == 1){
-				_this.$axios.post('http://127.0.0.1:4040/creatework', 
+				_this.$axios.post(_this.GLOBAL.baseUrl+'/creatework', 
 				    {num: index}
 				)
 				.then(function (response) {
@@ -255,15 +267,18 @@ export default {
 				Router.push({path: '/add/diary'});
 			}
 		},
-		//删除对应的评论
-		deleteComment: function(id,index){
+		//删除对应的评论或回复
+		deleteCoR: function(id,index,num){
 			var _this = this;
-			_this.$axios.post('http://127.0.0.1:4040/deleteComment', 
-			    {id: id}
+			_this.$axios.post(_this.GLOBAL.baseUrl+'/deleteCoR', 
+			    {id: id,num: num}
 			)
 			.then(function (response) {
 				var tep = response.data.tep;
-				if(tep == 0){
+				if(tep == 0 && num == 0){
+					_this.replys.splice(index,1);
+					_this.innavs[0].num--;
+				}else if(tep ==0 && num ==1){
 					_this.comments.splice(index,1);
 					_this.innavs[1].num--;
 				}

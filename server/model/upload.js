@@ -67,6 +67,8 @@ exports.uptop = function(req,res){
 //上传日志文章
 exports.updiary = function(req,res){
 	var data = req.body;
+	var uid = req.session.userId;
+	data.userid=uid;
 	dbserver.insertDiary(data,res);
 }
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="main detial">
+    <div class="detial">
 		<div class="title">
 			<div class="inner">
 				<p class="name">{{name}}</p>
@@ -71,7 +71,7 @@
 			//初始化
 			primary: function(){
 				var _this = this;
-				_this.$axios.post('http://127.0.0.1:4040/detial', {
+				_this.$axios.post(_this.GLOBAL.baseUrl+'/detial', {
 				})
 				.then(function (response) {
 					var tep = response.data.data.tep;
@@ -111,7 +111,7 @@
 			//获取评论数
 			commentcont: function(){
 				var _this = this;
-				_this.$axios.post('http://127.0.0.1:4040/getCommentCount', {
+				_this.$axios.post(_this.GLOBAL.baseUrl+'/getCommentCount', {
 					judge: 0,
 				})
 				.then(function (response) {
@@ -194,8 +194,8 @@
 			@include fonts(14px,#333,24px);
 			padding: 12px 0;
 			img{
-				margin-left: -140px;
-				padding: 4px 0;
+				// margin-left: -140px;
+				// padding: 4px 0;
 			}
 		}
 	}

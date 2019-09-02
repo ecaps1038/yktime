@@ -40,25 +40,30 @@
     		</div>
     	</div>
         <el-drawer
-          :title="title"
-          :visible.sync="drawer"
-          :direction="direction">
-            <div class="comments">
+            :title="title"
+            :visible.sync="drawer"
+            :direction="direction"
+            :before-close="handleClose"
+            >
+            <div class="replys">
                 <ul>
                     <li v-for="(num,index) in replys">
-                        <div class="comment-right">
+                        <div class="reply-right">
                             <p class="top">{{num.name}}<span>{{detia(num.time)}}</span></p>
-                            <p class="comment-m">{{num.replys}}</p>
+                            <p class="reply-m">{{num.replys}}</p>
+                            <p class="delete" @click="deleteCoR(num._id,index,0)">删除</p>
                         </div>
                     </li>
-                    <p  class="combott">{{comentclick}}</p>
+                    <p @click= "getReply" class="combott">{{comentclick}}</p>
                 </ul>
             </div>
         </el-drawer> 
         <el-drawer
-          :title="title"
-          :visible.sync="drawer1"
-          :direction="direction">
+            :title="title"
+            :visible.sync="drawer1"
+            :direction="direction"
+            :before-close="handleClose"
+          >
           <div class="comments">
               <ul>
                     <li v-for="(num,index) in comments">
@@ -70,7 +75,7 @@
                             <p class="comment-m">{{num.comment}}</p>
                             <a class="artic" href="/detial" target="_blank" @click="detial(num.worksID._id)" v-if="num.worksID != null">{{num.worksID.name}}</a>
                             <p class="noartic" v-if="num.worksID == null">文章已删除</p>
-                            <p class="delete" @click="deleteComment(num._id,index)">删除</p>
+                            <p class="delete" @click="deleteCoR(num._id,index,1)">删除</p>
                         </div>
                     </li>
                     <p @click="getcomment" class="combott">{{comentclick}}</p>

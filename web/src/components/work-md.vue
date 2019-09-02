@@ -68,7 +68,7 @@ import c from '../static/js/common.js';
         //初始化
         content: function(current){
             var _this = this;
-            _this.$axios.post('http://127.0.0.1:4040/getData', {
+            _this.$axios.post(_this.GLOBAL.baseUrl+'/getData', {
                 num:current,
                 display: _this.display,
                 judge: _this.judge,

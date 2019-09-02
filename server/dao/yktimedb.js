@@ -30,6 +30,7 @@ var CommentSchema = new Schema({
 
 //日志表
 var DiarySchema = new Schema({
+    userid: {type: String},                                     //用户id
     content:{type:String},
     time:{type:Date},
     title:{type:String},

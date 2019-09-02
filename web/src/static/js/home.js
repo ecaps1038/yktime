@@ -67,13 +67,17 @@ export default {
 
 	},
 	methods:{
+		mobile: function(){
+			var _this = this;
+			_this.$router.push({path:'/mobile/home'});
+		},
 		//时间转换
 		dtime: function(time){
     		return s.changeTime2(time);
     	},
     	counts: function(){
 			var _this = this;
-			_this.$axios.post('http://127.0.0.1:4040/getCount', {
+			_this.$axios.post(_this.GLOBAL.baseUrl+'/getCount', {
 				judge: 0,
 			})
 			.then(function (response) {
@@ -91,7 +95,7 @@ export default {
 		//初始化
         content: function(num){
 			var _this = this;
-			_this.$axios.post('http://127.0.0.1:4040/getData', {
+			_this.$axios.post(_this.GLOBAL.baseUrl+'/getData', {
 				num:_this.num,
 				display: _this.display,
 				judge: 0,
@@ -123,8 +127,13 @@ export default {
 	    //加载更多
 	    morepage: function(){
 	    	var _this = this;
-	    	if(document.documentElement.scrollTop + window.innerHeight >= document.body.offsetHeight-100) {
-                if(_this.num<Math.ceil(_this.total/_this.display)){
+	    	var scrolltop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+	    	// console.log(scrolltop);
+	    	// console.log(window.pageYOffset+'a');
+	    	// console.log(document.documentElement.scrollTop+'b');
+	    	// console.log(document.body.scrollTop+'c');
+	    	if(scrolltop + window.innerHeight >= document.body.offsetHeight-100) {
+                if(_this.num<Math.ceil(_this.total/_this.display+1)){
                 	_this.tobottom = "";
                 	var nowm = _this.num +1;
                 	this.lotties = false;
@@ -134,7 +143,7 @@ export default {
                 }
                 
             }
-	    }
+	    },
 	},
 	mounted:function(){this.content(this.num);s.addEvent(window,'scroll',this.morepage);},
 	watch:{

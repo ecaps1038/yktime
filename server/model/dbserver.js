@@ -505,6 +505,18 @@ exports.getAllReply= function(req,res){
         console.log(err);
     });
 }
+//删除一条留言
+exports.deleteReply = function(req,res){
+    var id = req.body.id;
+    Replys.findByIdAndRemove(id, function(err, ress){
+        if (err) {
+            console.log("数据删除失败：" + err);
+        }
+        else {
+            res.send({success:true,tep:0});
+        }
+    });
+};
 
 
 

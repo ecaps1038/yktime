@@ -10,6 +10,8 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 import axios from 'axios'
 
+import 'vant/lib/index.css';
+
 Vue.config.debug = true
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios

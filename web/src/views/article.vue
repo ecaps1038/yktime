@@ -24,7 +24,7 @@
     methods:{
         counts: function(){
             var _this = this;
-            _this.$axios.post('http://127.0.0.1:4040/getCount', {
+            _this.$axios.post(_this.GLOBAL.baseUrl+'/getCount', {
                 judge: _this.judge,
             })
             .then(function (response) {

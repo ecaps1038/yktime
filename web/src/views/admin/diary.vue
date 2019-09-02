@@ -1,5 +1,5 @@
 <template>
-    <div class="upwork main">
+    <div class="upwork">
     	<div class="inner">
 			<div class="inform">
 				<p class="inf-title">日志</p>
@@ -55,7 +55,7 @@ export default {
 			intro: '',
 			num1: 56,
 			num2: 1200,
-	        src: 'http://127.0.0.1:4040/user/nomare.png',
+	        src: this.GLOBAL.baseUrl+'/user/nomare.png',
 	        isok: '0',
 	        titlea:'',
 	        introa: '',
@@ -81,7 +81,7 @@ export default {
 	methods:{
         manage: function(){
 			var _this = this;
-			_this.$axios.get('http://127.0.0.1:4040/manage', {
+			_this.$axios.get(_this.GLOBAL.baseUrl+'/manage', {
 			})
 			.then(function (response) {
 				var data = response.data;
@@ -89,7 +89,7 @@ export default {
 				if(tep == 0){
 					Router.push({path: '/'});
 				}else if(tep == 1){
-					_this.imgurl = 'http://127.0.0.1:4040/user/user1.png';
+					_this.imgurl = _this.GLOBAL.baseUrl+'/user/user1.png';
 					_this.name = data.myname;
 				}
 			})
@@ -147,7 +147,7 @@ export default {
 	            	formData.append('file',_this.files[i]);
 	        	}
 			}
-	        _this.$axios.post('http://127.0.0.1:4040/uploaddiary', 
+	        _this.$axios.post(_this.GLOBAL.baseUrl+'/uploaddiary', 
 			    formData
 			)
 			.then(function (response) {
@@ -157,7 +157,7 @@ export default {
 					//将数组转为用","隔开的字符串
 					_this.photonames = response.data.data.join(",");
 					var data = {title:_this.title,content:_this.intro,imgs:_this.photonames,time:new Date()}
-					console.log(_this.photonames);
+					//console.log(_this.photonames);
 					_this.upfile(data);			
 				}				    
 			})
@@ -191,7 +191,7 @@ export default {
 			var _this = this;
 			_this.icon = 'el-icon-loading';
 				_this.save = '正在保存...';
-				_this.$axios.post('http://127.0.0.1:4040/updiary', data)
+				_this.$axios.post(_this.GLOBAL.baseUrl+'/updiary', data)
 				.then(function (response) {
 					var tep = response.data.tep;
 				    if(tep == 0){
@@ -221,25 +221,6 @@ export default {
 			var _this = this;
 			_this.$router.push({path: '/add/preview'});
 		},
-
-
-		//cookie测试
-		 cookie: function(){
-			var _this = this;
-			_this.$axios.get('http://127.0.0.1:4040/getcookie', {
-			})
-			.then(function (response) {
-				var data = response.data;
-				var id = data.id;
-				alert(id);
-			})
-			.catch(function (error) {
-			    console.log(error);
-			    alert(error);
-			    Router.push({path: '/'});
-			});
-		},
-	    
 	},
 	mounted:function(){
 		this.manage();

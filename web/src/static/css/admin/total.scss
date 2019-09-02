@@ -105,7 +105,7 @@
 .el-drawer__body{
 	height: 100%;
 }
-.comments{
+.comments, .replys{
 	height: 100%;
 	ul{
 		padding: 0 20px 20px 20px;
@@ -153,6 +153,40 @@
 			display: none;
 			cursor: pointer;
 		}
+	}
+	.reply-right{
+		padding-bottom: 8px;
+		border-bottom: 1px solid #eee;
+		position: relative;
+		.top{
+			@include fonts(14px,#333,24px,left,bold);
+			span{
+				padding-left: 8px;
+				@include fonts(12px,#999,24px,left,lighter);
+			}
+		}
+		.reply-m{
+			@include fonts(14px,#333,22px);
+		}
+		.artic{
+			@include fonts(14px,rgb(255, 127, 38),30px);
+			padding-top: 6px;
+			font-style:italic;
+		}
+		.noartic{
+			@include fonts(14px,#666,30px);
+			padding-top: 6px;
+			font-style:italic;
+		}
+		.delete{
+			position: absolute;
+			right: 0px;
+			bottom: 8px;
+			@include fonts(14px,#999,30px);
+			display: none;
+			cursor: pointer;
+		}
+
 	}
 	.combott{
 		@include fonts(14px,#666,30px,center);

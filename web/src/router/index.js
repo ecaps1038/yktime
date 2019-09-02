@@ -30,6 +30,13 @@ import upwork from './../views/admin/upwork'
 import preview from './../views/admin/preview'
 import diary from './../views/admin/diary'
 
+//移动端
+import mHome from './../views/mobile/home'
+import mDiary from './../views/mobile/diary'
+import mAddDiary from './../views/mobile/addDiary'
+import mNav from './../components/mobile_nav'
+import mDetial from './../views/mobile/detial'
+
 Vue.use(Router)
 
 var router = new Router({
@@ -112,6 +119,34 @@ var router = new Router({
                 {
                     path: 'preview',
                     component: preview
+                }
+            ]
+        },
+        {
+            //移动端
+            name:'addDiary',
+            path:'/mobile/add',
+            component:mAddDiary,
+        },
+        {
+            //移动端
+            name:'mdetial',
+            path:'/mobile/detial',
+            component:mDetial,
+            //children:[ {path: '',component:mNav}]
+        },
+        {
+            //移动端
+            name:'mobile',
+            path:'/mobile', redirect:'/home', component: mNav,
+            children:[
+                {
+                    path:'/mobile/home',
+                    component:mHome,
+                },
+                {
+                    path: '/mobile/diary',
+                    component: mDiary,
                 }
             ]
         }
