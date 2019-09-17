@@ -139,7 +139,7 @@
   		padding-left: 20px;
   		padding-top: 20px;
   		@include fonts(32px,#262626,1.5);
-  		font-weight:500;
+  		font-weight:bold;
   	}
   	.van-skeleton{
   		margin-bottom: 30px;
@@ -155,10 +155,8 @@
   		.name{
   			@include fonts(24px,#262626,30px);
   			padding: 10px 16px;
-  			font-weight:400;
   		}
   		.contents{
-  			font-weight: 400;
   			@include fonts(15px,rgba(40,41,45,0.8),21px);
   			padding:0 16px;
   		}
@@ -170,7 +168,6 @@
   			top: 52px;
   			transform:rotate(-90deg);
   			p{
-				font-weight: 400;
 	  			@include fonts(14px,rgba(40,41,45,0.4),24px);  	
 	  			letter-spacing:4px;
 	  			float: right;

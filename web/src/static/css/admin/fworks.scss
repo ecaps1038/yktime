@@ -25,7 +25,7 @@
 					@include fonts(16px,#333,20px);
 				}
 				.no-release{
-					@include fonts(14px,#ff7f26,24px);
+					@include fonts(14px,$scolor,24px);
 				}
 				.yes-release{
 					@include fonts(14px,#999,24px);
@@ -109,7 +109,7 @@
 				.title-icon{
 					width: 24px;
 					height: 24px;
-					fill: #ff7f26
+					fill: $scolor
 				}
 			}
 			.revoke{
@@ -180,10 +180,10 @@
 	}
 	//现在所在页码
 	.now-page{
-		background: #ff7f26;
+		background: $scolor;
 		color: #fff;
 		&:hover{
-			background: #ff7f26;
+			background: $scolor;
 		}
 	}
 }

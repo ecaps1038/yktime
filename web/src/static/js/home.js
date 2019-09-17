@@ -122,7 +122,7 @@ export default {
 		//lottie动画
         handleAnimation: function(anim) {
 	        this.anim = anim;
-	        console.log(anim); //这里可以看到 lottie 对象的全部属性
+	        //console.log(anim); //这里可以看到 lottie 对象的全部属性
 	    },
 	    //加载更多
 	    morepage: function(){

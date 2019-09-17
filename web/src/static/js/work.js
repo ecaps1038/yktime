@@ -29,11 +29,12 @@ import c from './common.js';
         dtime: function(time){
             return s.changeTime2(time);
         },
-        counts: function(){
+        counts: function(gjc){
             var _this = this;
             //_this.path=this.$route.path;
             _this.$axios.post(_this.GLOBAL.baseUrl+'/getCount', {
                 judge: _this.judge,
+                gjc: gjc,
             })
             .then(function (response) {
                 var data = response.data;
@@ -80,8 +81,12 @@ import c from './common.js';
             //父级调用子级方法
             this.$refs.child1.content(_this.nowpage); 
         },
+        //获取关键词分类跳转
+         gjcChange: function(index){
+            this.counts(index)
+        }
     },
     mounted(){
-        this.counts();
+        this.counts(-1);
     }
 }

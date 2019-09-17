@@ -118,13 +118,13 @@
 		.publish{
 			float: right;
 			margin-top: -40px;
-			background:  rgba(255, 127, 38, 0.9);
-			border-color: rgba(255, 127, 38, 0.9);
+			background:  $scolor;
+			border-color: $scolor;
 			cursor: pointer;
 			color: #fff;
+			opacity: 0.9;
 			&:hover{
-				background:  rgba(255, 127, 38, 1);
-				border-color: rgba(255, 127, 38, 1);
+				opacity: 1;
 			}
 		}
 		.abled{

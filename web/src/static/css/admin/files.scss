@@ -18,13 +18,13 @@
 		@include fonts(14px,#999,30px,center);
 		cursor: pointer;
 		&:hover{
-			@include bord-st(1px,16px,#ff7f26);
-			color: #ff7f26;
+			@include bord-st(1px,16px,$scolor);
+			color: $scolor;
 		}
 	}
 	.selectcss{
-		@include bord-st(1px,16px,#ff7f26);
-		color: #ff7f26;
+		@include bord-st(1px,16px,$scolor);
+		color: $scolor;
 	}
 }
 .file-main{
@@ -72,7 +72,7 @@
 		border-radius: 50%;
 		//background: #e8e8e8;
 		@include w-h(42px,42px,#fff2e9);
-		color: #ff7f26;
+		color: $scolor;
 		cursor: pointer;
 	}
 }

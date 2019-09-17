@@ -1,5 +1,6 @@
 <template>
     <div class="mobile-add">
+    	<div class="bg"></div>
 		<h2 class="title" >发表日志</h2>
 		<p class="closes" @click="back">取消</p>
 		<div class="dtitle">
@@ -85,6 +86,25 @@
 		back(){
         	this.$router.go(-1);//返回上一层
     	},
+    	//判断是否登录
+    	manage: function(){
+			var _this = this;
+			_this.$axios.get(_this.GLOBAL.baseUrl+'/manages', {
+			})
+			.then(function (response) {
+				var data = response.data;
+				var tep = data.tep;
+				if(tep == 0){
+					_this.$router.go(-1);
+				}else if(tep == 1){
+					console.log('移动端登录成功！')
+				}
+			})
+			.catch(function (error) {
+			    console.log(error);
+			    alert(error);
+			});
+		},
 	    //图片显示
 		eimg: function(){
 			var _this = this;
@@ -176,7 +196,7 @@
 		},
     },
     mounted:function(){
-    	//this.content();
+    	this.manage();
     }
 };
 
@@ -185,13 +205,21 @@
 <style lang="scss">
 @import "../../static/css/common.scss";
   .mobile-add{
+  	.bg{
+  		background: #fff;
+  		height: 1000px;
+  		width: 100%;
+  		position: fixed;
+  		top: 0;
+  		left: 0;
+  		z-index: -1;
+  	}
   	background: #fff;
-  	padding: 0 0 68px 0;
   	.title{
   		padding-left: 20px;
   		padding-top: 20px;
   		@include fonts(32px,#262626,1.5);
-  		font-weight:500;
+  		font-weight:bold;
   	}
   	.closes{
   		float: right;
@@ -228,11 +256,14 @@
   		}
   	}
   	.upphoto{
+  		clear: both;
 	}
 	.mimg-n{
 		float:left;
 		padding-left: 20px;
-		height: 60px;
+		padding-bottom: 60px;
+		width: 100%;
+		background: #fff;
 		.delete{
 			@include w-h(20px,20px,rgba(255,83,83,0.8));
 			border-radius: 50%;
@@ -244,7 +275,7 @@
 			cursor: pointer;
 			color: #fff;
 			font-size: 18px;
-			font-weight:500;
+			font-weight:bold;
 			line-height: 18px;
 			text-align: center;
 		}

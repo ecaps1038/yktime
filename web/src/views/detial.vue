@@ -52,12 +52,12 @@
 					</el-input>
 					<div class="comicon">
 						<div class="one" @click="show = !show">
-							<img :src="GLOBAL.baseUrl+'/user/tx'+icon+'.png'"/>
+							<img :src="GLOBAL.baseUrl+'/avatar/'+icon"/>
 						</div>
 						<transition name = "fade">
 							<ul class="two" v-show="show">
-								<li v-for="index in icons" @click="getnb(index)">
-									<img :src="GLOBAL.baseUrl+'/user/tx'+index+'.png'"/>
+								<li v-for="index in pharr" @click="getnb(index.filename)">
+									<img :src="GLOBAL.baseUrl+'/avatar/'+index.filename"/>
 								</li>
 							</ul>
 						</transition>
@@ -69,7 +69,7 @@
 				<ul>
 					<li v-for="(list,index) in comlist">
 						<div class="icon">
-							<img :src="GLOBAL.baseUrl+'/user/tx'+list.icon+'.png'"/>
+							<img :src="GLOBAL.baseUrl+'/avatar/'+list.icon"/>
 						</div>
 						<div class="commm">
 							<p class="name">{{list.name}}<span>{{detia(list.time)}}</span></p>

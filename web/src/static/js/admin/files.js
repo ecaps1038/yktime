@@ -18,6 +18,10 @@ var navss = [
 		path: "/cover/",
         name: "封面图片",
         num: ''
+	}, {
+		path: "/avatar/",
+        name: "头像图片",
+        num: ''
 	},
 ];
 // var photos = [
@@ -103,16 +107,24 @@ export default {
 					//获取文件数
 					for(var i=0;i<navss.length;i++){
 						if(navss[i].path == _this.fpath){
-							navss[i].num = ver.length;
+							for(var j=0;j<ver.length;j++){
+								var aa = ver[j].filename.match(patt1)[1];
+								if(aa == 'jpg' || aa == 'png' || aa == 'jpeg'){
+									_this.pharr.push(ver[j]);
+									navss[i].num++;
+									_this.selectFile.push(false);
+		                        }
+							}
+							//navss[i].num = ver.length;
 						}
 					}
-					for(var i=0;i<ver.length;i++){
-						var aa = ver[i].filename.match(patt1)[1];
-						if(aa == 'jpg' || aa == 'png' || aa == 'jpeg'){
-							_this.pharr.push(ver[i]);
-							_this.selectFile.push(false);
-                        }
-					}
+					// for(var i=0;i<ver.length;i++){
+					// 	var aa = ver[i].filename.match(patt1)[1];
+					// 	if(aa == 'jpg' || aa == 'png' || aa == 'jpeg'){
+					// 		_this.pharr.push(ver[i]);
+					// 		_this.selectFile.push(false);
+     //                    }
+					// }
 				}
 
 			})

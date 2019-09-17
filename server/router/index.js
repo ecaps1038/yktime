@@ -81,6 +81,7 @@ module.exports = function(app){
 			res.send({success:true,id:id,myimgurl:myimgurl,myname:myname});
 			//console.log('ccc');
 		}else{
+			res.send({success:false});
 			//res.redirect('/');
 			//console.log('ddd');
 		}

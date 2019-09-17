@@ -55,27 +55,32 @@ export default {
 		var n = new Date();
 		//获取时间戳
 		var dd = d.getTime();
+		var h = d.getHours();
+		var m = d.getMinutes();
+		var Y = d.getFullYear();
+		var M = d.getMonth() + 1;
+		var D = d.getDate();
+		//现在时间
 		var nn = n.getTime();
+		var hh = n.getHours();
+		var mm = n.getMinutes();
+		var YY = n.getFullYear();
+		var MM = n.getMonth() + 1;
+		var DD = n.getDate();
+
 		if((nn-dd)<120*1000){
 			time = '刚刚';
 			return time;
-		}else if(120*1000<(nn-dd) && (nn-dd)<60*60*1000){
+		}else if(120*1000<(nn-dd) && (nn-dd)<=60*60*1000){
 			time = Math.ceil((nn-dd)/60/1000)+'分钟前';
 			return time;
-		}else if(60*60*1000<(nn-dd) && d.getDate() == n.getDate()){
-			var h = d.getHours();
-			var m = d.getMinutes();
+		}else if(60*60*1000<(nn-dd) && D == DD && M == MM && Y ==YY){
 			if(m<10){
 				m = '0'+m;
 			}
 			time = h+':'+m;
 			return time;
-		}else if(d.getDate() < n.getDate() && d.getFullYear() == n.getFullYear()){
-			var Y = d.getFullYear();
-			var M = d.getMonth() + 1;
-			var D = d.getDate();
-			var h = d.getHours();
-			var m = d.getMinutes();
+		}else if(Y == YY){
 			if(M<10){
 				M = '0'+M;
 			}
@@ -91,11 +96,6 @@ export default {
 			time = M+'/'+D+' '+h+':'+m;
 			return time;
 		}else{
-			var Y = d.getFullYear();
-			var M = d.getMonth() + 1;
-			var D = d.getDate();
-			var h = d.getHours();
-			var m = d.getMinutes();
 			if(M<10){
 				M = '0'+M;
 			}

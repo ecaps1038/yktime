@@ -28,7 +28,7 @@
 			width: 450px;
 			position: relative;
 			.icon{
-				@include w-h(42px,42px,#ff7f26);
+				@include w-h(42px,42px,$scolor);
 				padding: 11px;
 				float: left;
 				img{
@@ -51,7 +51,7 @@
 					text-overflow:ellipsis; 
 					overflow: hidden; 
 					&:hover{
-						color: #ff7f26;
+						color: $scolor;
 					}
 					cursor: pointer;
 				}

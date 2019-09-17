@@ -15,7 +15,7 @@
     </div>
     <div v-if="total == 0" class="kong">
         <img src="../static/images/kong.png">
-        <p>这个人不知道忙什么去了～</p>
+        <p>我还没有内容～</p>
     </div>
 </div>
 </template>
@@ -150,22 +150,22 @@
 	}
 	// 现在所在页码
 	.now-page{
-		background: #ff7f26;
+		background: $scolor;
 		color: #fff;
 		&:hover{
-			background: #ff7f26;
+			background: $scolor;
 		}
 	}
 
 }
 .kong{
-        @include w-h(100%,900px,#fff);
+        @include w-h(100%,600px,#f4f4f4);
         position: absolute;
-        top: 0px;
+        top: 160px;
         img{
             width: 240px;
             margin: 0 auto;
-            padding-top: 280px;
+            padding-top: 200px;
         }
         p{
             padding-top: 20px;

@@ -68,7 +68,7 @@
               <ul>
                     <li v-for="(num,index) in comments">
                         <div class="img">
-                            <img :src="'http://127.0.0.1:4040/user/tx'+num.icon+'.png'"/>
+                            <img :src="GLOBAL.baseUrl+'/avatar/'+num.icon"/>
                         </div>
                         <div class="comment-right">
                             <p class="top">{{num.name}}<span>{{detia(num.time)}}</span></p>

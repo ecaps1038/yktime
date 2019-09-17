@@ -21,7 +21,7 @@
         </ul>
         <div class="clear"></div>
     </div> -->
-    <router-view name="workMd" :nowpage='nowpage' :display="display" :judge="judge"  :path="path"  ref="child1"></router-view>
+    <router-view name="workMd" :nowpage='nowpage' :display="display" :judge="judge"  :path="path" @gjcChange="gjcChange" ref="child1"></router-view>
     <router-view name="pages" :total="total" :nowpage='nowpage' :display="display" @pagechange="pagechange"></router-view>
     <!-- <router-link to="/hello">Goto Ap</router-link> -->
   </div>

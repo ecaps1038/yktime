@@ -213,7 +213,7 @@
                 left: 158px;
                 top: 88px;
                 z-index: 10;
-                @include w-h(20px,20px,#ff7f26);
+                @include w-h(20px,20px,$scolor);
                 border:4px solid #f3f3f3;
                 border-radius:50%;
             }

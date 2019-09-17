@@ -123,7 +123,7 @@
   		padding-left: 20px;
   		padding-top: 20px;
   		@include fonts(32px,#262626,1.5);
-  		font-weight:500;
+  		font-weight:bold;
   	}
   	.van-skeleton{
   		margin-bottom: 30px;
@@ -135,7 +135,7 @@
   		.name{
   			@include fonts(18px,#262626,27px);
   			padding-top: 10px;
-  			font-weight:500;
+  			font-weight:bold;
   		}
   		.date, .type span{
   			@include fonts(12px,rgba(40,41,45,0.4),17px);

@@ -1,6 +1,6 @@
 <template>
   <div class="main work">
-    <router-view name="workMd" :nowpage='nowpage' :display="display" :judge="judge" :path="path" ref="child2"></router-view>
+    <router-view name="workMd" :nowpage='nowpage' :display="display" :judge="judge" :path="path" @gjcChange="gjcChange" ref="child2"></router-view>
     <router-view name="pages" :total="total" :nowpage='nowpage' :display="display" @pagechange="pagechange"></router-view>
   </div>
 </template>
@@ -22,10 +22,11 @@
      computed:{
     },
     methods:{
-        counts: function(){
+        counts: function(gjc){
             var _this = this;
             _this.$axios.post(_this.GLOBAL.baseUrl+'/getCount', {
                 judge: _this.judge,
+                gjc: gjc,
             })
             .then(function (response) {
                 var data = response.data;
@@ -45,9 +46,13 @@
             //父级调用子级方法
             this.$refs.child2.content(_this.nowpage); 
         },
+        //获取关键词分类
+        gjcChange: function(index){
+            this.counts(index)
+        }
     },
     mounted(){
-        this.counts();
+        this.counts(-1);
     }
 };
 

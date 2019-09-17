@@ -20,11 +20,12 @@ export default {
 			num1: 10,										//限定评论名长度
 			commentnum:'',									//评论数
 			icons: 14,										//评论头像数
-			icon: 1,										//当前头像
+			icon: '00.png',										//当前头像
 			show: false,
 			abled: true,
 			comlist: [],
 			imgs: [],
+			pharr: [],
 		}
 	},
     computed:{
@@ -153,10 +154,35 @@ export default {
 		write: function(){
 			document.getElementById("comment").focus(); 
 		},
+		//获取头像
+		showPhoto: function(path){
+			var _this = this;
+            _this.$axios.post(_this.GLOBAL.baseUrl+'/showphoto', {path:'./data/avatar/'})
+			.then(function (response) {
+				if(response.data.code === 200) {
+					_this.pharr = [];
+					var patt1 = /\.(\w+)/;
+					var ver = response.data.data;
+					//获取文件数
+					for(var i=0;i<ver.length;i++){
+						var aa = ver[i].filename.match(patt1)[1];
+						if(aa == 'jpg' || aa == 'png' || aa == 'jpeg'){
+							_this.pharr.push(ver[i]);
+                        }
+					}
+					//console.log(_this.pharr);
+				}
+
+			})
+			.catch(function (error) {
+			    console.log(error);
+			    alert(error)
+			});
+		},
 	},
-	mounted:function(){this.primary();},
+	mounted:function(){this.primary();this.showPhoto()},
 	updated() {
-		console.log(document.body.offsetWidth)
+		//console.log(document.body.offsetWidth)
     this.imgs = this.$refs.detailCont.querySelectorAll("img");
     for (let i = 0; i < this.imgs.length; i++) {
       this.imgs[i].addEventListener("load", ele => {

@@ -109,6 +109,7 @@ exports.getallData = function(res){
 //获取文章数据总数返回
 exports.getCount = function(req,res){
     var judge = req.body.judge;
+    var gjc = req.body.gjc;
     var sel = {};
     if(judge == 0){
         sel = {'release':1};
@@ -117,9 +118,17 @@ exports.getCount = function(req,res){
     }else if(judge == 2){
         sel = {'types':1}
     }else if(judge == 3){
-        sel = {'types':0,'release':1}
+        if(gjc==-1){
+            sel = {'types':0,'release':1}
+        }else{
+            sel = {'types':0,'release':1,'classlfy':gjc}
+        }      
     }else if(judge == 4){
-        sel = {'types':1,'release':1}
+         if(gjc==-1){
+            sel = {'types':1,'release':1}
+        }else{
+            sel = {'types':1,'release':1,'classlfy':gjc}
+        }  
     }
     Works.count(sel,function(err, ress){
         if(err){
@@ -163,6 +172,7 @@ exports.getdata = function(req,res){
     var nowPage = req.body.num;
     var judge = req.body.judge;
     var display = req.body.display;
+    var gjc = req.body.gjc;
     var sel = {};
     if(judge == 0){
         sel = {'release':1};
@@ -171,9 +181,17 @@ exports.getdata = function(req,res){
     }else if(judge == 2){
         sel = {'types':1}
     }else if(judge == 3){
-        sel = {'types':0,'release':1}
+        if(gjc==-1){
+            sel = {'types':0,'release':1}
+        }else{
+            sel = {'types':0,'release':1,'classlfy':gjc}
+        }      
     }else if(judge == 4){
-        sel = {'types':1,'release':1}
+         if(gjc==-1){
+            sel = {'types':1,'release':1}
+        }else{
+            sel = {'types':1,'release':1,'classlfy':gjc}
+        }  
     }
     // if(select){
     //     sel = {'name':{$regex : select}};

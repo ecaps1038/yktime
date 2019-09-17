@@ -13,6 +13,7 @@ import Works from './../views/Works'
 import Article from './../views/article'
 import Diary from './../views/diary'
 import About from './../views/about'
+import Me from './../views/me'
 
 import pages from './../components/pages'
 import top from './../components/top'
@@ -36,6 +37,7 @@ import mDiary from './../views/mobile/diary'
 import mAddDiary from './../views/mobile/addDiary'
 import mNav from './../components/mobile_nav'
 import mDetial from './../views/mobile/detial'
+import mAbout from './../views/mobile/about'
 
 Vue.use(Router)
 
@@ -73,6 +75,7 @@ var router = new Router({
             ]
         },
         { name: 'about', path: '/about', component: About },
+        { name: 'me', path: '/me', component: Me },
         { 
             name: 'manage', path: '/manage', redirect:'/manage/total', component: manage,
             children:[
@@ -147,6 +150,10 @@ var router = new Router({
                 {
                     path: '/mobile/diary',
                     component: mDiary,
+                },
+                {
+                    path: '/mobile/about',
+                    component: mAbout,
                 }
             ]
         }

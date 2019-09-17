@@ -1,7 +1,9 @@
 <template>
     <div>
 		<div class="header">
-			<div class="logo"><router-link to="/home" :style="note"></router-link></div>
+			<div class="logo"><router-link to="/home"><svg class="logo-icon" aria-hidden="true">
+					<use xlink:href="#icon-logo"></use>
+				</svg></router-link></div>
 			<div class="nav">
 				<router-link to="/home">首页<i></i></router-link>
 				<router-link to="/works">作品<i></i></router-link>
@@ -46,12 +48,7 @@
 	export default {
 		data () {
 			return {
-			    note: {
-				backgroundImage: "url(" + require("../static/images/logo1.svg") + ") ",
-				backgroundPosition: "center center",
-				backgroundRepeat: "no-repeat",
-				backgroundSize: "cover",
-	        },
+			    
 				id: 0,
 				img: '',	
 				sub: '',
@@ -122,9 +119,11 @@
 	        	_this.$axios.get(_this.GLOBAL.baseUrl+'/login',{})
 	        	.then(function (response) {
 					var data = response.data;
-					_this.id = data.id;
-				    _this.user = '<a href="manage"><img src="'+_this.GLOBAL.baseUrl+'/user/user1.png"></a>';
-				    _this.sub = '退出';
+					if(data.success){
+						_this.id = data.id;
+					    _this.user = '<a href="manage"><img src="'+_this.GLOBAL.baseUrl+'/user/user1.png"></a>';
+					    _this.sub = '退出';
+					}
 				})
 				.catch(function (error) {
 				    console.log(error);
@@ -161,6 +160,12 @@
 		@include positions(absolute,24px,40px);
 		a{
 			@include w-h(72px,32px,#1c1c21);
+			.logo-icon{
+				width: 64px;
+				height: 36px;
+				fill: rgba(255,255,255,0.8);
+				text-align: center;
+			}
 		}
 	}
 	.nav{
@@ -203,7 +208,7 @@
 			// @include w-h(40px,28px,#3b3c41);
 			background: #3b3c41;
 			border-radius: 5px;
-			@include fonts(14px,#ff7f26,28px,center);
+			@include fonts(14px,$scolor,28px,center);
 			display: none;
 			cursor: pointer;
 			opacity: 0.5;

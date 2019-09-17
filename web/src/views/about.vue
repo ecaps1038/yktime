@@ -513,13 +513,13 @@
             .publish{
                 float: right;
                 margin-top: 16px;
-                background:  rgba(255, 127, 38, 0.9);
-                border-color: rgba(255, 127, 38, 0.9);
+                background:  $scolor;
+                border-color: $scolor;
                 cursor: pointer;
+                opacity: 0.9;
                 color: #fff;
                 &:hover{
-                    background:  rgba(255, 127, 38, 1);
-                    border-color: rgba(255, 127, 38, 1);
+                    opacity: 1;
                 }
             }
             .abled{

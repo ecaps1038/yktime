@@ -50,14 +50,14 @@
 				background: #232329;
 			}
 			&:hover .icon{
-				fill: #ff7f26;
+				fill: $scolor;
 			}
 		}
 		.router-link-active{
 			color: #fff;
 			background: #232329;
 			.icon{
-				fill:#ff7f26;
+				fill:$scolor;
 			}
 		}
 	}
@@ -87,7 +87,7 @@
 			.title-icon{
 				width: 24px;
 				height: 24px;
-				fill: #ff7f26;
+				fill: $scolor;
 			}
 			span{
 				@include fonts(20px,#333,24px,left);
