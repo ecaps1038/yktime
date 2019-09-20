@@ -95,7 +95,7 @@
 				var data = response.data;
 				var tep = data.tep;
 				if(tep == 0){
-					_this.$router.go(-1);
+					//_this.$router.go(-1);
 				}else if(tep == 1){
 					console.log('移动端登录成功！')
 				}
