@@ -121,7 +121,7 @@
 				if(data.success){
 					_this.dl = true;
 				}else{
-					this.dl = false;
+					_this.dl = false;
 				}
 			})
 			.catch(function (error) {
