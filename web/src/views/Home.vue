@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main home">
   	<div class="banner" :style="note">
   		<div class="bn-iner">
   			<p class="title" :style="suiy"></p>

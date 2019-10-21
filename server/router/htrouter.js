@@ -15,6 +15,10 @@ module.exports = function(app){
 	    res.type('html');
 	    res.render('index');
 	});
+	app.get('/mobile/detial', function (req, res) {
+	    res.type('html');
+	    res.render('index');
+	});
 	app.get('/home', function (req, res) {
 	    res.type('html');
 	    res.render('index');

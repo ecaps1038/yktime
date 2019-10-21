@@ -314,6 +314,8 @@
 			height: 48px;
 			margin-bottom: 20px;
 			border-width: 0px 0px 1px 0px;
+			border-radius: 0px;
+			border-color: rgba(40,41,45,.1);
 		}
 		.submit{
 			margin-top: 20px;

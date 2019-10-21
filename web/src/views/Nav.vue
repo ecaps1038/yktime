@@ -102,6 +102,7 @@
 							_this.psw = '';
 							_this.returns = '';
 							_this.showlogin = 'display:none';
+							console.log(response.data.ress);
 						}else if(tep == 1){
 							//匹配不成功
 							_this.psw = '';

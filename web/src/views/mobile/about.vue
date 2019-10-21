@@ -67,8 +67,34 @@
 					</li>
 				</ul>
 			</div>
+			<div class="mabout">
+				<div class="abme">
+					<div class="top">
+						<p class="abtit">我大概收集的我</p>
+						<span>更多<van-icon name="arrow" /></span>
+					</div>
+					<div class="main1">
+						<p>
+							我火火，生于90年，家乡那是个山清水秀！我自认为我在一个最美的时代诞生。就如家乡的变化，小时候我住过泥墙瓦房，夏天屋里泥墙上一个一个洞的野蜂巢有蜂飞进飞出，泥墙底座是红砂石。无知的小孩在上面刻满纹路。
+						</p>
+						<div class="img"></div>
+					</div>
+				</div>
+				<div class="abweb">
+					<div class="top">
+						<p class="abtit">我建立这个网站</p>
+						<span>更多<van-icon name="arrow" /></span>
+					</div>
+					<div class="main2">
+						<p>
+							我火火，生于90年，家乡那是个山清水秀！我自认为我在一个最美的时代诞生。就如家乡的变化，小时候我住过泥墙瓦房，夏天屋里泥墙上一个一个洞的野蜂巢有蜂飞进飞出，泥墙底座是红砂石。无知的小孩在上面刻满纹路。
+						</p>
+						<div class="img"></div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="mabout">
+		<!-- <div class="mabout">
 			<div class="abme">
 				<div class="top">
 					<p class="abtit">我大概收集的我</p>
@@ -93,7 +119,7 @@
 					<div class="img"></div>
 				</div>
 			</div>
-		</div>
+		</div> -->
     </div>
 </template>
 <script type="text/javascript">
@@ -180,7 +206,7 @@
 <style lang="scss">
 @import "../../static/css/common.scss";
   .mobile-a{
-  	background: #000;
+  	background: rgba(41,43,51,1);
   	height: 100%;
   	width: 100%;
   	.ltitle{
@@ -212,25 +238,19 @@
  	}
   	.bg{
   		position: fixed;
-  		z-index: 0;
+  		z-index: -1;
+  		top: 0;
   		height: 50%;
   		width: 100%;
   		background: rgba(40,41,45,1);
   	}
   	.mabout{
-  		position: fixed;
   		bottom: 0px;
   		width: 100%;
-  		height: 80%;
-  		background: #fff;
   		border-radius: 24px 24px 0 0;
-  		padding-top: 190px;
-  		overflow-y: auto; 
   	}
   	.mmsg{
-  		position: fixed;
-  		top: 20%;
-  		z-index: 1000;
+  		margin-top: 100px;
   		width: 100%;
   		background: #fff;
   		border-radius: 24px 24px 0 0 ;
@@ -243,7 +263,11 @@
   			border-radius: 50%;
   			border:3px solid rgba(40,41,45,0.1);
   			overflow: hidden;
-  			margin-top: -40px;
+  			position: absolute;
+  			top: -40px;
+  		}
+  		.msg{
+  			padding-top: 40px;
   		}
   		.name{
   			@include fonts(22px,rgba(40,41,45,1),1.5);
@@ -257,7 +281,7 @@
   			display: inline-block;
   			position: absolute;
   			right: 24px;
-  			top: 68px;
+  			top: 28px;
   			width:120px;
 			height:42px;
 			background:rgba(40,41,45,1);

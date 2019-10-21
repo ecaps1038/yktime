@@ -4,7 +4,7 @@ var bcrypt = require('bcryptjs');
 //登陆
 exports.logIn = function(data,pwd,req,res){
     var wherestr = {$or:[{'email': data},{'name': data}]};
-    var out = {'name':1,'pwd':1,'email':1,'online':1,'imgurl':1};
+    var out = {'name':1,'pwd':1,'email':1,'grade':1};
     User.find(wherestr, out, function(err, ress){
         if (err) {
             console.log("查询失败：" + err);
@@ -17,15 +17,19 @@ exports.logIn = function(data,pwd,req,res){
             ress.map(function(ver){
                 const pwdMatchFlag =bcrypt.compareSync(pwd, ver.pwd);
                 if(pwdMatchFlag){
-                    res.cookie('id',ver._id,{signed:true,path:'http://localhost:8080', maxAge: 1000});
-                    res.cookie('username',ver.name,{signed:true,path:'http://localhost:8080', maxAge: 1000});
-                //     if(ver.imgurl){
-                //         res.cookie('imgurl',ver.imgurl,{signed:true,path:'http://localhost:8080', maxAge: 1000}); 
-                //    }else{
-                //         res.cookie('imgurl','user.jpg',{signed:true,path:'http://localhost:8080', maxAge: 1000});
-                //    }
-                  
-                    res.send({success:true,tep:0});
+                    if(ver.grade != 1){
+                        res.send({success:true,tep:1,return:'您没有权限！'});
+                    }else{
+                        res.cookie('id',ver._id,{signed:true,path:'http://localhost:8080', maxAge: 1000});
+                        res.cookie('username',ver.name,{signed:true,path:'http://localhost:8080', maxAge: 1000});
+                    //     if(ver.imgurl){
+                    //         res.cookie('imgurl',ver.imgurl,{signed:true,path:'http://localhost:8080', maxAge: 1000}); 
+                    //    }else{
+                    //         res.cookie('imgurl','user.jpg',{signed:true,path:'http://localhost:8080', maxAge: 1000});
+                    //    }
+                      
+                        res.send({success:true,tep:0,ress});
+                    }
                    //return res.redirect('/yike');
                 }else{
                     //console.log('匹配失败！');

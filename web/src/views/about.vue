@@ -32,7 +32,7 @@
                     <div class="me">
                         <p>我火火，生于90年，家乡那是个山清水秀！我自认为我在一个最美的时代诞生。就如家乡的变化，小时候我住过泥墙瓦房，夏天屋里泥墙上一个一个洞的野蜂巢有蜂飞进飞出，泥墙底座是红砂石。无知的小孩在上面用硬石头刻满纹路。有人来家里弹棉花，我认真的看他弹棉花的每一个步骤。弹弓从棉花堆里面不过我是很无知的。但有人说那是真实</p>
                     </div>
-                    <button class="more">看看更多</button>
+                    <a href="/article" target="_blank" class="more">看看更多</a>
                     <div class="me-p">
                         <ul>
                             <li v-for="im in ime"></li>
@@ -92,12 +92,13 @@
                         <img src="../static/images/about/weixin.png"/>
                     </div>
                     <div class="xl">
-                        <img src="../static/images/about/xl.png"/>
+                        <a href="http://127.0.0.1:3000" target="_blank">
+                            <img src="../static/images/about/xl.png"/>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- <p @click="getip">获取ip</p> -->
     </div>
 </template>
 <script type="text/javascript">
