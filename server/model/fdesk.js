@@ -1,27 +1,30 @@
 var dbserver = require('./dbserver');
 
 //跳转详情页面前期准备
-exports.toDetial = function(req,res){
-	var id = req.body.data;
-	res.cookie('workid',id,{signed:true, path:'http://localhost:8080', maxAge: 1000*10});
-	dbserver.addTimes(id,res);
-	//res.send({success:true,tep:0});	
-};
+// exports.toDetial = function(req,res){
+// 	var id = req.body.data;
+// 	res.cookie('workid',id,{signed:true, path:'http://localhost:8080', maxAge: 1000*10});
+// 	dbserver.addTimes(id,res);
+// 	console.log(id);
+// 	//res.send({success:true,tep:0});	
+// };
 //进入detail页面
 exports.detial = function(req,res){
-	if(req.signedCookies.workid){
-		req.session.detialId = req.signedCookies.workid;
-		var id = req.session.detialId;
-		dbserver.getoneData(id,res);
-	}else if(req.session.detialId){
-		var id = req.session.detialId;
-		dbserver.getoneData(id,res);
-	}else{
-		var data = {
-			tep:0,
-		}
-		res.send({success:true,data:data});
-	}
+	var id = req.body.id;
+	dbserver.getoneData(id,res);
+	// if(req.signedCookies.workid){
+	// 	req.session.detialId = req.signedCookies.workid;
+	// 	var id = req.session.detialId;
+	// 	dbserver.getoneData(id,res);
+	// }else if(req.session.detialId){
+	// 	var id = req.session.detialId;
+	// 	dbserver.getoneData(id,res);
+	// }else{
+	// 	var data = {
+	// 		tep:0,
+	// 	}
+	// 	res.send({success:true,data:data});
+	// }
 }
 
 //评论处理

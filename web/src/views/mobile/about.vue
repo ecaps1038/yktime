@@ -68,8 +68,8 @@
 				</ul>
 			</div>
 			<div class="mabout">
-				<div class="abme">
-					<div class="top">
+				<div class="mabme">
+					<div class="mtop">
 						<p class="abtit">我大概收集的我</p>
 						<span>更多<van-icon name="arrow" /></span>
 					</div>
@@ -80,8 +80,8 @@
 						<div class="img"></div>
 					</div>
 				</div>
-				<div class="abweb">
-					<div class="top">
+				<div class="mabweb">
+					<div class="mtop">
 						<p class="abtit">我建立这个网站</p>
 						<span>更多<van-icon name="arrow" /></span>
 					</div>
@@ -307,10 +307,10 @@
 			}
 		}
 	}
-	.abme,.abweb{
+	.mabme,.mabweb{
 		padding: 20px;
 		width: 100%;
-		.top{
+		.mtop{
 			p{
 				@include fonts(18px,rgba(41,43,51,1),24px);
 				float: left;

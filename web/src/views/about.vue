@@ -92,7 +92,7 @@
                         <img src="../static/images/about/weixin.png"/>
                     </div>
                     <div class="xl">
-                        <a href="http://127.0.0.1:3000" target="_blank">
+                        <a href="http://www.huohuo90.com" target="_blank">
                             <img src="../static/images/about/xl.png"/>
                         </a>
                     </div>

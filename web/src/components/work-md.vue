@@ -12,11 +12,11 @@
 	    </div>
         <ul class="cards">
         	<li v-for=" (rem, index) in  articles">
-        		<a class="photo-img-div" href="/detial" target="_blank"  @click="detial(rem._id)">
+        		<a class="photo-img-div" :href="'/detial?id='+rem._id" target="_blank">
                     <img :src="'http://127.0.0.1:4040/cover/'+rem.icon" class="photo-img"/>
                 </a>
                 <div class="introduce-div">
-                  <a class="title"  href="/detial" target="_blank" @click="detial(rem._id)">{{rem.name}}</a>
+                  <a class="title"  :href="'/detial?id='+rem._id" target="_blank">{{rem.name}}</a>
                   <p class="introduce">{{rem.introduc}}</p>
                 </div>
                 <div class="work-other">

@@ -1,4 +1,4 @@
-const baseUrl = 'http://127.0.0.1:4040'
+const baseUrl = ''
 const token = '123456'
 
 export default {

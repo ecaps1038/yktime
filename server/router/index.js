@@ -230,9 +230,9 @@ module.exports = function(app){
 	});
 
 	//前台进入文章详情
-	app.post('/toDetial',function(req,res){
-		fdesk.toDetial(req,res);
-	})
+	// app.post('/toDetial',function(req,res){
+	// 	fdesk.toDetial(req,res);
+	// })
 	//文章详情页面获取内容
 	app.post('/detial',function(req,res){
 		fdesk.detial(req,res);

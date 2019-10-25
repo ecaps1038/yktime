@@ -75,5 +75,6 @@ module.exports = db.model('Works',WorksSchema);
 module.exports = db.model('Comment',CommentSchema);
 module.exports = db.model('Diary',DiarySchema);
 module.exports = db.model('Reply',ReplySchema);
+module.exports = db.model('Visit',VisitSchema);
 // module.exports = mongoose.model('Groupuser',GroupuserSchema);
 // module.exports = mongoose.model('Groupmsg',GroupmsgSchema);

@@ -15,7 +15,7 @@
 		    :loading="loading"
 			> 
 			</van-skeleton>
-			<a href="/mobile/detial" v-for="item in list" class="list-call" @click="detials(item._id)">
+			<a v-for="item in list" class="list-call" :href="'/mobile/detial?id='+item._id">
 				<div class="mimgh">
 					<van-image
 				  width="100%"

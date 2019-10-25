@@ -19,12 +19,12 @@
                     </div>
                     <p class="date">{{dtime(html.time)}}</p>
                     <div class="introduce-div">
-                      <a class="title"  href="/detial" target="_blank" @click="detials(html._id)">{{html.name}}</a>
+                      <a class="title" :href="'/detial?id='+html._id" target="_blank" >{{html.name}}</a>
                       <p class="introduce">{{html.introduc}}</p>
                     </div>
                 </section>
                 <div class="photo-div">
-                    <a class="photo-img-div" href="/detial" target="_blank"  @click="detials(html._id)">
+                    <a class="photo-img-div" :href="'/detial?id='+html._id" target="_blank"  >
                         <img :src="GLOBAL.baseUrl+'/cover/'+html.icon" class="photo-img"/>
                     </a>
                 </div>
