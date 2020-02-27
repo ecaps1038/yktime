@@ -52,7 +52,10 @@ app.get('/one', function (req, res) {
   res.type('html');
   res.render('one');
 });
-
+app.get('/download', function (req, res) {
+  const file = 'public/data/yiketime.apk';
+  res.download(file);
+});
 //处理附件内容字节数太大
 //var bodyParser = require('body-parser');
 app.use(bodyParser.json({limit:'50mb'}));

@@ -39,6 +39,7 @@
 			</div>
 			<div class="btn-div diary-up">
 				<button class="publish" @click="publish">发布</button>
+				 <button class="tupian" @click="publish1">图文并发</button>
 			</div>
 		</div>
     </div>
@@ -64,6 +65,7 @@ export default {
 	        photohtml:[],           //前端显示用
 	        files:[],				//后台保存用
 	        photonames: '',
+	        selects:true,
 		}
 	},
     computed:{
@@ -139,7 +141,7 @@ export default {
 			_this.files.splice(index,1);
 		},
 		//封面上传
-		upphoto: function(){
+		upphoto: function(vel){
 			var _this = this;
 			var formData = new FormData();
 			if(_this.files.length>0){
@@ -156,7 +158,7 @@ export default {
 					//console.log(response.data.data);
 					//将数组转为用","隔开的字符串
 					_this.photonames = response.data.data.join(",");
-					var data = {title:_this.title,content:_this.intro,imgs:_this.photonames,time:new Date()}
+					var data = {title:_this.title,content:_this.intro,imgs:_this.photonames,time:new Date(),types:vel}
 					//console.log(_this.photonames);
 					_this.upfile(data);			
 				}				    
@@ -211,7 +213,17 @@ export default {
 			//_this.$message(_this.title);
 			_this.judge();
 			if(_this.isok == 0){
-				_this.upphoto();
+				_this.upphoto(0);
+				_this.$message('发布成功！');
+				_this.$router.push({path: '/manage'});
+			}
+		},//点击发布
+		publish1: function(){
+			var _this = this;
+			//_this.$message(_this.title);
+			_this.judge();
+			if(_this.isok == 0){
+				_this.upphoto(1);
 				_this.$message('发布成功！');
 				_this.$router.push({path: '/manage'});
 			}
@@ -327,16 +339,6 @@ export default {
 		line-height: 42px;
 		color: #999;
 	}
-	}
-	.select{
-		position: relative;
-		padding: 15px 0;
-		input{
-			@include input(148px)
-		}
-		.label{
-			width: 320px;
-		}	
 	}
 	.sort{
 		width: 148px;
@@ -511,7 +513,7 @@ export default {
 			border-color: rgba(255, 127, 38, 1);
 		}
 	}
-	.preview{
+	.tupian{
 		margin-left: 18px;
 		background:  #f3f3f3;
 		border-color: #bbb;

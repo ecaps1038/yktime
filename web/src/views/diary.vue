@@ -220,7 +220,7 @@
         .imgs{
             float: left;
             padding: 40px 0 0 12px;
-            width: 280px;
+            width: 240px;
             .img{
                 width: 80px;
                 height: 80px;

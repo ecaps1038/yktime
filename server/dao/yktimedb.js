@@ -16,6 +16,7 @@ var WorksSchema = new Schema({
     time: {type: Date},  										//保存时间
     release: {type: Number},  									//是否发布
     times: {type: Number,default: 0},  							//查看次数
+    likes: {type: Number,default: 0},                            //喜欢次数
 });
 
 //评论表
@@ -27,6 +28,12 @@ var CommentSchema = new Schema({
     name:{type:String},
     icon: {type:String},
 });
+//喜欢表
+var LikeSchema = new Schema({
+    worksID: {type:Schema.Types.ObjectId,ref:'Works'},    //文章id
+    time:{type:Date},
+    userid:{type:String},
+});
 
 //日志表
 var DiarySchema = new Schema({
@@ -35,6 +42,8 @@ var DiarySchema = new Schema({
     time:{type:Date},
     title:{type:String},
     imgs: {type:String},
+    love: {type: Number,default: 0},                            //喜欢次数
+    types: {type: Number},                                      //属性
 });
 
 //回复我表
@@ -75,6 +84,6 @@ module.exports = db.model('Works',WorksSchema);
 module.exports = db.model('Comment',CommentSchema);
 module.exports = db.model('Diary',DiarySchema);
 module.exports = db.model('Reply',ReplySchema);
-module.exports = db.model('Visit',VisitSchema);
+module.exports = db.model('Like',LikeSchema);
 // module.exports = mongoose.model('Groupuser',GroupuserSchema);
 // module.exports = mongoose.model('Groupmsg',GroupmsgSchema);

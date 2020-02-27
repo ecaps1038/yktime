@@ -49,7 +49,6 @@ export default {
 		primary: function(){
 			var _this = this;
 			_this.$axios.post(_this.GLOBAL.baseUrl+'/detial', {
-				id:_this.$route.query.id,
 			})
 			.then(function (response) {
 				var tep = response.data.data.tep;
@@ -181,7 +180,7 @@ export default {
 			});
 		},
 	},
-	mounted:function(){this.primary();this.showPhoto()},
+	//mounted:function(){this.primary();this.showPhoto()},
 	updated() {
 		//console.log(document.body.offsetWidth)
     this.imgs = this.$refs.detailCont.querySelectorAll("img");

@@ -230,13 +230,22 @@ module.exports = function(app){
 	});
 
 	//前台进入文章详情
-	// app.post('/toDetial',function(req,res){
-	// 	fdesk.toDetial(req,res);
-	// })
+	app.post('/toDetial',function(req,res){
+		fdesk.toDetial(req,res);
+	})
 	//文章详情页面获取内容
 	app.post('/detial',function(req,res){
 		fdesk.detial(req,res);
 	})
+	//移动端文章详情页面获取内容
+	app.post('/detial1',function(req,res){
+		fdesk.detial1(req,res);
+	})
+	//移动端文章详情页面添加查看次数
+	app.post('/timesadd',function(req,res){
+		fdesk.timesadd(req,res);
+	})
+
 	//文章详情页面评论提交
 	app.post('/upcomment',function(req,res){
 		fdesk.upcomment(req,res);
@@ -252,6 +261,10 @@ module.exports = function(app){
 	//获取日志
 	app.post('/getDairy',function(req,res){
 		fdesk.getDiary(req,res);
+	})
+	//获取美图
+	app.post('/getPhotos',function(req,res){
+		fdesk.getPhotos(req,res);
 	})
 	//删除日志
 	app.post('/deleteDiary',function(req,res){
@@ -282,15 +295,26 @@ module.exports = function(app){
 	app.get('/toip',function(req,res){
 		console.log(req.ip);
 		var ip = req.ip.match(/\d+\.\d+\.\d+\.\d+/)
-		res.send({success:true,tep:ip});
+		res.send({success:true,ip});
+		console.log('ip是'+ip)
 	})
 	//后台获取回复总数
 	app.post('/getReplyCount',function(req,res){
 		fdesk.getReplyCount(req,res);
 	})
-	//后台获取回复
-	app.post('/getAllReply',function(req,res){
-		fdesk.getAllReply(req,res);
+	
+	//移动端添加like
+	app.post('/likes',function(req,res){
+		fdesk.insertLike(req,res);
+	})
+
+	//移动端获取like数
+	app.post('/likescont',function(req,res){
+		fdesk.getlikecount(req,res);
+	})
+	//移动端验证是否like
+	app.post('/islike',function(req,res){
+		fdesk.getlikesf(req,res);
 	})
 	
 }

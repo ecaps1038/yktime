@@ -107,6 +107,7 @@ export default {
 					//获取文件数
 					for(var i=0;i<navss.length;i++){
 						if(navss[i].path == _this.fpath){
+							navss[i].num=0;
 							for(var j=0;j<ver.length;j++){
 								var aa = ver[j].filename.match(patt1)[1];
 								if(aa == 'jpg' || aa == 'png' || aa == 'jpeg'){

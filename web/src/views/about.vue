@@ -92,8 +92,9 @@
                         <img src="../static/images/about/weixin.png"/>
                     </div>
                     <div class="xl">
-                        <a href="http://www.huohuo90.com" target="_blank">
+                        <a href="http://127.0.0.1:4040/download">
                             <img src="../static/images/about/xl.png"/>
+                            <span>逸刻APP</span>
                         </a>
                     </div>
                 </div>
@@ -543,9 +544,16 @@
         }
         .xl{
             float: left;
-            padding:140px 0 0 80px;
+            text-align: center;
+            padding:120px 0 0 80px;
             img{
                 width: 120px;
+            }
+            span{
+                text-align: center;
+                line-height: 52px;
+                font-size: 16px;
+
             }
         }
     }

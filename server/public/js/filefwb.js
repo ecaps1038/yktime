@@ -1,3 +1,4 @@
+
 //被wangEditor.js调用
 //获取file内容并选择
 function fileSelect(){

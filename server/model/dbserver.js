@@ -3,6 +3,7 @@ var Works = workdb.model('Works');
 var Comments = workdb.model('Comment')
 var Diarys = workdb.model('Diary')
 var Replys = workdb.model('Reply')
+var Likes = workdb.model('Like')
 var bcrypt = require('bcryptjs');
 
 //获取数据添加works表
@@ -35,9 +36,13 @@ exports.update = function(data,wid,ress){
     });
 }
 //更新文本查看数
-exports.addTimes = function(id,ress){
+exports.addTimes = function(id,tap,ress){
     var id = {_id:id};
-    var data = {$inc:{times:1}};
+    if(tap==0){
+        var data = {$inc:{times:1}};
+    }else if(tap==1){
+        var data = {$inc:{likes:1}};
+    }
     Works.findOneAndUpdate(id, data, function(err, res){
         if (err) {
             console.log("数据修改出错：" + err);
@@ -199,18 +204,22 @@ exports.getdata = function(req,res){
     var pageSize = display;                   //一页多少条
     var sort = {'time':-1};        //排序（按登录时间倒序）
     var condition = {};                 //条件
-    var skipnum = (nowPage-1) * pageSize;   //跳过数
-    var d = skipnum;
+    var skipnum = (nowPage-1) * pageSize;   //跳过数;
 
     var query = Works.find({});
     //根据userID查询
     query.where(sel);
     //按照最后会话时间倒序排列
     query.sort(sort);
-    //跳过数
+    //跳过数out
     query.skip(skipnum);
     //一页多少条
     query.limit(pageSize);
+    //查处结果过滤
+    query.select({'content':0})
+    //query.hint({ '_id': 1, 'userid': 1 })
+    //查出friendID的user对象
+    //query.populate('userid');
     //查询结果
     query.exec().then(function(ress){
         res.send({success:true,ress});
@@ -309,6 +318,35 @@ exports.deleteDiary = function(req,res){
 //查询日志
 exports.getDiary= function(req,res){
     var sel = {};
+    var nowPage = req.body.num;
+    var display = req.body.display;
+    // if(select){
+    //     sel = {'name':{$regex : select}};
+    // }
+    var pageSize = display;                   //一页多少条
+    var sort = {'time':-1};        //排序（按登录时间倒序）
+    var condition = {};                 //条件
+    var skipnum = (nowPage - 1) * pageSize;   //跳过数
+
+    var query = Diarys.find({});
+    //根据userID查询
+    query.where(sel);
+    //按照最后会话时间倒序排列
+    query.sort(sort);
+    //跳过数
+    query.skip(skipnum);
+    //一页多少条
+    query.limit(pageSize);
+    //查询结果
+    query.exec().then(function(ress){
+        res.send({success:true,ress});
+    }).catch(function(err){
+        console.log(err);
+    });
+}
+//查询日志美图
+exports.getPhotos= function(req,res){
+    var sel = {'types':1};
     var nowPage = req.body.num;
     var display = req.body.display;
     // if(select){
@@ -535,6 +573,50 @@ exports.deleteReply = function(req,res){
         }
     });
 };
+
+//获取数据添加like表
+exports.insertLike= function(data,ress){
+
+    var likes = new Likes(data);
+
+    likes.save(function (err, res) {
+        if (err) {
+            console.log("works添加失败" + err);
+        }
+        else {
+            //ress.cookie('workid',res._id,{signed:true, path:'http://localhost:8080', maxAge: 1000*10});
+            ress.send({success:true,tep:0});
+            //console.log("群添加成功");
+        }
+    });
+};
+
+//获取文章like总数
+exports.getLikeCount = function(workid,res){
+    var wherestr = {'worksID':workid};
+    Likes.count(wherestr,function(err, ress){
+        if(err){
+            console.log('搜索失败');
+        }else{
+            res.send({success:true,ress});
+            //console.log(ress)
+        }
+    });
+}
+
+//获取文章用户是否like
+exports.getLikesf = function(workid,id,res){
+    var wherestr = {'worksID':workid,'userid':id};
+    Likes.count(wherestr,function(err, ress){
+        if(err){
+            console.log('搜索失败');
+        }else{
+            res.send({success:true,ress});
+            //console.log(ress)
+        }
+    });
+}
+
 
 
 

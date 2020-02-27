@@ -130,7 +130,6 @@
             primary: function(){
                 var _this = this;
                 _this.$axios.post(_this.GLOBAL.baseUrl+'/detial', {
-                    id:_this.$route.query.id,
                 })
                 .then(function (response) {
                     var tep = response.data.data.tep;
